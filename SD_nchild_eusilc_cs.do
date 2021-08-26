@@ -1,9 +1,13 @@
-/* 		*** NUMBER OF CHILDREN PER HOUSEHOLD
+/* 		
+
+identifies the NUMBER OF CHILDREN PER HOUSEHOLD
+
 -> identify children
 -> count children
 -> rank household members from the youngest to the oldest
 
 Based on Mack, A. (2016) Data Handling in EU-SILC. GESIS Papers, 2016-10.
+
 */
 
 * Identify children under 18

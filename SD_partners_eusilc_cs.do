@@ -2,7 +2,9 @@
 
 -> create dataset of male partners
 -> create dataset of female partners
--> merge with the master data file 				*/
+-> merge with the master data file 				
+
+*/
 
 cd "$DATA" 
 

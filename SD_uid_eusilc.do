@@ -1,8 +1,11 @@
-/* 		*** UNIQUE HOUSEHOLD AND PERSONAL IDENTIFIERS***
+/* 		
+
+creates UNIQUE HOUSEHOLD AND PERSONAL IDENTIFIERS
 
 -> insert ISO 3166-1 numeric country codes (3 digits)
 -> transform original numeric IDs into string variables
--> add 3 digit ISO before personal and household identifiers = unique identifiers  
+-> add 3 digit ISO before personal and household identifiers = unique identifiers 
+ 
 */
 
 

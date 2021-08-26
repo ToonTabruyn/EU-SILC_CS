@@ -1,4 +1,10 @@
-/* Data preparation for microsimulation */
+/* 
+
+This code runs the OPEN FAMILY POLICY PROGRAM
+
+ */
+
+
 
 *** Data directory
 global DATA "C:\Users\u0140174\Documents\Data\EU-SILC" 

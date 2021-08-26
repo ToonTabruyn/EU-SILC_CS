@@ -1,4 +1,6 @@
-/* 		*** SAMPLE SELECTION ***
+/* 		
+
+SAMPLE SELECTION
 
 -> single men and women between the age of 16 and 45
 -> cohabiting couples (un/married) where woman is between 16 and 45 years old

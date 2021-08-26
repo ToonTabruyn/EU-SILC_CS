@@ -1,4 +1,10 @@
-/*	STANDARDIZATION OF VARIABLES 	*/
+/*	
+
+STANDARDISE variables 	
+
+Prepares the original variables for the Program. 
+
+*/
 
 * country
 // rename oldvar country	// 
@@ -29,12 +35,12 @@ foreach x in a b c d e f g h i j k l {
 	
 
 * duration of employment (months) 
-egen duremp = anycount(estatus*), values(1) // own calculation depending on the dataset; in months
+egen duremp = anycount(estatus*), values(1) 
 
 
 
 * duration of education
-egen duredu = anycount(pl211*), values(6) // duration of employment (time in education counts into qualifying period in CZ) 
+egen duredu = anycount(pl211*), values(6)  
 
 * duration of unemployment
 egen unemp_dur = anycount(estatus*), values(3)			
@@ -45,44 +51,28 @@ egen dursemp = anycount(estatus*), values(2)
 
 	
 * monthly gross earning (labour income) 
-// rename [] earning 
 
-gen earning_yg = py010g + py050g 	// collapse earning from employment and self-employment
+gen earning_yg = py010g + py050g 	// collapses earning from employment and self-employment
 
-gen dureact = duremp + dursemp 	// duration of employment and self-employment
+gen dureact = duremp + dursemp 	// adds of employment and self-employment
 gen earning = earning_yg/dureact 
+
 
 * self-employed are allowed negative "income"
 replace earning = 0 if earning < 0
 
-replace earning = 0 if econ_status == 4 & earning == .  // inactive earning = . => deletes the observations from sample
+replace earning = 0 if econ_status == 4 & earning == .  // inactive earning = . (if not recoded, deletes observations from the sample)
 
 drop dureact
+
 
 * age (at the time of interview)
 gen age = rx010
 			
 
-* unemployment benefits - household level variable in EU-SILC
-// rename oldvar unemp_ben
-
-
-	
-* residency status 
-/* recode oldvar ([] = 0 "not resident") ///
-			([] = 1 "resident"), ///
-			gen(residency) label(residencyl) */ // not in EU-SILC
-			
-
-
-
-* sector - not part of EU-SILC
-/* recode oldvar ([] = 1 private) ///
-			([] = 2 public), ///
-			gen(sector) label(sectorl) */
-
 * region
-rename db040 region		
+gen region = db040 		
+
 
 * partnership status
 recode pb200 (3 = 1 single) ///
@@ -91,13 +81,6 @@ recode pb200 (3 = 1 single) ///
 			
 
 * working hours
-rename pl060 whours	
+gen whours = pl060 	
 			
 
-/* for child benefits! ignore for now
-* number of children
-recode oldvar nchild
-
-* age of each child => depending on the survey
-cage1 etc
-*/
