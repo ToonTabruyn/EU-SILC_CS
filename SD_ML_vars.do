@@ -4,7 +4,6 @@ Creates MATERNITY LEAVE variables
 
 */
 
-
 gen ml_eli = . 		// eligibility for ML
 lab var ml_eli "ML eligibility"
 lab def ml_elil 0 "not eligible" 1 "eligible"
