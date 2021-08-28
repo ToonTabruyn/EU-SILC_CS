@@ -6,7 +6,7 @@ The Program translates national family policy legislations into a Stata code. In
 
 **To run the Program**:
 1. merge the original EU-SILC CS files using _SD_merge_eusilc_cs.do_ 
-    - skip this step if you already have merged EU-SILC file
+    - skip this step if you already have a merged EU-SILC file
 3. add your DATA directory in _MAIN_eusilc_cs.do_
 4. add your CODE directory in _MAIN_eusilc_cs.do_
 5. if you already have your merged EU-SILC file, add the name of the data file in _MAIN_eusilc_cs.do_
