@@ -11,5 +11,6 @@ The Program translates national family policy legislations into a Stata code. In
 6. run _MAIN_eusilc_cs.do_
 
 **License**
+
 The Open Family Policy Program is licensed under the GNU GPL3 license. For details on the condition of the license see the document LICENSE in this repository.
 
