@@ -38,37 +38,42 @@ replace pl_dur = 158/21.7 		if country == "FI" & year == 2019 & pl_eli == 1 ///
 */
 
 
-* IG a
-gen pl_ben = 27.86 * 21.7 		if country == "FI" & year == 2019 & pl_dur != . ///
-									& (earning*12) < 11942
+* IGa
+gen pl_ben = 27.86 * 21.7 			if country == "FI" & year == 2018 ///
+									& pl_eli == 1 & (earning*12) < 11942
 
-* IG b
-replace pl_ben = earning * 0.7 	if country == "FI" & year == 2019 & pl_dur != . ///
+* IGb
+replace pl_ben = earning * 0.7 		if country == "FI" & year == 2018 ///
+									& pl_eli == 1 & pl_ben == . ///
 									& inrange((earning*12),11942,37861)
 
-* IG c 
-gen pl_bena = (37862/12) * 0.7 	if country == "FI" & year == 2019 & pl_dur != . ///
-									& inrange((earning*12),37862,58252)
+* IGc 
+gen pl_bena = (37861/12) * 0.7 		if country == "FI" & year == 2018 ///
+									& pl_eli == 1 & inrange((earning*12),37861,58252)
 			
-gen pl_benb = (((earning*12) - 37862) / 12) * 0.4 		if country == "FI" ///
-									& year == 2019	& pl_dur != . ///
-									& inrange((earning*12),37862,58252)
+gen pl_benb = (((earning*12) - 37861) / 12) * 0.4 		///
+									if country == "FI" & year == 2018	///
+									& pl_eli == 1 & inrange((earning*12),37861,58252)
 
-replace pl_ben = ml_bena + ml_benb 		if country == "FI" ///
-												& year == 2019	& pl_dur != . ///
-												& inrange((earning*12),37862,58252)			
+replace pl_ben = pl_bena + pl_benb 		if country == "FI" ///
+												& year == 2018 & pl_eli == 1 & pl_ben == . ///
+												& inrange((earning*12),37861,58252)			
 			
-* IG d	
-gen pl_benc = ((58252-37862) / 12) * 0.4			if country == "FI" ///
-													& year == 2019	& pl_dur != . ///
+* IGd	
+gen pl_benc = (57183/12) * 0.4 * 0.4			if country == "FI" ///
+													& year == 2018 & pl_eli == 1 ///
 													& (earning*12) > 58252
 	
-replace pl_ben = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
-							& year == 2019	&  pl_dur != .  ///
-							& (earning*12) > 58252
+gen pl_bend = (((earning*12) - 57183) / 12) * 0.25 		///
+									if country == "FI" & year == 2018	///
+									& pl_eli == 1 & (earning*12) > 58252
 			
 
-			
+replace pl_ben = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
+							& year == 2018	& pl_eli == 1 & pl_ben == . ///
+							& (earning*12) > 58252
+
+
 			
 			
 replace pl_ben1 = pl_ben 		if country == "FI" & year == 2019 & pl_eli == 1

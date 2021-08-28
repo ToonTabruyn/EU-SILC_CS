@@ -33,7 +33,7 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2019 & gender == 1 & m
 * BENEFIT (monthly) 
 /* first 56 days:
 	-> €27.86/day if unemployed or earnings are less than €9,289/year (income group 56a; LP&R 2019)
-	-> 90% of earnings between €9,289/year and €57,183/year (IG 56b; LP&R 2019)
+	-> 90% of earnings between €9,289/year and €58,252/year (IG 56b; LP&R 2019)
 	-> 32.5% of earnings above €58,252/year (IG 56c; LP&R 2019)
 
 remaining 49 days:
@@ -78,20 +78,20 @@ replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2019 & gender == 
 									& inrange((earning*12),11942,37861)
 
 * IG 49c 
-gen ml_ben49a = (37862/12) * 0.7 	if country == "FI" & year == 2019 & gender == 1 ///
-									& ml_eli == 1 & inrange((earning*12),37862,58252)
+gen ml_ben49a = (37861/12) * 0.7 	if country == "FI" & year == 2019 & gender == 1 ///
+									& ml_eli == 1 & (earning*12) > 37861
 			
 gen ml_ben49b = (((earning*12) - 37862) / 12) * 0.4 		if country == "FI" ///
 									& year == 2019	& gender == 1 & ml_eli == 1 ///
-									& inrange((earning*12),37862,58252)
+									& inrange((earning*12),37862,57182)
 
 replace ml_ben49 = ml_ben49a + ml_ben49b 		if country == "FI" ///
 												& year == 2019	& gender == 1 ///
 												& ml_eli == 1 & ml_ben49 == . ///
-												& inrange((earning*12),37862,58252)			
+												& inrange((earning*12),37862,57182)			
 			
 * IG 49d	
-gen ml_ben49c = ((58252-37862) / 12) * 0.4			if country == "FI" ///
+gen ml_ben49c = (58252/12) * 0.4			if country == "FI" ///
 													& year == 2019	& gender == 1 ///
 													& ml_eli == 1 & (earning*12) > 58252
 	
@@ -105,6 +105,7 @@ replace ml_ben49 = ml_ben49a + ml_ben49c + ml_ben49d 		if country == "FI" ///
 							& (earning*12) > 58252
 			
 
+			
 * ML benefit 
 replace ml_ben1 = ((ml_ben56 * (56/6) ) + (ml_ben49 * (49/6))) * 4.3 		if country == "FI" ///
 												& year == 2019	& gender == 1 & ml_eli == 1

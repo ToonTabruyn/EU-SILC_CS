@@ -79,7 +79,7 @@ replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2018 & gender == 
 
 * IG 49c 
 gen ml_ben49a = (37167/12) * 0.7 	if country == "FI" & year == 2018 & gender == 1 ///
-									& ml_eli == 1 & inrange((earning*12),37168,57182)
+									& ml_eli == 1 & (earning*12) > 37168
 			
 gen ml_ben49b = (((earning*12) - 37167) / 12) * 0.4 		if country == "FI" ///
 									& year == 2018	& gender == 1 & ml_eli == 1 ///
@@ -91,7 +91,7 @@ replace ml_ben49 = ml_ben49a + ml_ben49b 		if country == "FI" ///
 												& inrange((earning*12),37167,57182)			
 			
 * IG 49d	
-gen ml_ben49c = ((57183-37167) / 12) * 0.4			if country == "FI" ///
+gen ml_ben49c = (57183/12) * 0.4			if country == "FI" ///
 													& year == 2018	& gender == 1 ///
 													& ml_eli == 1 & (earning*12) > 57183
 	

@@ -44,7 +44,7 @@ replace ml_ben1 = earning 		if country == "LU" & year == 2019 & ml_eli == 1
 replace ml_ben1 = 2089.75  		if country == "LU" & year == 2019 & ml_eli == 1 ///
 								& ml_ben1 < 2089.75
 								
-replace ml_ben1 = 10,448.75 	if country == "LU" & year == 2019 & ml_eli == 1 ///
+replace ml_ben1 = 10448.75 	if country == "LU" & year == 2019 & ml_eli == 1 ///
 								& ml_ben1 >= 10448.75
 
 			 
