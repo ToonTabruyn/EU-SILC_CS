@@ -16,6 +16,9 @@ The Program translates national family policy legislations into a Stata code. In
 
 The Open Family Policy Program is licensed under the GNU GPL3 license. For details on the condition of the license see the document LICENSE in this repository.
 
+<<<<<<< HEAD
 # Funding 
 
 This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 893008.
+=======
+>>>>>>> d143dbbb6105772eea0708554826310ee0ecdbf1
