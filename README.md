@@ -2,8 +2,6 @@
 
 The Program translates national family policy legislations into a Stata code. In combination with survey data (EU-SILC CS in this case), the Program creates a collection of policy variables that indicate which respondents would be entitled to family policies, the duration of the benefit payments and the amount of benefits. For more information about the Program see _Methodology_report_eusilc_cs_ file in this Repository. 
 
-https://zenodo.org/badge/399796332.svg
-
 # To run the Program:
 1. merge the original EU-SILC CS files using _SD_merge_eusilc_cs.do_ 
     - skip this step if you already have a merged EU-SILC file
