@@ -1,8 +1,4 @@
-/* ML_2017_AT_eusilc_cs
-
-date created: 27/09/2021
-
-*/
+/* ML_2017_AT_eusilc_cs */
 
 * AUSTRIA - 2017
 
