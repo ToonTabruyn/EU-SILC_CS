@@ -1,8 +1,5 @@
-/* ML_2019_LU_eusilc_cs
+/* ML_2019_LU_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * LUXEMBOURG - 2019
 
@@ -13,13 +10,8 @@ date created: 12/08/2021
 */
 
 replace ml_eli = 1 			if country == "LU" & year == 2019 & gender == 1 ///
-							& econ_status == 1 & duremp >= 6
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 6
 							
-replace ml_eli = 1 			if country == "LU" & year == 2019 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 6
-							
-replace ml_eli = 1 			if country == "LU" & year == 2019 & gender == 1 ///
-							& inlist(econ_status,1,2) & (duremp + dursemp) >= 6	
 							
 replace ml_eli = 0 			if ml_eli == . & country == "LU" & year == 2019 & gender == 1
 
@@ -44,7 +36,7 @@ replace ml_ben1 = earning 		if country == "LU" & year == 2019 & ml_eli == 1
 replace ml_ben1 = 2089.75  		if country == "LU" & year == 2019 & ml_eli == 1 ///
 								& ml_ben1 < 2089.75
 								
-replace ml_ben1 = 10448.75 	if country == "LU" & year == 2019 & ml_eli == 1 ///
+replace ml_ben1 = 10448.75 		if country == "LU" & year == 2019 & ml_eli == 1 ///
 								& ml_ben1 >= 10448.75
 
 			 
