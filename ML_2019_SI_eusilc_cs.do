@@ -1,8 +1,5 @@
-/* ML_2019_SI_eusilc_cs
+/* ML_2019_SI_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * SLOVENIA - 2019
 
@@ -18,13 +15,13 @@ date created: 12/08/2021
 replace ml_eli = 1 			if country == "SI" & year == 2019 & gender == 1 ///
 							& inlist(econ_status,1,2) 
 replace ml_eli = 1 			if country == "SI" & year == 2019 & gender == 1 ///
-							& inlist(econ_status,3,4) & duremp + dursemp >= 12
+							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12
 
 * single men
 replace ml_eli = 1 			if country == "SI" & year == 2019 & gender == 2 ///
 							& inlist(econ_status,1,2) & parstat == 1
 replace ml_eli = 1 			if country == "SI" & year == 2019 & gender == 2 ///
-							& inlist(econ_status,3,4) & duremp >= 12 & parstat == 1
+							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12 & parstat == 1
 							
 replace ml_eli = 0 			if ml_eli == . & country == "SI" & year == 2019 & gender == 1
 
@@ -39,7 +36,9 @@ replace ml_dur1 = 0 			if country == "SI" & year == 2019 & ml_eli == 1
 
 replace ml_dur2 = 105/7 		if country == "SI" & year == 2019 & ml_eli == 1 ///
 								& gender == 1
-replace ml_dur2 = 80/7			if country == "SI" & year == 2019 & ml_eli == 1 ///
+								
+* single men
+replace ml_dur2 = 77/7			if country == "SI" & year == 2019 & ml_eli == 1 ///
 								& gender == 2 & parstat == 1
 
 
@@ -49,10 +48,10 @@ replace ml_dur2 = 80/7			if country == "SI" & year == 2019 & ml_eli == 1 ///
 		-> €323.55/month (LP&R 2019)		
 */
 	
-replace ml_ben1 = earning 		if country == "SI" & year == 2019 & ml_eli == 1 ///
-								& inlist(econ_status,1,2)	
+replace ml_ben1 = earning 		if country == "SI" & year == 2019 & ml_eli == 1  
+
 replace ml_ben1 = 323.55 		if country == "SI" & year == 2019 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & ml_ben1 < 323.55
+								& ml_ben1 < 323.55
 
 					
 

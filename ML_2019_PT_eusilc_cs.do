@@ -1,8 +1,5 @@
-/* ML_2019_PT_eusilc_cs
+/* ML_2019_PT_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * PORTUGAL - 2019
 
@@ -13,14 +10,13 @@ date created: 12/08/2021
 	-> compulsorily social insurance for employed and self-employed 
 		- 6 months of work before childbirth	
 		
-	-> transferable to father only if the mother died or is incapacitated => 
-		we assume that this does not extend to abandonment of child by the mother (not coded)
+	-> transferable to father only if the mother dies or is incapacitated => 
+		we assume that this does not extend to abandonment of a child by the mother (not coded)
 */
 	
 replace ml_eli = 1 			if country == "PT" & year == 2019 & gender == 1 ///
-							& econ_status == 1 & duremp >= 6
-replace ml_eli = 1 			if country == "PT" & year == 2019 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 6
+							& inlist(econ_status,1,2) & (duremp + dursemp) >= 6
+							
 replace ml_eli = 1 			if country == "PT" & year == 2019 & gender == 1 ///
 							& inlist(econ_status,1,2) & duremp + dursemp >= 6
 
