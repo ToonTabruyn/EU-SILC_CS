@@ -1,15 +1,12 @@
-/* ML_2019_GB_eusilc_cs
+/* ML_2019_GB_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * UK - 2019
 
 * ELIGIBILITY
 /*	-> employed, self-employed: 
 		- for 26 weeks before childbirth 
-		- earning at least E 34/week
+		- earning at least €34/week
 	-> further restrictions for entitlement to cash benefits
 	
 	-> part of ML can be shared with the father (shared parental leave) if:
@@ -17,13 +14,14 @@ date created: 11/08/2021
 			- employed by the same employer for at least 26 weeks 
 		- father/partner:
 			- employed or self-employed for at least 26 weeks
-			- earned at least E 441 in total during 13 weeks within 66 weeks before the birth
+			- earned at least €441 in total during 13 weeks within 66 weeks before the birth
 	-> single fathers are not entitled to shared parental leave because it is 
 	   dependent on the mother's economic status
 */
 
 replace ml_eli = 1 			if country == "GB" & year == 2019 & gender == 1 ///
-							& inlist(econ_status,1,2) & (earning/4.3) >= 34
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 26/4.3 /// 
+							& (earning/4.3) >= 34
 
 * father's eligibility for shared parental leave 
 replace ml_eli = 1 			if country == "GB" & year == 2019 & gender == 2 ///
