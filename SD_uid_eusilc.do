@@ -55,16 +55,16 @@ tostring (rb230), gen(mid)
 tostring (rb240), gen(prid)
 
 * generate unique household and personal IDs
-egen str13 person_id = concat(isonum pids)
-egen str11 hh_id = concat(isonum hids)
+egen str13 person_id = concat(year isonum pids )
+egen str11 hh_id = concat(year isonum hids)
 
-egen str13 father_id = concat(isonum fid) if fid != "."
+egen str13 father_id = concat(year isonum fid) if fid != "."
 replace father_id = "." if fid == "."
 
-egen str13 mother_id = concat(isonum mid) if mid != "."
+egen str13 mother_id = concat(year isonum mid) if mid != "."
 replace mother_id = "." if mid == "."
 
-egen str13 partner_id = concat(isonum prid) if prid != "."
+egen str13 partner_id = concat(year isonum prid) if prid != "."
 replace partner_id = "." if prid == "."
 
 

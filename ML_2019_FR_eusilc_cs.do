@@ -1,8 +1,5 @@
-/* ML_2019_FR_eusilc_cs
+/* ML_2019_FR_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * FRANCE - 2019
 

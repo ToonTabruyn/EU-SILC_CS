@@ -1,8 +1,5 @@
-/* ML_2019_CZ_eusilc_cs
+/* ML_2019_CZ_eusilc_cs */
 
-date created: 15/7/2021
-
-*/
 
 * Czechia - 2019
 

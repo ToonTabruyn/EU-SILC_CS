@@ -1,18 +1,16 @@
-/* ML_2019_ES_eusilc_cs
+/* ML_2019_ES_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * SPAIN - 2019
 
 * ELIGIBILITY
-/*	-> employed, self-employed
-	-> under 21 years old: no qualifying condition 
-	-> 21-26 years: 90 days of compulsory contribution to social security system (coded) in past 7 years (not coded)
+/*	-> all employed and self-employed are entitled to some maternity leave (see section DURATION)
+	-> conditions apply for duration and benefits:
+		-> under 21 years old: no qualifying condition 
+		-> 21-26 years: 90 days of compulsory contribution to social security system (coded) in past 7 years (not coded)
 					or 180 days during work life (not coded)
-	-> 26+ years: 180 days of s.s. contribution (coded) in past 7 years (not coded) or 360 days over the whole working life (not coded)
-	-> employed, self-employed who don't fulfill the conditions (flat-rate benefits)
+		-> 26+ years: 180 days of s.s. contribution (coded) in past 7 years (not coded) or 360 days over the whole working life (not coded)
+		-> employed, self-employed who don't fulfill the conditions (flat-rate benefits)
 	
 	-> mother can transfer 4 weeks to father if both parents work => coded for single men
 */
@@ -43,7 +41,7 @@ replace ml_dur2 = 16 		if country == "ES" & year == 2019 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & age < 21
 
 replace ml_dur2 = 16 		if country == "ES" & year == 2019 & ml_eli == 1 ///
-							& inlist(econ_status,1,2) & inrange(age,21,25) ///
+							& inlist(econ_status,1,2) & inrange(age,21,26) ///
 							& (duremp+dursemp) >= 90/21.7
 
 replace ml_dur2 = 16 		if country == "ES" & year == 2019 & ml_eli == 1 ///							
@@ -69,7 +67,7 @@ replace ml_ben1 = earning 		if country == "ES" & year == 2019 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & age < 21
 
 replace ml_ben1 = earning 		if country == "ES" & year == 2019 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & inrange(age,21,25) ///
+								& inlist(econ_status,1,2) & inrange(age,21,26) ///
 								& (duremp+dursemp) >= 90/21.7
 
 replace ml_ben1 = earning 		if country == "ES" & year == 2019 & ml_eli == 1 ///
