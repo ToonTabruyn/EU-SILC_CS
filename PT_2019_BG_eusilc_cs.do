@@ -1,9 +1,6 @@
- /* PT_2019_BG_eusilc_cs
+ /* PT_2019_BG_eusilc_cs */
 
-date created: 15/07/2021
-
-*/
-
+ 
 * BULGARIA - 2019
 
 * ELIGIBILITY
@@ -31,18 +28,18 @@ replace pt_dur = 15/5 if country == "BG" & year == 2019 & pt_eli == 1
 */
 
 	
-replace pt_ben1 = (((0.9*earning)/4.3) * pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = ((earning * 0.9) * (15/21.7)) + (earning * ((21.7-15)/21.7)) ///
 										if country == "BG" & year == 2019 ///
 										& pt_eli == 1 & pt_ben1 == .
 	
  
 * minimum
-replace pt_ben1 = 235.16 + ((earning/4.3)*(4.3-pt_dur)) 	if country == "BG" & year == 2019 ///
-															& pt_eli == 1 & ((0.9*earning)/4.3) < 235.16/pt_dur
+replace pt_ben1 = 235.16 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2019 ///
+															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 235.16
  
 * maximum 
-replace pt_ben1 = 1329.36 + ((earning/4.3)*(4.3-pt_dur)) 	if country == "BG" & year == 2019 ///
-															& pt_eli == 1 & ((0.9*earning)/4.3) >= 1329.36/pt_dur
+replace pt_ben1 = 1329.36 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2019 ///
+															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= 1329.36
 										
 
 

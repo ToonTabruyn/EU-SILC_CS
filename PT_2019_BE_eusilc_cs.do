@@ -1,14 +1,12 @@
-/* PT_2019_BE_eusilc_cs
+/* PT_2019_BE_eusilc_cs */
 
-date created: 15/07/2021
-
-*/
 
 * Belgium - 2019
 
 * ELIGIBILITY
 /*	-> employed
 */
+
 replace pt_eli = 1 		if country == "BE" & year == 2019 & gender == 2 ///
 						& econ_status == 1
 replace pt_eli = 0 		if pt_eli == . & country == "BE" & year == 2019 & gender == 2 
@@ -23,15 +21,17 @@ replace pt_dur = 10/5 	if country == "BE" & year == 2019 & gender == 2 ///
 * BENEFIT (monthly)
 /*	-> 82% of earnings, ceiling = €116.87/day 		*/
 
-replace pt_ben1 = (((0.82 * earning)/4.3) * pt_dur)	+ (earning * (4.3-pt_dur)) ///
+replace pt_ben1 = ((earning * 0.82) * (10/21.7)) + (earning * ((21.7-10)/21.7)) ///
 									if country == "BE" & year == 2019 ///
 									& gender == 2  & pt_eli == 1					
 
 * above ceiling
-replace pt_ben1 = (116.87*10) + (earning * (4.3-pt_dur)) ///
+replace pt_ben1 = (116.87*10) + (earning * ((21.7-10)/21.7)) ///
 									if country == "BE" & year == 2019 ///
 									& gender == 2  & pt_eli == 1 ///
-									& (((0.82 * earning)/4.3) * pt_dur) > (116.87 * 10)
+									& ((0.82*earning)/21.7) > 116.87 
+									
+									
 	
 
 replace pt_ben2 = pt_ben1 			if country == "BE" & year == 2019 & gender == 2
