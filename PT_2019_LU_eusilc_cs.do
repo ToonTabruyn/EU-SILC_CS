@@ -1,8 +1,5 @@
-/* PT_2019_LU_eusilc_cs
+/* PT_2019_LU_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * LUXEMBOURG - 2019
 

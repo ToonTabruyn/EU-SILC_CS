@@ -1,8 +1,5 @@
-/* PT_2019_GR_eusilc_cs
+/* PT_2019_GR_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * GREECE - 2019
 

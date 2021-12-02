@@ -1,8 +1,5 @@
-/* PT_2019_NL_eusilc_cs
+/* PT_2019_NL_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * NETHERLANDS - 2019
 
@@ -18,7 +15,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "NL" & year == 2019 & gender ==
 * DURATION (weeks)
 /* -> 5 days (calculated the same was as parental leave; LP&R 2019) */
 
-replace pt_dur = 2/5 if country == "NL" & year == 2019 & pt_eli == 1  // LP&R 2019
+replace pt_dur = 5/5 if country == "NL" & year == 2019 & pt_eli == 1  // LP&R 2019
 
 
 * BENEFIT (monthly)
