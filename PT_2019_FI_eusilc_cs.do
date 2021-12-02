@@ -1,8 +1,5 @@
-/* PT_2019_FI_eusilc_cs
+/* PT_2019_FI_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * Finland - 2019
 
@@ -31,45 +28,55 @@ replace pt_dur = 54/6 if country == "FI" & year == 2019 & pt_eli == 1
 
 
 * IGa
-gen pt_ben = 27.86 * 21.7 			if country == "FI" & year == 2018 & gender == 2 ///
+replace pt_ben1 = 27.86 * 21.7 			if country == "FI" & year == 2019 & gender == 2 ///
 									& pt_eli == 1 & (earning*12) < 11942
+									
+replace pt_ben1 = 27.86 * 21.7 		if country == "FI" & year == 2019 & gender == 2 ///
+									& pt_eli == 1 & econ_status == 3
 
 * IGb
-replace pt_ben = earning * 0.7 		if country == "FI" & year == 2018 & gender == 2 ///
-									& pt_eli == 1 & pt_ben == . ///
+replace pt_ben1 = earning * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
+									& pt_eli == 1 & pt_ben1 == . ///
 									& inrange((earning*12),11942,37861)
 
+									
 * IGc 
-gen pt_bena = (37861/12) * 0.7 		if country == "FI" & year == 2018 & gender == 2 ///
+gen pt_bena = (37861/12) * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
 									& pt_eli == 1 & (earning*12) > 37861
 			
-gen pt_benb = (((earning*12) - 37861) / 12) * 0.4 		///
-									if country == "FI" & year == 2018	///
+gen pt_benb = (earning - (37862/12)) * 0.4 		///
+									if country == "FI" & year == 2019	///
 									& gender == 2 & pt_eli == 1 ///
 									& inrange((earning*12),37861,58252)
 
-replace pt_ben = pt_bena + pt_benb 		if country == "FI" ///
-												& year == 2018	& gender == 2 ///
-												& pt_eli == 1 & pt_ben == . ///
+replace pt_ben1 = pt_bena + pt_benb 		if country == "FI" ///
+												& year == 2019	& gender == 2 ///
+												& pt_eli == 1 & pt_ben1 == . ///
 												& inrange((earning*12),37861,58252)			
-			
+
+																								
+												
+												
 * IGd	
 gen pt_benc = (57183/12) * 0.4			if country == "FI" ///
-													& year == 2018	& gender == 2 ///
+													& year == 2019	& gender == 2 ///
 													& pt_eli == 1 & (earning*12) > 58252
 	
-gen pt_bend = (((earning*12) - 57183) / 12) * 0.25 		///
-									if country == "FI" & year == 2018	///
+gen pt_bend = (earning - (58252/12)) * 0.25  		///
+									if country == "FI" & year == 2019	///
 									& gender == 2 & pt_eli == 1 ///
 									& (earning*12) > 58252
 			
 
-replace pt_ben = pt_bena + pt_benc + pt_bend 		if country == "FI" ///
-							& year == 2018	& gender == 2 & pt_eli == 1 & pt_ben == . ///
+replace pt_ben1 = pt_bena + pt_benc + pt_bend 		if country == "FI" ///
+							& year == 2019	& gender == 2 & pt_eli == 1 & pt_ben1 == . ///
 							& (earning*12) > 57183
 
 
 
+replace pt_ben2 = pt_ben1 	if country == "FI" & year == 2019 & gender == 2 & pt_eli == 1
+						
+			
 
 
 foreach x in 1 2 {
