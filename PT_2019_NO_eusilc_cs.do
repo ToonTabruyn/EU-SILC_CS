@@ -1,8 +1,5 @@
-/* PT_2019_NO_eusilc_cs
+/* PT_2019_NO_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -10,6 +7,7 @@ date created: 12/08/2021
 	Additional source: https://familie.nav.no/om-foreldrepenger#hvor-lenge-kan-du-fa-foreldrepenger
 	Accessed: 01/04/2021
 */
+
 
 * NORWAY - 2019
 
@@ -34,7 +32,7 @@ replace pt_eli = 1 			if country == "NO" & year == 2019 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single woman							
-replace pt_eli = 1			if country == "NO" & year == 2019 & gender == 2 ///
+replace pt_eli = 1			if country == "NO" & year == 2019 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & parstat == 1
 
 replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2019 & gender == 2
@@ -50,18 +48,10 @@ replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2019 & gender =
 */
 
 * both are eligible and only man is eligible
-replace pt_dur = 15 		if country == "NO" & year == 2019 & pt_eli == 1 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
-replace pt_dur = 15 		if country == "NO" & year == 2019 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
-
-* only woman is eligible 
-replace pt_dur = 15 		if country == "NO" & year == 2019 & pt_eli == 1 & gender == 1 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
+replace pt_dur = 15 		if country == "NO" & year == 2019 & pt_eli == 1 & gender == 2 
 
 * single woman
-replace pt_dur = 15			if country == "NO" & year == 2019 & pt_eli == 1 & gender == 1 ///
-							& parstat == 1
+replace pt_dur = 15			if country == "NO" & year == 2019 & pt_eli == 1 & gender == 1 
 
 
 
@@ -72,13 +62,15 @@ replace pt_dur = 15			if country == "NO" & year == 2019 & pt_eli == 1 & gender =
 */
 
 replace pt_ben1 = earning 		if country == "NO" & year == 2019 & pt_eli == 1
+
 replace pt_ben1 = 61868/12		if country == "NO" & year == 2019 & pt_eli == 1 ///
 								& pt_ben1 >= 61868/12
+								
 replace pt_ben1 = 8585/11		if country == "NO" & year == 2019 & pt_eli == 1 ///
 								& pt_ben1 < 8585/11
 
 
-replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2019 & pt_eli == 1
+replace pt_ben2 = pt_ben1 		if country == "NO" & year == 2019 & pt_eli == 1
 
 
 
