@@ -1,20 +1,17 @@
-/* PL_2019_BG_eusilc_cs
+/* PL_2019_BG_eusilc_cs */
 
-date created: 24/08/2021
-
-*/
 
 * BULGARIA - 2019
 
 * ELIGIBILITY
-/* 	-> Parental leave is specifically designed for women. 
+/* 	-> Parental leave is specifically designed for women (LP&R 2019) 
 	-> All women are entitled to a cash benefit. 
 	
 	-> single father is not automatically entitled - mother's consent is required => not coded
    Source: MISSOC 01/07/2019										*/
 
 replace pl_eli = 1 	if country == "BG" & year == 2019 & gender == 1
-replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2008 
+replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2019 
 
 
 * DURATION (weeks)
@@ -23,11 +20,12 @@ replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2008
 	Source: MISSOC 01/07/2019										
 */
    
-replace pl_dur = (2*52) - ((410-45)/5) 		if country == "BG" & year == 2019 & pl_eli == 1 ///
-											& gender == 1 & econ_status == 1 & duremp >= 12 ///
-											& pl_eli == 1
-replace pl_dur = 52 		if country == "BG" & year == 2019 & pl_eli == 1 ///
-							& gender == 1 & pl_dur == . & pl_eli == 1
+replace pl_dur = (2*52) - ml_dur1	 	if country == "BG" & year == 2019 & pl_eli == 1 ///
+										& gender == 1 & econ_status == 1 & duremp >= 12
+						
+										
+replace pl_dur = 52 					if country == "BG" & year == 2019 & pl_eli == 1 ///
+										& gender == 1 & pl_dur == . 
 
 
 
@@ -39,6 +37,7 @@ replace pl_dur = 52 		if country == "BG" & year == 2019 & pl_eli == 1 ///
    
 replace pl_ben1 = 194	 if country == "BG" & year == 2019 & pl_eli == 1 ///
 						 & gender == 1 & econ_status == 1 & duremp >= 12
+
 replace pl_ben1 = 51	 if country == "BG" & year == 2019 & pl_eli == 1 ///
 						 & gender == 1 & pl_ben1 == . & pl_eli == 1 
 
