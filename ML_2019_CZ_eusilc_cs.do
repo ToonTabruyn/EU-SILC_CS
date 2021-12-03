@@ -50,11 +50,11 @@ gen dab = earning/21.7 				if country == "CZ" & year == 2019 & ml_eli == 1 ///
 
 * daily earning between €43 and €64
 gen dab1 = 43 						if country == "CZ" & year == 2019 & ml_eli == 1 ///
-									& inrange(earning/21.7,43,57)
+									& inrange(earning/21.7,43,64)
 gen dab2 = ((earning/21.7) - 43)*0.6 	if country == "CZ" & year == 2019 & ml_eli == 1 ///
-										& inrange(earning/21.7,43,57)
+										& inrange(earning/21.7,43,64)
 replace dab = dab1 + dab2 				if country == "CZ" & year == 2019 & ml_eli == 1 ///
-										& inrange(earning/21.7,43,57) & dab == .
+										& inrange(earning/21.7,43,64) & dab == .
 drop dab1 dab2
 										
 * daily earning between €64 adn €129										
@@ -101,4 +101,4 @@ foreach x in 1 2 {
 
 
 
-drop dab dab1 dab2 dab3
+
