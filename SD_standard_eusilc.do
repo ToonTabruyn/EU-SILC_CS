@@ -56,7 +56,7 @@ replace dursemp = . if econ_status == .
 
 gen earning_yg = py010g + py050g  if econ_status != . 	// collapses earning from employment and self-employment
 
-gen dureact = duremp + dursemp 	if econ_status != .// adds of employment and self-employment
+gen dureact = duremp + dursemp 	if econ_status != . // adds of employment and self-employment
 gen earning = earning_yg/dureact 
 
 
