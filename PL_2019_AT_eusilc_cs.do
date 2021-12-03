@@ -1,14 +1,11 @@
-/* PL_2019_AT_eusilc_cs
+/* PL_2019_AT_eusilc_cs */
 
-date created: 24/08/2021
-
-*/
 
 * AUSTRIA - 2019
 
 * ELIGIBILITY
 /*	-> parental leave: employed, individual entitlement
-	-> parental benefit: all parents, family entitlement
+	-> parental benefit: all parents, family entitlement 
 */
 replace pl_eli = 1 	if country == "AT" & year == 2019 
 replace pl_eli = 0 	if pl_eli == . & country == "AT" & year == 2019
@@ -27,17 +24,18 @@ replace pl_eli = 0 	if pl_eli == . & country == "AT" & year == 2019
 		the period of postnatal maternity leave is deduced for women who would be 
 		eligible for maternity leave. 	
 		
+	-> NOTE: if missing values on partner's economic status or earning => women's information is used	
 */
 
 * employed   
 	* eligible for ML
 	* and cohabiting
-replace pl_dur = (365/7) - 8 	if country == "AT" & year == 2019 & pl_eli == 1 ///
-								& gender == 1 & (econ_status == 1 | p_econ_status == 1) ///
-								& parstat == 2 & ml_eli == 1
+replace pl_dur = (365/7) - ml_dur2 	if country == "AT" & year == 2019 & pl_eli == 1 ///
+									& gender == 1 & (econ_status == 1 | p_econ_status == 1) ///
+									& parstat == 2 & ml_eli == 1
 	* and single
-replace pl_dur = (365/7) - 8 	if country == "AT" & year == 2019 & pl_eli == 1 ///
-								& gender == 1 & econ_status == 1 & parstat == 1 & ml_eli == 1 & pl_dur == .
+replace pl_dur = (365/7) - ml_dur2 	if country == "AT" & year == 2019 & pl_eli == 1 ///
+									& gender == 1 & econ_status == 1 & parstat == 1 & ml_eli == 1 & pl_dur == .
 
 
 
@@ -48,7 +46,7 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
 							& parstat == 2 & ml_eli != 1 & pl_dur == .
 	* and single
 replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
-							& gender == 1 & econ_status == 1 & parstat == 1 & ml_eli != 1 & pl_dur == . 
+							& econ_status == 1 & parstat == 1 & ml_eli != 1 & pl_dur == . 
 
 		
 
@@ -59,7 +57,7 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
 
 * single men
  replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
-							& gender == 2 & parstat == 1 & econ_status == 1 & pl_dur == . 
+							& gender == 2 & parstat == 1 & pl_dur == . 
 
 
 
@@ -74,51 +72,58 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
 	-> all other parents: €33.88/day (most generous option corresponding with the coded leave duration)
 */
 
-* identify partner with higher earnings
-gen hiearn = 1 if earning > p_earning & gender == 1
-replace hiearn = 1 if earning < p_earning & gender == 2
 
  ** employed & single
 replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2019 & pl_eli == 1 /// 
-									& econ_status == 1 & parstat == 2 & earning < (66*21.7)
+									& econ_status == 1 & parstat == 1 ///
+									& (earning*0.8) < (66*21.7) 
+									
+replace pl_ben1 = 66 * 21.7			if country == "AT" & year == 2019 & pl_eli == 1 /// 
+									& econ_status == 1 & parstat == 1 ///
+									& (earning*0.8) >= (66*21.7)								
  
  ** not working & single
 replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2019 & pl_eli == 1 /// 
-									& econ_status != 1 & parstat == 2 & earning < (66*21.7)
+									& econ_status != 1 & parstat == 1
  
  
- ** cohabiting
-replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1 ///
-									& econ_status == 1 & earning > (66*21.7) & pl_ben1 == . ///
-									& hiearn == 1
-									
-replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1 ///
-									& p_econ_status == 1 & p_earning > (66*21.7) & pl_ben1 == . /// 
-									& hiearn == 1
-									
+ 
+ ** cohabiting -> asssigned to a woman
+	* employed, woman higher earning
 replace pl_ben1 = 0.8 * earning		if country == "AT" & year == 2019 & pl_eli == 1 ///
 									& econ_status == 1 & earning > p_earning & pl_ben1 == . ///
-									& hiearn == 1
+									& gender == 1 & parstat == 2 & p_earning != .
 									
+	* employed, man higher earning
 replace pl_ben1 = 0.8 * p_earning	if country == "AT" & year == 2019 & pl_eli == 1 ///
 									& p_econ_status == 1 & earning < p_earning & pl_ben1 == . ///
-									& hiearn == 1
+									& gender == 1 & parstat == 2 & p_earning != .
 									
+	* neither of the partners is employed										
 replace pl_ben1 = 33.88 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1 ///
-									& econ_status != 1 & p_econ_status != 1 & pl_ben1 == . /// 
-									& hiearn == 1
+									& econ_status != 1 & !inlist(p_econ_status,.,1) & pl_ben1 == . ///
+									& gender == 1
 
+									
+	* employed, partner's earning is missing	
+replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2019 & pl_eli == 1 /// 
+									& econ_status == 1 & parstat == 2 & p_earning == .
+									
+	
+									
+	* ceiling 
+replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1 ///
+									& econ_status == 1 & pl_ben1 > (66*21.7) & pl_ben1 != .
+									
 
- 
- 
  
 replace pl_ben2 = pl_ben1		if country == "AT" & year == 2019 & pl_eli == 1
 
 
 foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "AT" & year == 2019
+	replace pl_ben`x' = 0 	if country == "AT" & year == 2019 & pl_ben`x' == .
 }
 
-replace pl_dur = 0 	if pl_eli == 0 & country == "AT" & year == 2019
+replace pl_dur = 0 	if country == "AT" & year == 2019 & pl_dur == . 
 
-drop hiearn
+
