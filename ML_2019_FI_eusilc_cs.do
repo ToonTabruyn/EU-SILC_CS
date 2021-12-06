@@ -41,17 +41,13 @@ remaining 49 days:
 
 * Income group (IG) 56a
 gen ml_ben56 = 27.86 * 21.7 		if country == "FI" & year == 2019 ///
-									& gender == 1 & ml_eli == 1 ///
-									& econ_status == 3
+									& gender == 1 & ml_eli == 1 
 
 
-replace ml_ben56 = 27.86 * 21.7 		if country == "FI" & year == 2019 ///
-									& gender == 1 & ml_eli == 1 ///
-									& (earning*12) < 9289
 
 * IG 56b			
 replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2019 ///
-									& gender == 1 & ml_eli == 1 & ml_ben56 == . ///
+									& gender == 1 & ml_eli == 1 ///
 									& inrange((earning*12),9289,58252)
 
 * IG 56c			
@@ -66,35 +62,31 @@ gen ml_ben56b = (earning - (58252/12)) * 0.325 		if country == "FI" & year == 20
 	
 replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2019 ///
 												& gender == 1 & ml_eli == 1 ///
-												& ml_ben56 == . ///
 												& (earning*12) > 58252 & ml_eli == 1
 
 
+												
 * IG 49a
 gen ml_ben49 = 27.86 * 21.7 		if country == "FI" & year == 2019 & gender == 1 ///
-									& ml_eli == 1 & econ_status == 3
+									& ml_eli == 1 
 
-
-replace ml_ben49 = 27.86 * 21.7 	if country == "FI" & year == 2019 & gender == 1 ///
-									& ml_eli == 1 & (earning*12) < 11942
 
 * IG 49b - annual earnings under 37,861
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2019 & gender == 1 ///
-									& ml_eli == 1 & ml_ben49 == . ///
-									& inrange((earning*12),11942,37861)
+									& ml_eli == 1 & inrange((earning*12),11942,37861)
 
+									
 * IG 49c - annual earnings between €37,862/year and €58,252/year
 gen ml_ben49a = (37861/12) * 0.7 	if country == "FI" & year == 2019 & gender == 1 ///
 									& ml_eli == 1 & (earning*12) > 37861
 			
 gen ml_ben49b = (earning - (37862/12)) * 0.4 		if country == "FI" ///
-									& year == 2019	& gender == 1 & ml_eli == 1 ///
-									& inrange((earning*12),37862,58252)
+													& year == 2019	& gender == 1 & ml_eli == 1 ///
+													& inrange((earning*12),37862,58252)
 
 replace ml_ben49 = ml_ben49a + ml_ben49b 		if country == "FI" ///
 												& year == 2019	& gender == 1 ///
-												& ml_eli == 1 & ml_ben49 == . ///
-												& inrange((earning*12),37862,58252)			
+												& ml_eli == 1 & inrange((earning*12),37862,58252)			
 			
 * IG 49d - annual earnings above 58,252	
 gen ml_ben49c = (58252/12) * 0.4			if country == "FI" ///
@@ -107,14 +99,14 @@ gen ml_ben49d = (earning - (58252/12)) * 0.25 		if country == "FI" ///
 			
 
 replace ml_ben49 = ml_ben49a + ml_ben49c + ml_ben49d 		if country == "FI" ///
-							& year == 2019	& gender == 1 & ml_eli == 1 & ml_ben49 == . ///
-							& (earning*12) > 58252
+															& year == 2019	& gender == 1 & ml_eli == 1 ///
+															& (earning*12) > 58252
 			
 
 			
 * ML benefit 
 replace ml_ben1 = ((ml_ben56 * (56/105) ) + (ml_ben49 * (49/105))) 		if country == "FI" ///
-												& year == 2019	& gender == 1 & ml_eli == 1
+																		& year == 2019	& gender == 1 & ml_eli == 1
 
 
 			 
