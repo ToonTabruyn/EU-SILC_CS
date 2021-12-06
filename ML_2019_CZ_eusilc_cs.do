@@ -45,42 +45,41 @@ replace ml_dur2 = 22 	if country == "CZ" & year == 2019 & gender == 1 & ml_eli =
 
 ** DAILY ASSESSMENT BASE:
 * daily earning < 43
-gen dab = earning/21.7 				if country == "CZ" & year == 2019 & ml_eli == 1 ///
-									& earning/21.7 < 43
+gen dab = earning/21.7 				if country == "CZ" & year == 2019 & earning/21.7 < 43
 
 * daily earning between €43 and €64
-gen dab1 = 43 						if country == "CZ" & year == 2019 & ml_eli == 1 ///
-									& inrange(earning/21.7,43,64)
-gen dab2 = ((earning/21.7) - 43)*0.6 	if country == "CZ" & year == 2019 & ml_eli == 1 ///
+gen dab1 = 43 						if country == "CZ" & year == 2019 & inrange(earning/21.7,43,64)
+
+gen dab2 = ((earning/21.7) - 43)*0.6 	if country == "CZ" & year == 2019 ///
 										& inrange(earning/21.7,43,64)
-replace dab = dab1 + dab2 				if country == "CZ" & year == 2019 & ml_eli == 1 ///
+replace dab = dab1 + dab2 				if country == "CZ" & year == 2019 ///
 										& inrange(earning/21.7,43,64) & dab == .
 drop dab1 dab2
 										
-* daily earning between €64 adn €129										
-gen dab1 = 43 						if country == "CZ" & year == 2019 & ml_eli == 1 ///
+* daily earning between €64 and €129										
+gen dab1 = 43 						if country == "CZ" & year == 2019 ///
 									& inrange(earning/21.7,64,129)
-gen dab2 = (64 - 43)*0.6 			if country == "CZ" & year == 2019 & ml_eli == 1 ///
+gen dab2 = (64 - 43)*0.6 			if country == "CZ" & year == 2019  ///
 									& inrange(earning/21.7,64,129)
-gen dab3 = ((earning/21.7) - 64)*0.3 	if country == "CZ" & year == 2019 & ml_eli == 1 ///
+gen dab3 = ((earning/21.7) - 64)*0.3 	if country == "CZ" & year == 2019 ///
 										& inrange(earning/21.7,64,129)
 
-replace dab = dab1 + dab2 + dab3  	if country == "CZ" & year == 2019 & ml_eli == 1 ///
+replace dab = dab1 + dab2 + dab3  	if country == "CZ" & year == 2019  ///
 									& inrange(earning/21.7,64,129) & dab == .									
 drop dab1 dab2 dab3 
 
 * daily earning over €129
-gen dab1 = 43 						if country == "CZ" & year == 2019 & ml_eli == 1 ///
+gen dab1 = 43 						if country == "CZ" & year == 2019 ///
 									& earning/21.7 > 129
-gen dab2 = (64 - 43)*0.6 			if country == "CZ" & year == 2019 & ml_eli == 1 ///
+gen dab2 = (64 - 43)*0.6 			if country == "CZ" & year == 2019  ///
 									& earning/21.7 > 129
 										
-gen dab3 = (129 - 64)*0.3 			if country == "CZ" & year == 2019 & ml_eli == 1 ///
+gen dab3 = (129 - 64)*0.3 			if country == "CZ" & year == 2019  ///
 									& earning/21.7 > 129
 
-replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2019 & ml_eli == 1 ///
+replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2019 ///
 									& earning/21.7 > 129 & dab == . 										
-										
+drop dab1 dab2 dab3 										
 										
 
 
