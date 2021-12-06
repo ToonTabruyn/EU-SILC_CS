@@ -1,8 +1,5 @@
-/* PL_2019_ES_eusilc_cs
+/* PL_2019_ES_eusilc_cs */
 
-date created: 21/08/2021
-
-*/
 
 * SPAIN - 2019
 
@@ -16,7 +13,7 @@ replace pl_eli =  0			if pl_eli == . & country == "ES" & year == 2019
 
 
 * DURATION (weeks)
-/*	-> until child is 3 years old => family entitlement, all assigned to woman
+/*	-> until child is 3 years old => family entitlement, in couples assigned to women
 	-> unclear whether there is a regional variation in duration of benefit payment => not coded 	
 */
 	
@@ -25,7 +22,7 @@ replace pl_dur = (3*52) - ml_dur2 		if country == "ES" & year == 2019 & pl_eli =
 
 * single men										
 replace pl_dur = (3*52) - pt_dur 		if country == "ES" & year == 2019 & pl_eli == 1 ///
-										& gender == 2 & pt_eli == 1 & parstat == 1
+										& gender == 2 & parstat == 1 & inlist(econ_status,1,2)
 
 * BENEFIT (monthly)
 /*	-> unpaid
@@ -43,13 +40,21 @@ replace pl_ben1 = 0 		if country == "ES" & year == 2019 & pl_eli == 1
 
 * Basque country
 replace pl_ben1 = 277.08	if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg < 20000
+							& region == "ES21" & earning_yg < 20000 & gender == 1
+replace pl_ben1 = 277.08	if country == "ES" & year == 2019 & pl_eli == 1 ///
+							& region == "ES21" & earning_yg < 20000 & gender == 2 & parstat == 1
+							
 replace pl_ben1 = 232.92	if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg >= 20000	
+							& region == "ES21" & earning_yg >= 20000 & gender == 1
+eplace pl_ben1 = 232.92	if country == "ES" & year == 2019 & pl_eli == 1 ///
+							& region == "ES21" & earning_yg >= 20000 & gender == 2 & parstat == 1
 
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000							
+							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 1
+							
+replace pl_ben1 = 250		if country == "ES" & year == 2019 & pl_eli == 1 ///
+							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 2 & parstat == 1
 
 							
 replace pl_ben2 = pl_ben1		if country == "ES" & year == 2019 & pl_eli == 1
