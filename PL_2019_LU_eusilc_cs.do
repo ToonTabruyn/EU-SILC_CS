@@ -1,8 +1,5 @@
-/* PL_2019_LU_eusilc_cs
+/* PL_2019_LU_eusilc_cs */
 
-date created: 21/08/2021
-
-*/
 
 * LUXEMBOURG - 2019
 
@@ -11,13 +8,9 @@ date created: 21/08/2021
 	-> self-employed 	
 	-> worked for at least 12 months (coded) before childbirth with the same employer (not coded) 	*/
 	
-replace pl_eli = 1 			if country == "LU" & year == 2019 & econ_status == 1 ///
-							& duremp >= 12
-replace pl_eli = 1 			if country == "LU" & year == 2019 & econ_status == 2 ///
-							& dursemp >= 12							
 replace pl_eli = 1 			if country == "LU" & year == 2019 & inlist(econ_status,1,2) ///
-							& (duremp + dursemp) >= 12							
-
+							& (duremp + dursemp) >= 12
+											
 replace pl_eli =  0			if pl_eli == . & country == "LU" & year == 2019
 
 
