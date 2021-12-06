@@ -1,8 +1,5 @@
-/* PL_2019_SI_eusilc_cs
+/* PL_2019_SI_eusilc_cs */
 
-date created: 21/08/2021
-
-*/
 
 * SLOVENIA - 2019
 
@@ -30,14 +27,14 @@ replace pl_dur = 365/7 		if country == "SI" & year == 2019 & pl_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> employed, self-employed: 100% earning
-	-> ceiling: €2,863/month (LP&R 2018) 
+	-> ceiling: €2,900/month (LP&R 2019) 
 	-> all other residents: €258.09/month 	*/
 
 replace pl_ben1 = earning 			if country == "SI" & year == 2019 & pl_eli == 1 ///
 									& inlist(econ_status,1,2)
 								
-replace pl_ben1 = 2863	 			if country == "SI" & year == 2019 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & pl_ben1 >= 2863
+replace pl_ben1 = 2900	 			if country == "SI" & year == 2019 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 >= 2900
 									
 replace pl_ben1 = 258.09	 		if country == "SI" & year == 2019 & pl_eli == 1 ///
 									& inlist(econ_status,3,4)
