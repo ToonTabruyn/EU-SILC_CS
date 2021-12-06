@@ -1,8 +1,5 @@
-/* PL_2019_HR_eusilc_cs
+/* PL_2019_HR_eusilc_cs */
 
-date created: 24/08/2021
-
-*/
 
 * CROATIA - 2019
 
@@ -36,11 +33,8 @@ replace pl_eli = 0 		if pl_eli == . & country == "HR" & year == 2019
  */
    
 replace pl_dur = 4 		if country == "HR" & year == 2019 & pl_eli == 1 ///
-						& econ_status == 1 & duremp >= 12 
-						
-replace pl_dur = 4 		if country == "HR" & year == 2019 & pl_eli == 1 ///
-						& econ_status == 2 & dursemp >= 12 
-
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 
+					
 						
 replace pl_dur = 6 		if country == "HR" & year == 2019 & pl_eli == 1 ///
 						& pl_dur == . 
@@ -54,10 +48,10 @@ replace pl_dur = 6 		if country == "HR" & year == 2019 & pl_eli == 1 ///
 */
 
 replace pl_ben1 = earning 		if country == "HR" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & duremp >= 12
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
 
 replace pl_ben1 = 540 	if country == "HR" & year == 2019 & pl_eli == 1 ///
-						& inlist(econ_status,1,2) & duremp >= 12 & earning > 540
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning >= 540
 
 
 replace pl_ben1 = 315 	if country == "HR" & year == 2019 & pl_eli == 1 ///
