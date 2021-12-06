@@ -1,8 +1,4 @@
-/* PL_2019_DE_eusilc_cs
-
-date created: 24/08/2021
-
-*/
+/* PL_2019_DE_eusilc_cs */
 
 * GERMANY - 2019
 
@@ -14,7 +10,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "DE" & year == 2019
 
 
 * DURATION (weeks)
-/*	-> benefits are family entitlement (assigned to woman)
+/*	-> benefits are family entitlement (in couples assigned to women)
 	-> if parents interrupt their work: 12 months/parent 
 	-> the maximum duration of leave is 12 months in total for both parents 
 	-> bonus months if both parents take some leave: 2 months (coded as father's right)
@@ -39,26 +35,21 @@ replace pl_dur = 12			if country == "DE" & year == 2019 & pl_eli == 1 ///
 	*/
 
 replace pl_ben1 = 0.65 * earning	if country == "DE" & year == 2019 & pl_eli == 1 ///
-									& pl_ben1 == .
+									& pl_ben1 == . & inrange(econ_status,1,2)
 
 * minimum
 replace pl_ben1 = 300		if country == "DE" & year == 2019 & pl_eli == 1 ///
-							& inrange(econ_status,1,2) & pl_ben1 < 300 & pl_ben1 == .
+							& inrange(econ_status,1,2) & pl_ben1 < 300
 
 * ceiling
 replace pl_ben1 = 1800		if country == "DE" & year == 2019 & pl_eli == 1 ///
-							& inrange(econ_status,1,2) & pl_ben1 >= 1800 & pl_ben1 == .
+							& inrange(econ_status,1,2) & pl_ben1 >= 1800 
 							
 * inactive, unemployed	
 replace pl_ben1 = 300 		if country == "DE" & year == 2019 & pl_eli == 1 ///
 							& inlist(econ_status,3,4) 
 							
 							
-
-
-
-
-
 replace pl_ben2 = pl_ben1 		if country == "DE" & year == 2019 & pl_eli == 1
 
 
