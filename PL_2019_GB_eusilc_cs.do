@@ -1,8 +1,4 @@
-/* PL_2019_GB_eusilc_cs
-
-date created: 25/08/2021
-
-*/
+/* PL_2019_GB_eusilc_cs */
 
 /*	Great Britain provides shared parental leave and parental leave.
 	
