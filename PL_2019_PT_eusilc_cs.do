@@ -63,7 +63,8 @@ replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur)
 												& gender == 2 & parstat == 1
 												
 replace pl_ben1 =  435.76		if country == "PT" & year == 2019 & pl_eli == 1	///
-								& pl_ben1 < 435.76 & gender == 2 & parstat == 1						
+								& pl_ben1 < 435.76 & gender == 2 & parstat == 1
+								
 												
 replace pl_ben2 = earning 		if country == "PT" & year == 2019 & pl_eli == 1
 
