@@ -1,8 +1,5 @@
-/* PL_2019_HU_eusilc_cs
+/* PL_2019_HU_eusilc_cs */
 
-date created: 25/08/2021
-
-*/
 
 * HUNGARY - 2019
 
@@ -24,14 +21,14 @@ replace pl_dur = (3*52) - ml_dur2 		if country == "HU" & year == 2019 & pl_eli =
 
 * women not eligible for ML
 replace pl_dur = 3*52 		if country == "HU" & year == 2019 & pl_eli == 1 ///
-							& pl_dur == . 
+							& pl_dur == . & gender == 1
 
 * single men eligible for PT
 replace pl_dur = (3*52) - pt_dur 		if country == "HU" & year == 2019 & pl_eli == 1 ///
 										& gender == 2 & parstat == 1 & pl_dur == . & pt_eli == 1
 										
 * single men not eligible for PT
-replace pl_dur = (3*52)		if country == "HU" & year == 2019 & pl_eli == 1 ///
+replace pl_dur = (3*52)					if country == "HU" & year == 2019 & pl_eli == 1 ///
 										& gender == 2 & parstat == 1 & pl_dur == .
 							
 
@@ -61,12 +58,16 @@ replace pl_gyes = . 	if country == "HU" & year == 2019 & pl_eli == 1 ///
 
 
 * GYED
+	* women
 gen pl_gyed = 0.7*earning 		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& ml_eli == 1 & earning < 921 & gender == 1
+								& ml_eli == 1 & inlist(econ_status,1,2) ///
+								& earning < 921 & gender == 1
 							
 replace pl_gyed = 921		 	if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& ml_eli == 1 & earning >= 921 & gender == 1
-
+								& ml_eli == 1 & inlist(econ_status,1,2) ///
+								& earning >= 921 & gender == 1
+								
+	* single men
 replace pl_gyed = 0.7*earning 	if country == "HU" & year == 2019 & pl_eli == 1 ///
 								& inlist(econ_status,1,2) & earning < 921 ///
 								& gender == 2 & parstat == 1
@@ -75,56 +76,47 @@ replace pl_gyed = 921		 	if country == "HU" & year == 2019 & pl_eli == 1 ///
 								& inlist(econ_status,1,2) & earning >= 921 ///
 								& gender == 2 & parstat == 1
 
+replace pl_gyed = 0 			if pl_gyed == . & gender == 1 & country == "HU" & year == 2019
+replace pl_gyed = 0 			if pl_gyed == . & gender == 2 & parstat == 1 & country == "HU" & year == 2019
+
+						
+
+* Benefits
+	* women, employed & self-employed
+replace pl_ben1 = (pl_gyed * ((2*52)/(3*52))) + (pl_gyes * (52/(3*52))) 		if country == "HU" ///
+										& year == 2019 & gender == 1 & pl_eli == 1 & inlist(econ_status,1,2)
+										
+	* women, unemployed, inactive
+replace pl_ben1 = pl_gyes 		if country == "HU" & year == 2019 & gender == 1 & pl_eli == 1 & inlist(econ_status,3,4)										
+										
+	* single men, employed & self-employed
+replace pl_ben1 = (pl_gyed * ((2*52)/(3*52))) + (pl_gyes * (52/(3*52))) 		if country == "HU" ///
+										& year == 2019 & gender == 2 & pl_eli == 1 & parstat == 1 ///
+										& inlist(econ_status,1,2)
+										
+	* single men, unemployed & inactive
+replace pl_ben1 = pl_gyes				if country == "HU" & year == 2019 & gender == 2 ///
+										& pl_eli == 1 & parstat == 1 & inlist(econ_status,3,4)
+										
+										
+	
+	* women
+replace pl_ben2 = pl_gyed 		if country == "HU" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & gender == 1
+
+replace pl_ben2 = pl_gyes 		if country == "HU" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,3,4) & gender == 1
+								
+	* single men
+replace pl_ben2 = pl_gyed 		if country == "HU" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & gender == 2 & parstat == 1
+
+replace pl_ben2 = pl_gyes 		if country == "HU" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,3,4) & gender == 2 & parstat == 1
+	
+								
+
 							
-
-replace pl_ben1 = (pl_gyed/((2*52)/3*52)) + (pl_gyes/(52/(3*52))) ///
-								if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& ml_eli == 1 & earning < 921 & gender == 1
-
-replace pl_ben1 = (921/((2*52)/3*52)) + (pl_gyes/(52/(3*52))) ///
-								if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& ml_eli == 1 & earning >= 921 & gender == 1 & pl_ben1 == .
-								
-replace pl_ben1 = (pl_gyed/((2*52)/3*52)) + (pl_gyes/(52/(3*52))) ///
-								if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & duremp >= 12 & earning < 921 ///
-								& gender == 2 & parstat == 1 & pl_ben1 == .
-
-replace pl_ben1 = (921/((2*52)/3*52)) + (pl_gyes/(52/(3*52))) ///
-								if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & earning >= 921 ///
-								& gender == 2 & parstat == 1 & pl_ben1 == . 
-
-replace pl_ben1 = pl_gyes 		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& parstat == 1 & pl_ben1 == .
-								
-replace pl_ben1 = pl_gyes 		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& parstat == 2 & gender == 1 & pl_ben1 == . 
-								
-
-								
-
-replace pl_ben2 = pl_gyed  		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & duremp >= 12 & earning < 921 ///
-								& parstat == 1
-
-replace pl_ben2 = pl_gyed  		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & duremp >= 12 & earning < 921 ///
-								& parstat == 2 & gender == 1 & pl_ben2 == .
-								
-replace pl_ben2 = 921  			if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & duremp >= 12 & earning >= 921 ///
-								& parstat == 1 & pl_ben2 == .
-
-replace pl_ben2 = 921  			if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & duremp >= 12 & earning >= 921 ///
-								& parstat == 2 & gender == 1 & pl_ben2 == .
-								
-replace pl_ben2 = pl_gyes 		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& parstat == 1 & pl_ben2 == .
-								
-replace pl_ben2 = pl_gyes 		if country == "HU" & year == 2019 & pl_eli == 1 ///
-								& parstat == 2 & gender == 1 & pl_ben2 == .
 
 								
 foreach x in 1 2 {
