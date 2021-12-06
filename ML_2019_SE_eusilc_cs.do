@@ -41,7 +41,7 @@ replace ml_dur2 = 90/7 		if country == "SE" & year == 2019 & ml_eli == 1
 /*	-> eligible for earning related benefit: min. income €26/day (coded) for 240 calendar days (not coded) before childbirth
 		- for 195 calendar days (includes 90 non-transferable leave): 77.6% earning
 			- minimum: €23.48/day
-			- ceiling: €42,737.50/month - this is an earning ceiling NOT benefit ceiling (LP&R 2019)
+			- ceiling: €42,737.50 (it is assumed the value refers to annual earnings)
 		- for 45 days: €16.91/day (only applicable for pl_ben)
 	-> all others: €23.48/day
 	-> source: LP&R 2019
@@ -52,8 +52,8 @@ replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2019 & ml_eli == 
 										& (earning/30) >= 26
 replace ml_ben1 = 23.48*30				if country == "SE" & year == 2019 & ml_eli == 1 ///
 										& earning/30 < 26 
-replace ml_ben1 = 0.776*42737.50		if country == "SE" & year == 2019 & ml_eli == 1 ///
-										& earning >= 42737.50
+replace ml_ben1 = 42737.50/12			if country == "SE" & year == 2019 & ml_eli == 1 ///
+										& earning*12 >= 42737.50
 
 									
 replace ml_ben2 = ml_ben1 			if country == "SE" & year == 2019 & ml_eli == 1
