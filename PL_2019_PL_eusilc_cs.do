@@ -1,8 +1,5 @@
-/* PL_2019_PL_eusilc_cs
+/* PL_2019_PL_eusilc_cs */
 
-date created: 21/08/2021
-
-*/
 
 * POLAND - 2019
 
@@ -21,6 +18,7 @@ replace pl_eli = 0			if pl_eli == . & country == "PL" & year == 2019
 	-> 52 weeks for everyone else 		
 */
 
+	* women
 replace pl_dur = 32 		if country == "PL" & year == 2019 & pl_eli == 1 ///
 							& gender == 1 & econ_status == 1
 replace pl_dur = 52 		if country == "PL" & year == 2019 & pl_eli == 1 ///
@@ -36,8 +34,8 @@ replace pl_dur = 52 		if country == "PL" & year == 2019 & pl_eli == 1 ///
 							
 * BENEFIT (monthly)
 /*	-> proportional benefits: 
-		- woman chose 100% ML benefit: 100% earning for 6 weeks, 60% for 24 weeks (LP&R 2019; not coded)
-		- woman chose 80% ML benefit: 80% earning for the whole period (coded; LP&R 2019)
+		- woman choose 100% ML benefit: 100% earning for 6 weeks, 60% for 24 weeks (LP&R 2019; not coded)
+		- woman choose 80% ML benefit: 80% earning for the whole period (coded; LP&R 2019)
 	-> flat-rate benefit: €232/month
  */
 replace pl_ben1 = earning*0.8 		if country == "PL" & year == 2019 & pl_eli == 1 ///
