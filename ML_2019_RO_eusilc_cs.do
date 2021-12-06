@@ -31,8 +31,8 @@ replace ml_dur2 = (63+63)/5 	if country == "RO" & year == 2019 & ml_eli == 1 ///
 								& gender == 1
 
 * single men								
-replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2019 & ml_eli == 1 ///
-									& gender == 2 
+replace ml_dur2 = ((63+63)-(6*5))/5	if country == "RO" & year == 2019 & ml_eli == 1 ///
+									& gender == 2 & parstat == 1
 
 
 
