@@ -29,7 +29,7 @@ replace ml_eli = 1 			if country == "NO" & year == 2019 & gender == 1 ///
 
 * only man is eligible							
 replace ml_eli = 1 			if country == "NO" & year == 2019 & gender == 2 ///
-							& (duremp + dursemp) < 6  & (p_duremp + p_dursemp) >= 6
+							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single man							
 replace ml_eli = 1			if country == "NO" & year == 2019 & gender == 2 ///
