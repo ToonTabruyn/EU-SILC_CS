@@ -1,8 +1,4 @@
-/* ML_2018_SE_eusilc_cs
-
-date created: 01/04/2021
-
-*/
+/* ML_2018_SE_eusilc_cs */
 
 /*	Sweden doesn't distinguish between ML and PT but only recognizes PARENTAL LEAVE, 
 	which is a combination of individual non-transferable and individual transferable
@@ -14,7 +10,7 @@ date created: 01/04/2021
 * SWEDEN - 2018
 
 * ELIGIBILITY
-/*	-> all women are eligible to cash benefits (vary by economic status)
+/*	-> all women are eligible for cash benefits (vary by economic status)
 	-> single fathers are entitled to mother's share of leave (LP&R 2018)
 */
 replace ml_eli = 1 			if country == "SE" & year == 2018 & gender == 1
@@ -38,7 +34,7 @@ replace ml_dur2 = 90/7 		if country == "SE" & year == 2018 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> eligible for earning related benefit: min. income €26/day for 240 calendar days before childbirth
+/*	-> eligible for earning related benefit: min. income €26/day (coded) for 240 calendar days (not coded) before childbirth
 		- for 195 calendar days (includes 90 non-transferable leave): 77.6% earning
 			- minimum: €26/day
 			- ceiling: €46,803/month - this is an earning ceiling NOT benefit ceiling (LP&R 2018)
@@ -50,7 +46,7 @@ replace ml_dur2 = 90/7 		if country == "SE" & year == 2018 & ml_eli == 1
 replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2018 & ml_eli == 1 ///
 										& (earning/30) >= 26
 replace ml_ben1 = 26*30					if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& earning/30 < 26 
+										& ml_ben1 < 26*30
 replace ml_ben1 = 0.776*46803			if country == "SE" & year == 2018 & ml_eli == 1 ///
 										& earning >= 46803
 
