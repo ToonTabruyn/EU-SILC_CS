@@ -1,8 +1,4 @@
-/* ML_2018_RO_eusilc_cs
-
-date created: 31/03/2021
-
-*/
+/* ML_2018_RO_eusilc_cs */
 
 * ROMANIA - 2018
 
@@ -32,7 +28,7 @@ replace ml_dur2 = (63+63)/5 	if country == "RO" & year == 2018 & ml_eli == 1 ///
 								& gender == 1
 
 replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2018 & ml_eli == 1 ///
-									& gender == 2
+									& gender == 2 & parstat == 1
 
 
 
