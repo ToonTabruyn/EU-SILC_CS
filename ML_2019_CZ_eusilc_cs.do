@@ -30,7 +30,7 @@ replace ml_eli = 0 		if ml_eli == . & country == "CZ" & year == 2019 & gender ==
 
 replace ml_dur1 = 6 	if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
 
-replace ml_dur2 = 22 	if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
+replace ml_dur2 = 28-6 	if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
 
 
 
@@ -85,12 +85,12 @@ drop dab1 dab2 dab3
 
 /*	-> 70% of daily assessment base, ceiling: €47/day */
 
-replace ml_ben1 = dab*0.7 		if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
-replace ml_ben1 = 47*21.7 		if ml_ben1 >= 47*21.7
+replace ml_ben1 = (dab*0.7) * 21.7 		if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
+replace ml_ben1 = 47*21.7 				if ml_ben1 >= 47*21.7
 
 
-replace ml_ben2 = dab*0.7 		if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
-replace ml_ben2 = 47*21.7 		if ml_ben2 >= 47*21.7
+replace ml_ben2 = ml_ben1 		if country == "CZ" & year == 2019 & gender == 1 & ml_eli == 1
+
 
 
 foreach x in 1 2 {
