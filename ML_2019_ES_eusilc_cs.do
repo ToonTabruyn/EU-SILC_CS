@@ -53,7 +53,7 @@ replace ml_dur2 = 42/5		if country == "ES" & year == 2019 & ml_eli == 1 ///
 
 * single men
 replace ml_dur2 = 10 		if country == "ES" & year == 2019 &  ml_eli == 1 ///
-							& gender == 2 
+							& gender == 2 & parstat == 1
 							
 							
 							
