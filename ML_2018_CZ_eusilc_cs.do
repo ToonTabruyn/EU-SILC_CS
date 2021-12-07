@@ -1,8 +1,5 @@
-/* ML_2018_CZ_eusilc_cs
+/* ML_2018_CZ_eusilc_cs */
 
-date created: 18/02/2021
-
-*/
 
 * Czechia - 2018
 
@@ -33,7 +30,7 @@ replace ml_eli = 0 		if ml_eli == . & country == "CZ" & year == 2018 & gender ==
 
 replace ml_dur1 = 6 	if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
 
-replace ml_dur2 = 22 	if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
+replace ml_dur2 = 28-6 	if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
 
 
 
@@ -89,12 +86,12 @@ replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2018 & ml_eli == 
 
 /*	-> 70% of daily assessment base, ceiling: €47/day */
 
-replace ml_ben1 = dab*0.7 		if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
-replace ml_ben1 = 47*21.7 		if ml_ben1 >= 47*21.7
+replace ml_ben1 = (dab*0.7) * 21.7 		if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
+replace ml_ben1 = 47*21.7 				if ml_ben1 >= 47*21.7
 
 
-replace ml_ben2 = dab*0.7 		if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
-replace ml_ben2 = 47*21.7 		if ml_ben2 >= 47*21.7
+replace ml_ben2 = ml_ben1 		if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
+
 
 
 foreach x in 1 2 {
