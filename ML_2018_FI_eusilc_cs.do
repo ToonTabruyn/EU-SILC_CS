@@ -1,8 +1,5 @@
-/* ML_2018_FI_eusilc_cs
+/* ML_2018_FI_eusilc_cs */
 
-date created: 18/02/2021
-
-*/
 
 * Finland - 2018 
 
@@ -32,7 +29,7 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2018 & gender == 1 & m
 
 * BENEFIT (monthly; LP&R 2018)
 /* first 56 days:
-	-> E 24.64/day if unemployed or earnings are less than €8,215/year (income group 56a)
+	-> €24.64/day if unemployed or earnings are less than €8,215/year (income group 56a)
 	-> 90% of earnings between €8,215/year and €57,183/year (IG 56b)
 	-> 32.5% of earnings above €57,183/year (IG 56c)
 
@@ -44,6 +41,11 @@ remaining 49 days:
 
 * Income group (IG) 56a
 gen ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2018 ///
+									& gender == 1 & ml_eli == 1 ///
+									& econ_status == 3
+
+
+replace ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2018 ///
 									& gender == 1 & ml_eli == 1 ///
 									& (earning*12) < 8215
 
@@ -57,7 +59,7 @@ gen ml_ben56a = (57183/12) * 0.9 	if country == "FI" & year == 2018 ///
 									& gender == 1 & (earning*12) > 57183 ///
 									& ml_eli == 1
 									
-gen ml_ben56b = ((earning*12) - 57183) * 0.325 		if country == "FI" & year == 2018 ///
+gen ml_ben56b = (earning - (57183/12)) * 0.325 		if country == "FI" & year == 2018 ///
 													& gender == 1 ///
 													& (earning*12) > 57183 & ml_eli == 1
 	
@@ -70,32 +72,36 @@ replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2018 ///
 
 * IG 49a
 gen ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2018 & gender == 1 ///
+									& ml_eli == 1 & econ_status == 3
+
+
+replace ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2018 & gender == 1 ///
 									& ml_eli == 1 & (earning*12) < 10562
 
-* IG 49b
+* IG 49b - annual earnings under €37,167
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2018 & gender == 1 ///
 									& ml_eli == 1 & ml_ben49 == . ///
 									& inrange((earning*12),10562,37167)
 
-* IG 49c 
+* IG 49c - annual earnings between €37,168/year and €57,183/year
 gen ml_ben49a = (37167/12) * 0.7 	if country == "FI" & year == 2018 & gender == 1 ///
 									& ml_eli == 1 & (earning*12) > 37168
 			
-gen ml_ben49b = (((earning*12) - 37167) / 12) * 0.4 		if country == "FI" ///
+gen ml_ben49b = (earning - (37167/12)) * 0.4 		if country == "FI" ///
 									& year == 2018	& gender == 1 & ml_eli == 1 ///
-									& inrange((earning*12),37168,57182)
+									& inrange((earning*12),37168,57183)
 
 replace ml_ben49 = ml_ben49a + ml_ben49b 		if country == "FI" ///
 												& year == 2018	& gender == 1 ///
 												& ml_eli == 1 & ml_ben49 == . ///
-												& inrange((earning*12),37167,57182)			
+												& inrange((earning*12),37167,57183)			
 			
-* IG 49d	
+* IG 49d - annual earnings above €57,183 	
 gen ml_ben49c = (57183/12) * 0.4			if country == "FI" ///
 													& year == 2018	& gender == 1 ///
 													& ml_eli == 1 & (earning*12) > 57183
 	
-gen ml_ben49d = (((earning*12) - 57183) / 12) * 0.25 		if country == "FI" ///
+gen ml_ben49d = (earning - (57183/12)) * 0.25 		if country == "FI" ///
 									& year == 2018	& gender == 1 & ml_eli == 1 ///
 									& (earning*12) > 57183
 			
@@ -106,7 +112,7 @@ replace ml_ben49 = ml_ben49a + ml_ben49c + ml_ben49d 		if country == "FI" ///
 			
 
 * ML benefit 
-replace ml_ben1 = ((ml_ben56 * (56/6) ) + (ml_ben49 * (49/6))) * 4.3 		if country == "FI" ///
+replace ml_ben1 = ((ml_ben56 * (56/105) ) + (ml_ben49 * (49/105)))		if country == "FI" ///
 												& year == 2018	& gender == 1 & ml_eli == 1
 
 
