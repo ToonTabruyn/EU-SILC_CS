@@ -1,8 +1,4 @@
-/* ML_2018_IS_eusilc_cs
-
-date created: 02/04/2021
-
-*/
+/* ML_2018_IS_eusilc_cs */
 
 /*	Iceland doesn't recognise ML and PT but only PL with individual non-transferable and 
 	family rights. The individual non-transferable right for mother is coded in here. 
