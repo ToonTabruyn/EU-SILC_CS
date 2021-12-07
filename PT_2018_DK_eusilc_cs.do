@@ -1,8 +1,5 @@
-/* PT_2018_DK_eusilc_cs
+/* PT_2018_DK_eusilc_cs */
 
-date created: 24/03/2021
-
-*/
 
 * DENMARK - 2018
 
@@ -25,7 +22,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "DK" & year == 2018 & gender ==
 
 * DURATION (weeks)
 /*	-> combined entitlement for mother and father (MISSOC 01/07/2018)
-	-> 2 weeks within 14 weeks after birth			*/
+	-> 2 weeks (coded) within 14 weeks after birth (not coded)			*/
 
 replace pt_dur = 2 		if country == "DK" & year == 2018 & pt_eli == 1
 
@@ -37,13 +34,12 @@ replace pt_dur = 2 		if country == "DK" & year == 2018 & pt_eli == 1
 	-> students: extra 12 months of study grant (not coded; LP&R 2018) */
 	
 replace pt_ben1 = earning 		if country == "DK" & year == 2018 & pt_eli == 1 ///
-								& inlist(econ_status,1,2) & earning/4.3 < 577
+								& inlist(econ_status,1,2) 
 								
 replace pt_ben1 = (577*pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
 								if country == "DK" & year == 2018 & pt_eli == 1 ///
 								& inlist(econ_status,1,2) & pt_ben1/4.3 >= 577 ///
-								& pt_ben1 == .								
-
+								
 
 replace pt_ben2 = pt_ben1 		if country == "DK" & year == 2018 & pt_eli == 1
 
