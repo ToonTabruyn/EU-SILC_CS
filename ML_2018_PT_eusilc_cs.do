@@ -1,8 +1,4 @@
-/* ML_2018_PT_eusilc_cs
-
-date created: 30/03/2021
-
-*/
+/* ML_2018_PT_eusilc_cs */
 
 * PORTUGAL - 2018
 
@@ -12,16 +8,12 @@ date created: 30/03/2021
 		- ML refers to the leave reserved for mother
 	-> compulsorily social insurance for employed and self-employed 
 		- 6 months of work before childbirth	
-	-> transferable to father only if the mother died or is incapacitated => 
+	-> transferable to father only if the mother dies or is incapacitated => 
 		we assume that this does not extend to abandonment of child by the mother 
 */
 	
 replace ml_eli = 1 			if country == "PT" & year == 2018 & gender == 1 ///
-							& econ_status == 1 & duremp >= 6
-replace ml_eli = 1 			if country == "PT" & year == 2018 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 6
-replace ml_eli = 1 			if country == "PT" & year == 2018 & gender == 1 ///
-							& inlist(econ_status,1,2) & duremp + dursemp >= 6
+							& inlist(econ_status,1,2) & duremp >= 6
 
 							
 replace ml_eli = 0 			if ml_eli == . & country == "PT" & year == 2018 & gender == 1
