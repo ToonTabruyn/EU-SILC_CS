@@ -44,7 +44,7 @@ replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2019 & ml_eli == 1
 	-> those who do not fulfill this requirement = €315/month	*/
 	
 replace ml_ben1 = earning 		if country == "HR" & year == 2019 & gender == 1 ///
-								& ml_eli == 1 & (duremp + dursemp) >= 12
+								& ml_eli == 1 & (duremp + dursemp) >= 12 & earning != 0
 replace ml_ben1 = 315 			if country == "HR" & year == 2019 & gender == 1 ///
 								& ml_eli == 1 & ml_ben1 == .
 
