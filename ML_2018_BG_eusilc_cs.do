@@ -1,8 +1,5 @@
-/* ML_2018_BG_eusilc_cs
+/* ML_2018_BG_eusilc_cs */
 
-date created: 12/03/2021
-
-*/
 
 * BULGARIA - 2018
 
@@ -12,17 +9,13 @@ date created: 12/03/2021
 	
 	-> mother can transfer the leave to father after 6 months
 		- can be used until child is 1 year old
-		- father must be employed for at least 12 months (coded in eligibility but not in duration and benefits)
-		- single father is not automatically entitled since the mother's consent is required
+		- father must be employed for at least 12 months (not coded)
+		- single father is not automatically entitled since the mother's consent is required => not coded
 */
 
 replace ml_eli = 1 		if country == "BG" & year == 2018 & gender == 1 ///
 						& econ_status == 1 & duremp >= 12
-						
-* cohabiting men
-replace ml_eli = 1 		if country == "BG" & year == 2018 & gender == 2 ///
-						& econ_status == 1 & duremp >= 12 & parstat == 2
-
+					
 						
 replace ml_eli = 0 		if ml_eli == . & country == "BG" & year == 2018 & gender == 1
 
@@ -50,7 +43,7 @@ replace ml_ben1 = 235.16 				if country == "BG" & year == 2018 ///
 										& ml_ben1 < 235.16
 replace ml_ben1 = 1329.18 				if country == "BG" & year == 2018 /// 
 										& gender == 1 & ml_eli == 1 ///
-										& ml_ben1 > 1329.18
+										& ml_ben1 >= 1329.18
 				
 				
 replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2018 & gender == 1 & ml_eli == 1
