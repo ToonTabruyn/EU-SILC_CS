@@ -1,8 +1,5 @@
-/* ML_2018_GR_eusilc_cs
+/* ML_2018_GR_eusilc_cs */
 
-date created: 26/03/2021
-
-*/
 
 * GREECE - 2018
 
