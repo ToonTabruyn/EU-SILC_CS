@@ -1,8 +1,4 @@
-/* PT_2018_ES_eusilc_cs
-
-date created: 01/04/2021
-
-*/
+/* PT_2018_ES_eusilc_cs */
 
 * SPAIN - 2018
 
@@ -34,9 +30,9 @@ replace pt_dur = 4 				if country == "ES" & year == 2018 & pt_eli == 1 ///
 */
 
 replace pt_ben1 = earning 	if country == "ES" & year == 2018 & pt_eli == 1
-replace pt_ben1 = ((3803.70/4.3)*pt_dur) + ((earning/4.3)*(4.3-pt_dur)) 	///
-									if country == "ES" & year == 2018 & pt_eli == 1 ///
-									& pt_ben1 > 3803.7
+
+replace pt_ben1 = 3803 		if country == "ES" & year == 2018 & pt_eli == 1 ///
+							& pt_ben1 > 3803.7
 
 replace pt_ben2 = pt_ben1 	if country == "ES" & year == 2018 & pt_eli == 1
 
