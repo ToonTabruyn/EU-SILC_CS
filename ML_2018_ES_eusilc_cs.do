@@ -1,8 +1,5 @@
-/* ML_2018_ES_eusilc_cs
+/* ML_2018_ES_eusilc_cs */
 
-date created: 01/04/2021
-
-*/
 
 * SPAIN - 2018
 
@@ -43,7 +40,7 @@ replace ml_dur2 = 16 		if country == "ES" & year == 2018 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & age < 21
 
 replace ml_dur2 = 16 		if country == "ES" & year == 2018 & ml_eli == 1 ///
-							& inlist(econ_status,1,2) & inrange(age,21,25) ///
+							& inlist(econ_status,1,2) & inrange(age,21,26) ///
 							& (duremp+dursemp) >= 90/21.7
 
 replace ml_dur2 = 16 		if country == "ES" & year == 2018 & ml_eli == 1 ///							
@@ -55,7 +52,7 @@ replace ml_dur2 = 42/5		if country == "ES" & year == 2018 & ml_eli == 1 ///
 
 * single men
 replace ml_dur2 = 10 		if country == "ES" & year == 2018 &  ml_eli == 1 ///
-							& gender == 2 
+							& gender == 2 & parstat == 1
 							
 							
 							
@@ -69,7 +66,7 @@ replace ml_ben1 = earning 		if country == "ES" & year == 2018 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & age < 21
 
 replace ml_ben1 = earning 		if country == "ES" & year == 2018 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & inrange(age,21,25) ///
+								& inlist(econ_status,1,2) & inrange(age,21,26) ///
 								& (duremp+dursemp) >= 90/21.7
 
 replace ml_ben1 = earning 		if country == "ES" & year == 2018 & ml_eli == 1 ///
