@@ -48,10 +48,11 @@ replace ml_dur2 = 77/7			if country == "SI" & year == 2019 & ml_eli == 1 ///
 		-> €323.55/month (LP&R 2019)		
 */
 	
-replace ml_ben1 = earning 		if country == "SI" & year == 2019 & ml_eli == 1  
+replace ml_ben1 = earning 		if country == "SI" & year == 2019 & ml_eli == 1 ///
+								& inlist(econ_status,1,2)
 
 replace ml_ben1 = 323.55 		if country == "SI" & year == 2019 & ml_eli == 1 ///
-								& ml_ben1 < 323.55
+								& ml_ben1 < 323.55 & inlist(econ_status,1,2)
 
 					
 
