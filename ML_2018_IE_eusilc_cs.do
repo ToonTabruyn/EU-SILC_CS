@@ -1,8 +1,5 @@
-/* ML_2018_IE_eusilc_cs
+/* ML_2018_IE_eusilc_cs */
 
-date created: 26/03/2018
-
-*/
 
 * IRELAND - 2018
 
@@ -34,10 +31,10 @@ replace ml_dur2 = 26+16-2 		if country == "IE" & year == 2018 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 26 weeks: €240/weeks
+/*	-> 26 weeks: €240/week
 	-> 16 weeks: unpaid 	*/
 	
-replace ml_ben1 = ((240*4.3)/(26/(26+12)))  	if country == "IE" & year == 2018 & ml_eli == 1
+replace ml_ben1 = ((240*4.3) * (26/(26+16)))  	if country == "IE" & year == 2018 & ml_eli == 1
 
 
 replace ml_ben2 = 240*4.3 		if country == "IE" & year == 2018 & ml_eli == 1
