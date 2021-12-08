@@ -1,8 +1,4 @@
-/* PT_2018_HR_eusilc_cs
-
-date created: 12/03/2021
-
-*/
+/* PT_2018_HR_eusilc_cs */
 
 * CROATIA - 2018
 
