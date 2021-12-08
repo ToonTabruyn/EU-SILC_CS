@@ -55,9 +55,6 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
  replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
 							& gender == 1 & econ_status != 1 & pl_dur == . 
 
-* single men
- replace pl_dur = (365/7) 	if country == "AT" & year == 2019 & pl_eli == 1 ///
-							& gender == 2 & parstat == 1 & pl_dur == . 
 
 
 
