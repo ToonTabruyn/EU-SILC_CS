@@ -47,12 +47,8 @@ replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2019 & gender =
 		- 59 weeks on 80% earning
 */
 
-* both are eligible and only man is eligible
-replace pt_dur = 15 		if country == "NO" & year == 2019 & pt_eli == 1 & gender == 2 
 
-* single woman
-replace pt_dur = 15			if country == "NO" & year == 2019 & pt_eli == 1 & gender == 1 
-
+replace pt_dur = 15 		if country == "NO" & year == 2019 & pt_eli == 1 
 
 
 * BENEFIT (monthly)
