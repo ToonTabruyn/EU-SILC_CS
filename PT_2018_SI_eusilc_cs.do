@@ -1,8 +1,5 @@
-/* PT_2018_SI_eusilc_cs
+/* PT_2018_SI_eusilc_cs */
 
-date created: 31/03/2021
-
-*/
 
 * SLOVENIA - 2018
 
@@ -18,7 +15,7 @@ date created: 31/03/2021
 replace pt_eli = 1 			if country == "SI" & year == 2018 & gender == 2 ///
 							& inlist(econ_status,1,2) 
 replace pt_eli = 1 			if country == "SI" & year == 2018 & gender == 2 ///
-							& inlist(econ_status,3,4) & duremp + dursemp >= 12	
+							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12	
 	
 
 * DURATION (weeks)
@@ -29,8 +26,8 @@ replace pt_dur = 30/7 	if country == "SI" & year == 2018 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 90% earnings
-	-> ceiling: E 2,863/month (LP&R 2018) 	
-	-> minimum: E 842.79/month (LP&R 2018)		*/
+	-> ceiling: €2,863/month (LP&R 2018) 	
+	-> minimum: €842.79/month (LP&R 2018)		*/
 
 replace pt_ben1 = 0.9*earning 	 	if country == "SI" & year == 2018 & pt_eli == 1 
 replace pt_ben1 = 842.79	 	 	if country == "SI" & year == 2018 & pt_eli == 1 ///
