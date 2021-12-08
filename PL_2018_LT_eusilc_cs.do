@@ -1,8 +1,5 @@
-/* PL_2018_LT_eusilc_cs
+/* PL_2018_LT_eusilc_cs */
 
-date created: 29/03/2021
-
-*/
 
 * LITHUANIA - 2018
 
@@ -11,12 +8,9 @@ date created: 29/03/2021
 	-> family entitlement => in couples assigned to women
 */
 
-replace pl_eli = 1 			if country == "LT" & year == 2018 & econ_status == 1 ///
-							& duremp >= 12
-replace pl_eli = 1 			if country == "LT" & year == 2018 & econ_status == 2 ///
-							& dursemp >= 12
 replace pl_eli = 1 			if country == "LT" & year == 2018 & inlist(econ_status,1,2) ///
-							& duremp + dursemp >= 12
+							& (duremp+dursemp) >= 12
+
 							
 replace pl_eli =  0			if pl_eli == . & country == "LT" & year == 2018
 
@@ -38,7 +32,8 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2018 & pl_eli == 1 //
 
 
 * BENEFIT (monthly)
-/* 	-> choice of leave until child is 1: 100%, ceiling: €1,617.40/month (coded)
+/* 	-> choice of leave until child is 1: 100%
+		-> ceiling: €1,617.40/month (coded)
 	-> choice of leave until child is 2: not coded
 		- 70% earnings until child is 1, ceiling: €1,132.18/month
 		- 40% of earnings for the rest of the leave, ceiling: €646.98/month */
