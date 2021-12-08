@@ -1,8 +1,5 @@
-/* PT_2018_LT_eusilc_cs
+/* PT_2018_LT_eusilc_cs */
 
-date created: 29/03/2021
-
-*/
 
 * LITHUANIA - 2018
 
@@ -10,11 +7,11 @@ date created: 29/03/2021
 /*	-> employed, self-employed: for 12 months (coded) during past 2 years (not coded) */
 
 replace pt_eli = 1 		if country == "LT" & year == 2018 & gender == 2 ///
-						& econ_status == 1 & duremp >= 12
-replace pt_eli = 1 		if country == "LT" & year == 2018 & gender == 2 ///
-						& econ_status == 2 & dursemp >= 12
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
+
 
 replace pt_eli = 0 		if pt_eli == . & country == "LT" & year == 2018 & gender == 2
+
 
 * DURATION (weeks)
 /*	-> 1 month */
@@ -22,7 +19,7 @@ replace pt_dur = 4.3 	if country == "LT" & year == 2018 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 100% average earnings
+/*	-> 100% average earnings (MISSOC 07/2018)
 	-> ceiling: €1,617.40/month (LP&R 2018)
 */
 	
