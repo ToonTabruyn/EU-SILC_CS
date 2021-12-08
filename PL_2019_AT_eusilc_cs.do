@@ -77,11 +77,11 @@ replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2019 & pl_eli == 1
 									
 replace pl_ben1 = 66 * 21.7			if country == "AT" & year == 2019 & pl_eli == 1 /// 
 									& econ_status == 1 & parstat == 1 ///
-									& (earning*0.8) >= (66*21.7)								
+									& pl_ben1 >= (66*21.7)								
  
- ** not working & single
+ ** not employed & single
 replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2019 & pl_eli == 1 /// 
-									& econ_status != 1 & parstat == 1
+									& inrange(econ_status,2,4) & parstat == 1
  
  
  
@@ -96,9 +96,10 @@ replace pl_ben1 = 0.8 * p_earning	if country == "AT" & year == 2019 & pl_eli == 
 									& p_econ_status == 1 & earning < p_earning & pl_ben1 == . ///
 									& gender == 1 & parstat == 2 & p_earning != .
 									
+									
 	* neither of the partners is employed										
 replace pl_ben1 = 33.88 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1 ///
-									& econ_status != 1 & !inlist(p_econ_status,.,1) & pl_ben1 == . ///
+									& inrange(econ_status,2,4) & !inlist(p_econ_status,.,1) & pl_ben1 == . ///
 									& gender == 1
 
 									
@@ -106,17 +107,17 @@ replace pl_ben1 = 33.88 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1
 replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2019 & pl_eli == 1 /// 
 									& econ_status == 1 & parstat == 2 & p_earning == .
 									
-	
+	* not employed
+replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2019 & pl_eli == 1 /// 
+									& inrange(econ_status,2,4) & parstat == 2 & pl_ben1 == .
 									
 	* ceiling 
 replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2019 & pl_eli == 1 ///
-									& econ_status == 1 & pl_ben1 > (66*21.7) & pl_ben1 != .
+									& pl_ben1 > (66*21.7) & pl_ben1 != (33.88 * 21.7)
+
 									
-
- 
-replace pl_ben2 = pl_ben1		if country == "AT" & year == 2019 & pl_eli == 1
-
-
+replace pl_ben2 = pl_ben1		if country == "AT" & year == 2019 & pl_eli == 1									
+									
 foreach x in 1 2 {
 	replace pl_ben`x' = 0 	if country == "AT" & year == 2019 & pl_ben`x' == .
 }
