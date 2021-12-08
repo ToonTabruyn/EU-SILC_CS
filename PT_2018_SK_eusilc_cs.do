@@ -1,8 +1,4 @@
-/* PT_2018_SK_eusilc_cs
-
-date created: 31/03/2021
-
-*/
+/* PT_2018_SK_eusilc_cs */
 
 /*
 *** NOTE: No statutory right to paternity leave. The individual entitlements 
@@ -26,9 +22,8 @@ date created: 31/03/2021
 	-> single fathers can also claim "ML" - already coded in ml_eli!	*/
 	
 replace pt_eli = 1 		if country == "SK" & year == 2018 & gender == 2 ///
-						& econ_status ==  1 & duremp >= (270/7)/4.3 & parstat == 2
-replace pt_eli = 1 		if country == "SK" & year == 2018 & gender == 2 ///
-						& econ_status ==  2 & dursemp >= (270/7)/4.3 & parstat == 2		
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 270/30 & parstat == 2
+		
 						
 replace pt_eli = 0 		if pt_eli == . & country == "SK" & year == 2018 & gender == 2
 
@@ -43,7 +38,7 @@ replace pt_dur = 28 	if country == "SK" & year == 2018 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 75% average earnings
-	-> ceiling: E 954/month (LP&R 2018)	*/
+	-> ceiling: €954/month (LP&R 2018)	*/
 	
 replace pt_ben1 = 0.75*earning 		if country == "SK" & year == 2018 & pt_eli == 1
 replace pt_ben1 = 954		 		if country == "SK" & year == 2018 & pt_eli == 1 ///
