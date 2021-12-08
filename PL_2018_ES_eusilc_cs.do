@@ -1,8 +1,5 @@
-/* PL_2018_ES_eusilc_cs
+/* PL_2018_ES_eusilc_cs */
 
-date created: 01/04/2021
-
-*/
 
 * SPAIN - 2018
 
@@ -16,7 +13,7 @@ replace pl_eli =  0			if pl_eli == . & country == "ES" & year == 2018
 
 
 * DURATION (weeks)
-/*	-> until child is 3 years old => family entitlement, all assigned to woman
+/*	-> until child is 3 years old => family entitlement, in couples all assigned to women
 	-> unclear whether there is a regional variation in duration of benefit payment => not coded 	
 */
 	
