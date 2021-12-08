@@ -207,7 +207,7 @@ replace pl_ben1 =  0.7 * (21.7*dab)	if country == "CZ" & year == 2019 & pl_eli =
 										& econ_status == 1 & parstat == 2 ///
 										& earning/21.7 < 1576
 	
-	* woman employed, below ceiling
+	* woman employed, above ceiling
 replace pl_ben1 =  1576					if country == "CZ" & year == 2019 & pl_eli == 1 ///
 										& econ_status == 1 & parstat == 2 ///
 										& earning/21.7 >= 1576
