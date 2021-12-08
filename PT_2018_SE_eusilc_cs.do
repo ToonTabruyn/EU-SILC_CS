@@ -1,9 +1,4 @@
-/* PT_2018_SE_eusilc_cs
-
-date created: 01/04/2021
-latest update:
-
-*/
+/* PT_2018_SE_eusilc_cs */
 
 /*	Sweden doesn't distinguish between ML and PT but only recognizes PARENTAL LEAVE, 
 	which is a combination of individual non-transferable and individual transferable
@@ -37,46 +32,46 @@ replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2018 & pt_eli =
 
 * BENEFIT (monthly)
 /*	-> 10 days: 77.6% earning
-		- ceiling: E 35,103/month - this is earning ceiling NOT benefit ceiling 
+		- ceiling: €35,103/year - this is earning ceiling NOT benefit ceiling 
 		- minimum: not specified, also not specified whether only for working parents => 
-			assumed minimum as with the parental leave 
+			assumed identical with the 90 days 
 	-> 90 days: 77.6% earning
-			- minimum: E 26/day
-			- ceiling: E 46,803/month - this is an earning ceiling NOT benefit ceiling (LP&R 2018)
+			- minimum: €26/day
+			- ceiling: €46,803/year - this is an earning ceiling NOT benefit ceiling (LP&R 2018)
 */
 
 
-replace pt_ben1 = 0.776*earning 		if country == "SE" & year == 2018 & pt_eli == 1 ///
-										& (earning/30) >= 26
+replace pt_ben1 = 0.776 * earning 		if country == "SE" & year == 2018 & pt_eli == 1 ///
+										& (earning/21.7) >= 26
 
-replace pt_ben1 = 26*30					if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& (earning/30) < 26
+replace pt_ben1 = 26 * 21.7				if country == "SE" & year == 2018 & pt_eli == 1 ///
+										& (earning/21.7) < 26
 
-replace pt_ben1 = [(0.776*35103) * (10/(90+10))] + [(0.776*earning) * (90/(90+10))] ///
-										if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& inrange(earning,35103,46803)
+replace pt_ben1 = ((0.776 * (35103/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
+										if country == "SE" & year == 2018 & pt_eli == 1 ///
+										& inrange((earning*12),35103,46803)
 
-replace pt_ben2 = [(0.776*35103) * (10/(90+10))] + [(0.776*46803) * (90/(90+10))] ///
-										if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& earning > 46803
+replace pt_ben1 = ((0.776 * (35103/12)) * (10/(90+10)))	+ ((0.776 * (46803/12)) * (90/(90+10))) ///
+											if country == "SE" & year == 2018 & pt_eli == 1 ///
+											& earning > 46803/12
 
-		
-		
+	
+	
+	
 replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2018 & pt_eli == 1 ///
-										& (earning/30) >= 26
+										& (earning/21.7) >= 26
 
-replace pt_ben2 = 26*30					if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& (earning/30) < 26
+replace pt_ben2 = 26*21.7				if country == "SE" & year == 2018 & pt_eli == 1 ///
+										& (earning/21.7) < 26
 										
-replace pt_ben2 = [((0.776*35103)/4.3) * (10/7)] + [((0.776*earning)/4.3) * ((30-10)/7)] ///
-										if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& inrange(earning,35103,46803)
+replace pt_ben2 = ((0.776 * (35103/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
+										if country == "SE" & year == 2018 & pt_eli == 1 ///
+										& inrange((earning*12),35103,46803)
 										
-replace pt_ben2 = [((0.776*35103)/4.3) * (10/7)] + [((0.776*46803)/4.3) * ((30-10)/7)] ///
-										if country == "SE" & year == 2018 & ml_eli == 1 ///
-										& earning > 46803
-
- 										
+replace pt_ben2 = ((0.776 * (35103/12)) * (10/21.7)) + ((0.776 * (46803/12)) * ((21.7-10)/21.7)) ///
+										if country == "SE" & year == 2018 & pt_eli == 1 ///
+										& earning > 46803/12
+								
 										
 
 
