@@ -1,8 +1,5 @@
-/* PT_2018_IT_eusilc_cs
+/* PT_2018_IT_eusilc_cs */
 
-date created: 29/03/2021
-
-*/
 
 * ITALY - 2018
 
