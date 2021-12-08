@@ -4,10 +4,10 @@
 * HUNGARY - 2019
 
 * ELIGIBILITY
-/*	-> employed, self-employed 	*/
+/*	-> employed (LP&R 2019) 	*/
 	
 replace pt_eli = 1 		if country == "HU" & year == 2019 & gender == 2 ///
-						& inlist(econ_status,1,2) 
+						& econ_status == 1 
 						
 						
 replace pt_eli = 0 		if pt_eli == . & country == "HU" & year == 2019 & gender == 2
