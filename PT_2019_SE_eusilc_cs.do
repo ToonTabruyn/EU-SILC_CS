@@ -49,12 +49,13 @@ replace pt_ben1 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 
 replace pt_ben1 = 23.48 * 21.7			if country == "SE" & year == 2019 & pt_eli == 1 ///
 										& (earning/21.7) < 23.48
 
-replace pt_ben1 = (0.776 * (32053.20/12)) 	if country == "SE" & year == 2019 & pt_eli == 1 ///
-											& inrange(earning,32053.20,42737.50)
-
-replace pt_ben1 = (((0.776 * (32053.20/12)) * (10/(90+10)))	+ ((0.776 * (42737.50/12)) * (90/(90+10))) ///
+replace pt_ben1 = ((0.776 * (32053.20/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
 											if country == "SE" & year == 2019 & pt_eli == 1 ///
-											& earning > 42737.50
+											& inrange((earning*12),32053.20,42737.50)
+
+replace pt_ben1 = ((0.776 * (32053.20/12)) * (10/(90+10)))	+ ((0.776 * (42737.50/12)) * (90/(90+10))) ///
+											if country == "SE" & year == 2019 & pt_eli == 1 ///
+											& earning > 42737.50/12
 
 	
 	
@@ -62,16 +63,16 @@ replace pt_ben1 = (((0.776 * (32053.20/12)) * (10/(90+10)))	+ ((0.776 * (42737.5
 replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 ///
 										& (earning/21.7) >= 23.48
 
-replace pt_ben2 = 26*21.7				if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& (earning/21.7) < 26
+replace pt_ben2 = 23.48*21.7			if country == "SE" & year == 2019 & pt_eli == 1 ///
+										& (earning/21.7) < 23.48
 										
-replace pt_ben2 = ((0.776 * 32053) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
+replace pt_ben2 = ((0.776 * (32053.20/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
 										if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& inrange(earning,35103,46803)
+										& inrange((earning*12),32053.20,42737.50)
 										
-replace pt_ben2 = ((0.776 * 32053) * (10/21.7)) + ((0.776 * 42737.50) * ((21.7-10)/21.7)) ///
+replace pt_ben2 = ((0.776 * (32053.20/12)) * (10/21.7)) + ((0.776 * (42737.50/12)) * ((21.7-10)/21.7)) ///
 										if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& earning > 42737.5
+										& earning > 42737.5/12
 
  										
 										
