@@ -1,8 +1,4 @@
-/* PL_2018_GR_eusilc_cs
-
-date created: 26/03/2021
-
-*/
+/* PL_2018_GR_eusilc_cs */
 
 * GREECE - 2018
 
