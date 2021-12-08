@@ -21,7 +21,7 @@ replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2019
 */
    
 replace pl_dur = (2*52) - ml_dur2	 	if country == "BG" & year == 2019 & pl_eli == 1 ///
-										& gender == 1 & econ_status == 1 & duremp >= 12
+										& gender == 1 & econ_status == 1 & duremp >= 12 & ml_eli == 1
 						
 										
 replace pl_dur = 52 					if country == "BG" & year == 2019 & pl_eli == 1 ///
