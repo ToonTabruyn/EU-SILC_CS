@@ -29,7 +29,7 @@ replace pl_dur = 18 * 4.3 				if country == "EE" & year == 2019 & pl_dur == . //
 * single men										
 replace pl_dur = 3*52 			if country == "EE" & year == 2019 ///
 								& pl_eli == 1 & gender == 2 & parstat == 1
-replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2019 & pl_dur == . ///
+replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2019 ///
 								& pl_eli == 1 & gender == 2 & parstat == 1 ///
 								& inlist(econ_status,3,4)
 								
