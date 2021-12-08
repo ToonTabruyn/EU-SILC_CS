@@ -1,12 +1,10 @@
-/* PT_2018_NL_eusilc_cs
+/* PT_2018_NL_eusilc_cs */
 
-date created: 01/03/2021
-
-*/
 
 * NETHERLANDS - 2018
 
-* ELIGIBILITY (LP&R 2018)
+* ELIGIBILITY 
+/* -> employed (LP&R 2018) */
 
 replace pt_eli = 1 		if country == "NL" & year == 2018 & gender == 2 ///
 						& econ_status == 1
