@@ -1,8 +1,5 @@
-/* PL_2018_BE_eusilc_cs
+/* PL_2018_BE_eusilc_cs */
 
-date created: 02/03/2021
-
-*/
 
 * BELGIUM - 2018
 
