@@ -6,7 +6,7 @@
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed
-	-> compulsorily insured for at least 365 days over the past 2 years 
+	-> compulsorily insured for at least 365 days (coded) over the past 2 years (not coded)
 	-> father is eligible in case of mother's death or when she is not present 
 		in the household due to health reason => assumed this doesn't apply to 
 		fathers when the mother abandoned the child
