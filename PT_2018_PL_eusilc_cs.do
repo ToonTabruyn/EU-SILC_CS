@@ -1,8 +1,5 @@
-/* PT_2018_PL_eusilc_cs
+/* PT_2018_PL_eusilc_cs */
 
-date created: 30/03/2021
-
-*/
 
 * POLAND - 2018
 
