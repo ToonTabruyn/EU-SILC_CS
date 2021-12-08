@@ -1,8 +1,4 @@
-/* PT_2018_NO_eusilc_cs
-
-date created: 01/04/2021
-
-*/
+/* PT_2018_NO_eusilc_cs */
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -34,7 +30,7 @@ replace pt_eli = 1 			if country == "NO" & year == 2018 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single woman							
-replace pt_eli = 1			if country == "NO" & year == 2018 & gender == 2 ///
+replace pt_eli = 1			if country == "NO" & year == 2018 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & parstat == 1
 
 replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2018 & gender == 2
@@ -49,33 +45,26 @@ replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2018 & gender =
 		- 59 weeks on 80% earning
 */
 
-* both are eligible and only man is eligible
-replace pt_dur = 15 		if country == "NO" & year == 2018 & pt_eli == 1 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
-replace pt_dur = 15 		if country == "NO" & year == 2018 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
 
-* only woman is eligible 
-replace pt_dur = 15 		if country == "NO" & year == 2018 & pt_eli == 1 & gender == 1 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
-
-* single woman
-replace pt_dur = 15			if country == "NO" & year == 2018 & pt_eli == 1 & gender == 1 ///
-							& parstat == 1
+replace pt_dur = 15 		if country == "NO" & year == 2018 & pt_eli == 1 
 
 
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €61,357/year  => 61,357/12 = €5,113/month
-	-> minimum: maternity grant - €6,665 for the whole period => 6,665/11 = €605/month
+	-> ceiling: €61,357/year 
+	-> minimum: maternity grant - €6,665 for the whole period (11 months)
 */
 
 replace pt_ben1 = earning 		if country == "NO" & year == 2018 & pt_eli == 1
-replace pt_ben1 = 5113			if country == "NO" & year == 2018 & pt_eli == 1 ///
-								& pt_ben1 >= 5113
-replace pt_ben1 = 605			if country == "NO" & year == 2018 & pt_eli == 1 ///
-								& pt_ben1 < 605
+
+* ceiling
+replace pt_ben1 = 61357/12			if country == "NO" & year == 2018 & pt_eli == 1 ///
+									& pt_ben1 >= 61357/12
+
+* minimum
+replace pt_ben1 = 6665/11			if country == "NO" & year == 2018 & pt_eli == 1 ///
+									& pt_ben1 < 6665/11
 
 
 replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2018 & pt_eli == 1
