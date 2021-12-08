@@ -64,7 +64,7 @@ replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 * IGd	
 
 
-gen pl_benc = (57183/12) * 0.4			if country == "FI" & year == 2019	& gender == 1 ///
+gen pl_benc = (58252/12) * 0.4			if country == "FI" & year == 2019	& gender == 1 ///
 										& pl_eli == 1 & (earning*12) > 58252
 	
 gen pl_bend = (earning - (58252/12)) * 0.25  		///
@@ -75,7 +75,7 @@ gen pl_bend = (earning - (58252/12)) * 0.25  		///
 
 replace pl_ben1 = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
 							& year == 2019	& gender == 1 & pl_eli == 1 ///
-							& (earning*12) >= 57183
+							& (earning*12) >= 58252
 
 
 							
@@ -111,7 +111,7 @@ replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 * IGd	
 
 
-replace pl_benc = (57183/12) * 0.4		if country == "FI" & year == 2019	& gender == 2 ///
+replace pl_benc = (58252/12) * 0.4		if country == "FI" & year == 2019	& gender == 2 ///
 										& pl_eli == 1 & (earning*12) > 58252 & parstat == 1
 	
 replace pl_bend = (earning - (58252/12)) * 0.25  		///
@@ -122,7 +122,7 @@ replace pl_bend = (earning - (58252/12)) * 0.25  		///
 
 replace pl_ben1 = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
 							& year == 2019	& gender == 2 & pl_eli == 1 ///
-							& (earning*12) >= 57183 & parstat == 1
+							& (earning*12) >= 58252 & parstat == 1
 
 							
 							
