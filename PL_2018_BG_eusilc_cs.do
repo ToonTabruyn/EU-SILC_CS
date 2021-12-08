@@ -1,20 +1,17 @@
-/* PL_2018_BG_eusilc_cs
+/* PL_2018_BG_eusilc_cs */
 
-date created: 15/03/2021
-
-*/
 
 * BULGARIA - 2018
 
 * ELIGIBILITY
-/* 	-> Parental leave is specifically designed for women. 
+/* 	-> Parental leave is specifically designed for women (LP&R 2018)
 	-> All women are entitled to a cash benefit. 
 	
 	-> single father is not automatically entitled - mother's consent is required => not coded
    Source: MISSOC 01/07/2018										*/
 
 replace pl_eli = 1 	if country == "BG" & year == 2018 & gender == 1
-replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2008 
+replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2018 
 
 
 * DURATION (weeks)
@@ -23,9 +20,9 @@ replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2008
 	Source: MISSOC 01/07/2018										
 */
    
-replace pl_dur = (2*52) - ((410-45)/5) 		if country == "BG" & year == 2018 & pl_eli == 1 ///
-											& gender == 1 & econ_status == 1 & duremp >= 12 ///
-											& pl_eli == 1
+replace pl_dur = (2*52) - ml_dur2 		if country == "BG" & year == 2018 & pl_eli == 1 ///
+										& gender == 1 & econ_status == 1 & duremp >= 12 ///
+										& ml_eli == 1
 replace pl_dur = 52 		if country == "BG" & year == 2018 & pl_eli == 1 ///
 							& gender == 1 & pl_dur == . & pl_eli == 1
 
