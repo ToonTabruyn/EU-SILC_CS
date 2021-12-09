@@ -1,7 +1,7 @@
-/* ML_2018_ES_eusilc_cs */
+/* ML_2016_ES_eusilc_cs */
 
 
-* SPAIN - 2018
+* SPAIN - 2016
 
 * ELIGIBILITY
 /*	-> employed, self-employed
@@ -14,15 +14,15 @@
 	-> mother can transfer 10 weeks to father => coded for single men
 */
 
-replace ml_eli = 1 			if country == "ES" & year == 2018 & gender == 1 ///
+replace ml_eli = 1 			if country == "ES" & year == 2016 & gender == 1 ///
 							& inlist(econ_status,1,2) 
 
 * single men							
-replace ml_eli = 1 			if country == "ES" & year == 2018 & gender == 2 ///
+replace ml_eli = 1 			if country == "ES" & year == 2016 & gender == 2 ///
 							& inlist(econ_status,1,2) & parstat == 1
 														
 													
-replace ml_eli = 0 			if ml_eli == . & country == "ES" & year == 2018 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "ES" & year == 2016 & gender == 1
 
 
 
@@ -34,57 +34,57 @@ replace ml_eli = 0 			if ml_eli == . & country == "ES" & year == 2018 & gender =
 	-> no obligatory prenatal leave => coded 0
 */
 
-replace ml_dur1 = 0 		if country == "ES" & year == 2018 & ml_eli == 1
+replace ml_dur1 = 0 		if country == "ES" & year == 2016 & ml_eli == 1
 
-replace ml_dur2 = 16 		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_dur2 = 16 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & age < 21
 
-replace ml_dur2 = 16 		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_dur2 = 16 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & inrange(age,21,26) ///
 							& (duremp+dursemp) >= 90/21.7
 
-replace ml_dur2 = 16 		if country == "ES" & year == 2018 & ml_eli == 1 ///							
+replace ml_dur2 = 16 		if country == "ES" & year == 2016 & ml_eli == 1 ///							
 							& inlist(econ_status,1,2) & age > 26 ///
 							& (duremp+dursemp) >= 180/21.7
 							
-replace ml_dur2 = 42/5		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_dur2 = 42/5		if country == "ES" & year == 2016 & ml_eli == 1 ///
 							& ml_dur2 == .
 
 * single men
-replace ml_dur2 = 10 		if country == "ES" & year == 2018 &  ml_eli == 1 ///
+replace ml_dur2 = 10 		if country == "ES" & year == 2016 &  ml_eli == 1 ///
 							& gender == 2 & parstat == 1
 							
 							
 							
 * BENEFIT (monthly)
-/*	-> employed, self-employed who didn't fulfill the contribution requirements: €537.84/month (LP&R 2018)
+/*	-> employed, self-employed who didn't fulfill the contribution requirements: €537.84/month (LP&R 2016)
 	-> employed, self-employed: 100%
 	-> ceiling: €3,803.70/month	
 */
 
-replace ml_ben1 = earning 		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = earning 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & age < 21
 
-replace ml_ben1 = earning 		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = earning 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & inrange(age,21,26) ///
 								& (duremp+dursemp) >= 90/21.7
 
-replace ml_ben1 = earning 		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = earning 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & age > 26 ///
 								& (duremp+dursemp) >= 180/21.7
 								
-replace ml_ben1 = 3803.70 		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = 3803.70 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& ml_ben1 >= 3803.7
 
-replace ml_ben1 = 537.84		if country == "ES" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = 537.84		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& ml_ben1 == .
 
 
-replace ml_ben2 = ml_ben1 		if country == "ES" & year == 2018 & ml_eli == 1
+replace ml_ben2 = ml_ben1 		if country == "ES" & year == 2016 & ml_eli == 1
 
 
 foreach x in 1 2 {
-	replace ml_dur`x' = 0 	if country == "ES" & year == 2018 & ml_eli == 0
-	replace ml_ben`x' = 0 	if country == "ES" & year == 2018 & ml_eli == 0
+	replace ml_dur`x' = 0 	if country == "ES" & year == 2016 & ml_eli == 0
+	replace ml_ben`x' = 0 	if country == "ES" & year == 2016 & ml_eli == 0
 	
 }

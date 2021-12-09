@@ -1,7 +1,7 @@
-/* ML_2018_IT_eusilc_cs */
+/* ML_2016_IT_eusilc_cs */
 
 
-* ITALY - 2018
+* ITALY - 2016
 
 * ELIGIBILITY
 /*	-> employed
@@ -15,14 +15,14 @@
 		professionals and atypical workers: not specified in the sources => not coded
 */
 		
-replace ml_eli = 1 			if country == "IT" & year == 2018 & gender == 1 ///
+replace ml_eli = 1 			if country == "IT" & year == 2016 & gender == 1 ///
 							& inrange(econ_status,1,2)
 
 	* single men						
-replace ml_eli = 1 			if country == "IT" & year == 2018 & gender == 2 ///
+replace ml_eli = 1 			if country == "IT" & year == 2016 & gender == 2 ///
 							& inrange(econ_status,1,2) & parstat == 1
 							
-replace ml_eli = 0 			if ml_eli == . & country == "IT" & year == 2018 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "IT" & year == 2016 & gender == 1
 
 
 * DURATION (weeks)
@@ -30,12 +30,12 @@ replace ml_eli = 0 			if ml_eli == . & country == "IT" & year == 2018 & gender =
 	-> prenatal: 1 month
 	-> father if mother doesn't claim: 3 months 			*/
 	
-replace ml_dur1 = 4.3			if country == "IT" & year == 2018 & ml_eli == 1 & gender == 1
+replace ml_dur1 = 4.3			if country == "IT" & year == 2016 & ml_eli == 1 & gender == 1
 
-replace ml_dur2 = (5*4.3)-4.3 	if country == "IT" & year == 2018 & ml_eli == 1 & gender == 1
+replace ml_dur2 = (5*4.3)-4.3 	if country == "IT" & year == 2016 & ml_eli == 1 & gender == 1
 
 * single men
-replace ml_dur2 = 3*4.3			if country == "IT" & year == 2018 & ml_eli == 1 & gender == 2 ///
+replace ml_dur2 = 3*4.3			if country == "IT" & year == 2016 & ml_eli == 1 & gender == 2 ///
 								& parstat == 1
 
 
@@ -44,14 +44,14 @@ replace ml_dur2 = 3*4.3			if country == "IT" & year == 2018 & ml_eli == 1 & gend
 /*	-> 80% earning, no ceiling  
 	-> public sector employees are entitled to 100% for the first 30 days, no ceiling => not coded */
 
-replace ml_ben1 = 0.8*earning 		if country == "IT" & year == 2018 & ml_eli == 1
+replace ml_ben1 = 0.8*earning 		if country == "IT" & year == 2016 & ml_eli == 1
 
 
-replace ml_ben2 = ml_ben1 			if country == "IT" & year == 2018 & ml_eli == 1
+replace ml_ben2 = ml_ben1 			if country == "IT" & year == 2016 & ml_eli == 1
 
 
 foreach x in 1 2 {
-    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "IT" & year == 2018
-	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "IT" & year == 2018
+    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "IT" & year == 2016
+	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "IT" & year == 2016
 }
 

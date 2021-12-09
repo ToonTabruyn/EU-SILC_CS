@@ -1,7 +1,7 @@
-/* ML_2018_GB_eusilc_cs */
+/* ML_2016_GB_eusilc_cs */
 
 
-* UK - 2018
+* UK - 2016
 
 * ELIGIBILITY
 /*	-> employed (statutory maternity pay), self-employed (maternity allowance): 
@@ -19,17 +19,17 @@
 	   dependent on the mother's economic status
 */
 
-replace ml_eli = 1 			if country == "GB" & year == 2018 & gender == 1 ///
+replace ml_eli = 1 			if country == "GB" & year == 2016 & gender == 1 ///
 							& inlist(econ_status,1,2) & (earning/4.3) >= 34 ///
 							& (duremp+dursemp) >= 26/4.3
 
 * father's eligibility for shared parental leave 
-replace ml_eli = 1 			if country == "GB" & year == 2018 & gender == 2 ///
+replace ml_eli = 1 			if country == "GB" & year == 2016 & gender == 2 ///
 							& inlist(econ_status,1,2) & (duremp+dursemp) >= 26/4.3 ///
 							& (earning/4.3) >= 441 & p_econ_status == 1 ///
 							& (p_duremp+p_dursemp) >= 26/4.3
 							
-replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2018 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2016 & gender == 1
 
 * DURATION (weeks)
 /*	-> employed if (for paid leave):
@@ -50,13 +50,13 @@ replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2018 & gender =
 	
 */
 
-replace ml_dur1 = 0 		if country == "GB" & year == 2018 & ml_eli == 1 & gender == 1
+replace ml_dur1 = 0 		if country == "GB" & year == 2016 & ml_eli == 1 & gender == 1
 
-replace ml_dur2 = 52 		if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_dur2 = 52 		if country == "GB" & year == 2016 & ml_eli == 1 ///
 							& econ_status == 1 & duremp >= 26/4.3 ///
 							& (earning/4.3) >= 131 & gender == 1
 							
-replace ml_dur2 = 39		if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_dur2 = 39		if country == "GB" & year == 2016 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & ml_dur2 == . ///
 							& (earning/4.3) >= 34 & gender == 1
 
@@ -76,39 +76,39 @@ replace ml_dur2 = 39		if country == "GB" & year == 2018 & ml_eli == 1 ///
 
 
 * statutory maternity pay
-gen ml_bena = 0.9 * earning			if country == "GB" & year == 2018 & ml_eli == 1
-gen ml_benb = (164 * 4.3)			if country == "GB" & year == 2018 & ml_eli == 1 
+gen ml_bena = 0.9 * earning			if country == "GB" & year == 2016 & ml_eli == 1
+gen ml_benb = (164 * 4.3)			if country == "GB" & year == 2016 & ml_eli == 1 
 
 									
 	* under ceiling
-replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2016 & ml_eli == 1 ///
 											& (earning*0.9)/4.3 < 164 & ml_dur2 == 52
 
 	* above ceiling
 replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
-											if country == "GB" & year == 2018 & ml_eli == 1 ///
+											if country == "GB" & year == 2016 & ml_eli == 1 ///
 											& (earning*0.9)/4.3 >= 164 & ml_dur2 == 52
 
 
 
 * maternity allowance	
 	* under ceiling
-replace ml_ben1 = ml_bena		if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = ml_bena		if country == "GB" & year == 2016 & ml_eli == 1 ///
 								& (earning*0.9)/4.3 < 164 & ml_dur2 == 39	
 	
 	
 	* above ceiling
-replace ml_ben1 = ml_benb		if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = ml_benb		if country == "GB" & year == 2016 & ml_eli == 1 ///
 								& (earning*0.9)/4.3 >= 164 & ml_dur2 == 39
 	
 	
 	
 
 * statutory maternity pay - 1st month										
-replace ml_ben2 = ml_bena 				if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_ben2 = ml_bena 				if country == "GB" & year == 2016 & ml_eli == 1 ///
 										&  ml_dur2 == 52
 										
-replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2018 & ml_eli == 1 ///
+replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2016 & ml_eli == 1 ///
 										& ml_dur2 == 39							
 										
 										
@@ -116,8 +116,8 @@ replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2018 & ml_eli == 1 //
 										
 										
 foreach x in 1 2 {
-	replace ml_dur`x' = 0 	if country == "GB" & year == 2018 & ml_eli == 0
-	replace ml_ben`x' = 0 	if country == "GB" & year == 2018 & ml_eli == 0
+	replace ml_dur`x' = 0 	if country == "GB" & year == 2016 & ml_eli == 0
+	replace ml_ben`x' = 0 	if country == "GB" & year == 2016 & ml_eli == 0
 	
 }
 

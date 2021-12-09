@@ -1,7 +1,7 @@
-/* ML_2018_FR_eusilc_cs */
+/* ML_2016_FR_eusilc_cs */
 
 
-* FRANCE - 2018
+* FRANCE - 2016
 
 * ELIGIBILITY
 /*	-> employed
@@ -9,9 +9,9 @@
 	-> transferable to father only in the event of mother's death (not coded)
 */
 
-replace ml_eli = 1 			if country == "FR" & year == 2018 & gender == 1 ///
+replace ml_eli = 1 			if country == "FR" & year == 2016 & gender == 1 ///
 							& inlist(econ_status,1,2)
-replace ml_eli = 0 			if ml_eli == . & country == "FR" & year == 2018 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "FR" & year == 2016 & gender == 1
 
 
 * DURATION (weeks)
@@ -21,12 +21,12 @@ replace ml_eli = 0 			if ml_eli == . & country == "FR" & year == 2018 & gender =
 	the hypothetical child the microsimulation adds to the HH)
 */
 	
-replace ml_dur1 = 3 		if country == "FR" & year == 2018 & gender == 1 & ml_eli == 1
+replace ml_dur1 = 3 		if country == "FR" & year == 2016 & gender == 1 & ml_eli == 1
 
-replace ml_dur2 = 16-3 		if country == "FR" & year == 2018 & gender == 1 ///
+replace ml_dur2 = 16-3 		if country == "FR" & year == 2016 & gender == 1 ///
 							& ml_eli == 1 & childc < 2
 							
-replace ml_dur2 = 26-3 		if country == "FR" & year == 2018 & gender == 1 ///
+replace ml_dur2 = 26-3 		if country == "FR" & year == 2016 & gender == 1 ///
 							& ml_eli == 1 & childc >= 2
 
 
@@ -34,28 +34,28 @@ replace ml_dur2 = 26-3 		if country == "FR" & year == 2018 & gender == 1 ///
 /*	-> 100%
 	-> minimum: €9.39/day
 	-> ceiling: €86/ day
-	-> no ceiling in public sector (not coded; LP&R 2018)
-	-> source: MISSOC 01/07/2018
+	-> no ceiling in public sector (not coded; LP&R 2016)
+	-> source: MISSOC 01/07/2016
 */ 
 	
-replace ml_ben1 = earning 			if country == "FR" & year == 2018 & ml_eli == 1 ///
+replace ml_ben1 = earning 			if country == "FR" & year == 2016 & ml_eli == 1 ///
 									& ml_ben1 == .
 
 * minimum
-replace ml_ben1 = 9.39 * 21.7		if country == "FR" & year == 2018  ///
+replace ml_ben1 = 9.39 * 21.7		if country == "FR" & year == 2016  ///
 									& ml_eli == 1 & ml_ben1 < 9.39*21.7
 		
 * maximum
-replace ml_ben1 = 86 * 21.7			if country == "FR" & year == 2018  ///
+replace ml_ben1 = 86 * 21.7			if country == "FR" & year == 2016  ///
 									& ml_eli == 1 & ml_ben1 >= 86*21.7
 		
 
 
-replace ml_ben2 = ml_ben1 		if country == "FR" & year == 2018 & ml_eli == 1
+replace ml_ben2 = ml_ben1 		if country == "FR" & year == 2016 & ml_eli == 1
 
 
 foreach x in 1 2 {
-    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "FR" & year == 2018
-	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "FR" & year == 2018
+    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "FR" & year == 2016
+	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "FR" & year == 2016
 }
 
