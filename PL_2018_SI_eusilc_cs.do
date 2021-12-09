@@ -1,8 +1,5 @@
-/* PL_2018_SI_eusilc_cs
+/* PL_2018_SI_eusilc_cs */
 
-date created: 31/03/2021
-
-*/
 
 * SLOVENIA - 2018
 
