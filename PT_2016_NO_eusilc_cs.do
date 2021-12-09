@@ -1,4 +1,4 @@
-/* PT_2018_NO_eusilc_cs */
+/* PT_2016_NO_eusilc_cs */
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -7,7 +7,7 @@
 	Accessed: 01/04/2021
 */
 
-* NORWAY - 2018
+* NORWAY - 2016
 
 * ELIGIBILITY
 /*	-> any economic activity if they were employed or self-employed for at least 6 months
@@ -18,22 +18,22 @@
 */
 
 * only man is eligibile
-replace pt_eli = 1 			if country == "NO" & year == 2018 & gender == 2 ///
+replace pt_eli = 1 			if country == "NO" & year == 2016 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * both partners are eligible
-replace pt_eli = 1 			if country == "NO" & year == 2018 & gender == 2 ///
+replace pt_eli = 1 			if country == "NO" & year == 2016 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
 
 * only woman is eligible							
-replace pt_eli = 1 			if country == "NO" & year == 2018 & gender == 1 ///
+replace pt_eli = 1 			if country == "NO" & year == 2016 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single woman							
-replace pt_eli = 1			if country == "NO" & year == 2018 & gender == 1 ///
+replace pt_eli = 1			if country == "NO" & year == 2016 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & parstat == 1
 
-replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2018 & gender == 2
+replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2016 & gender == 2
 
 
 * DURATION (weeks)
@@ -46,7 +46,7 @@ replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2018 & gender =
 */
 
 
-replace pt_dur = 15 		if country == "NO" & year == 2018 & pt_eli == 1 
+replace pt_dur = 15 		if country == "NO" & year == 2016 & pt_eli == 1 
 
 
 
@@ -56,25 +56,25 @@ replace pt_dur = 15 		if country == "NO" & year == 2018 & pt_eli == 1
 	-> minimum: maternity grant - €6,665 for the whole period (11 months)
 */
 
-replace pt_ben1 = earning 		if country == "NO" & year == 2018 & pt_eli == 1
+replace pt_ben1 = earning 		if country == "NO" & year == 2016 & pt_eli == 1
 
 * ceiling
-replace pt_ben1 = 61357/12			if country == "NO" & year == 2018 & pt_eli == 1 ///
+replace pt_ben1 = 61357/12			if country == "NO" & year == 2016 & pt_eli == 1 ///
 									& pt_ben1 >= 61357/12
 
 * minimum
-replace pt_ben1 = 6665/11			if country == "NO" & year == 2018 & pt_eli == 1 ///
+replace pt_ben1 = 6665/11			if country == "NO" & year == 2016 & pt_eli == 1 ///
 									& pt_ben1 < 6665/11
 
 
-replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2018 & pt_eli == 1
+replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2016 & pt_eli == 1
 
 
 
 
 
 foreach x in 1 2 {
-	replace pt_ben`x' = 0 	if country == "NO" & year == 2018 & pt_eli == 0
+	replace pt_ben`x' = 0 	if country == "NO" & year == 2016 & pt_eli == 0
 }
 
-replace pt_dur = 0 		if country == "NO" & year == 2018 & pt_eli == 0 
+replace pt_dur = 0 		if country == "NO" & year == 2016 & pt_eli == 0 
