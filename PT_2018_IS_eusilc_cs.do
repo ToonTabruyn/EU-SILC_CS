@@ -1,8 +1,4 @@
-/* PT_2018_IS_eusilc_cs
-
-date created: 02/04/2021
-
-*/
+/* PT_2018_IS_eusilc_cs */
 
 /*	Iceland doesn't recognise ML and PT but only PL with individual non-transferable and 
 	family rights. The individual non-transferable right for father is coded in here. 
@@ -32,8 +28,6 @@ replace pt_eli = 0 		if pt_eli == . & country == "IS" & year == 2018 & gender ==
 replace pt_dur = 3*4.3 	if country == "IS" & year == 2018 & pt_eli == 1 
 
 
-
-
 * BENEFIT (monthly)
 /*	-> employed, self-employed: active for 6 months prior to birth
 			- employed for at least 25% of full time (10 hours/week for 40 hours/week full-time employment) 
@@ -43,8 +37,8 @@ replace pt_dur = 3*4.3 	if country == "IS" & year == 2018 & pt_eli == 1
 					   €1,367/month if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
 	-> those not fulfilling the conditions: 
-		- students: E 1,367/month
-		- working less than 25% FT: E 596/month
+		- students: €1,367/month
+		- working less than 25% FT: €596/month
 */
 
 * employed, self-employed working 10-20 hours/week			
