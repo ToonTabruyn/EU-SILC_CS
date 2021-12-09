@@ -2,13 +2,12 @@ clear
 set more off
 
 * original data
-global sourcepath "C:\Users\u0140174\Documents\Data\EU-SILC April 2021\Cross\Cross"
+global sourcepath "[enter RAW DATA directory]"
 * temporary data folder
-global datapath "C:\Users\u0140174\Documents\Data\EU-SILC_raw"
+global datapath "[enter temporary directory]"
 
 * merged EU-SILC data folder
-//global outpath "[add path]"
-global outpath "C:\Users\u0140174\Documents\Data\EU-SILC_out"
+global outpath "[enter directory for the final merged data]"
 
 cd "$datapath" // Select a working directory where the files will be stored
 
@@ -16,7 +15,7 @@ cd "$datapath" // Select a working directory where the files will be stored
 ** IS UK to be added with 2019 data
 local countries "AT BE BG CH CY CZ DE DK EE EL ES FI FR HR HU IE IS IT LT LU LV MT NL NO PL PT RO SE SI SK UK"
 local countries_x "BE BG CH CY CZ DE DK EE EL ES FI FR HR HU IE IS IT LT LU LV MT NL NO PL PT RO SE SI SK UK"
-local time "18 19"
+local time "18 19" 
 
 
 foreach x in D H P R {
@@ -41,6 +40,7 @@ foreach x in D H P R {
 
 
 local time "18 19"
+
 
 foreach t of local time {
 	
