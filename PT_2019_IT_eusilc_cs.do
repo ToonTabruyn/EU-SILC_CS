@@ -16,7 +16,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "IT" & year == 2019 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 4 days */
+/*	-> 5 days paid and compulsory + 1 day unpaid and optional*/
 
 replace pt_dur = 4/5 	if country == "IT" & year == 2019 & pt_eli == 1
 
