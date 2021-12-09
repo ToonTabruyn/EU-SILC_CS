@@ -1,8 +1,4 @@
-/* PL_2018_NO_eusilc_cs
-
-date created: 01/04/2021
-
-*/
+/* PL_2018_NO_eusilc_cs */
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -29,25 +25,42 @@ replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2018
 /*	-> parents can choose between 2 options for the whole parental leave:
 		- 49 weeks on 100% earning
 		- 59 weeks on 80% earning
-	-> joint right share: 19 weeks (remainder from 15 weeks reserved to mother and 15 weeks to father) */
+	-> joint right share: 19 weeks (remainder from 15 weeks reserved to mother and 15 weeks to father) 
+			-> assigned to mother
+*/
 
-replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1
+	* women
+replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 1
+
+	* single men
+replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 2 & parstat == 1
+
+
 
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €61,357/year  => 61,357/12 = €5,113/month
-	-> minimum: maternity grant - €6,665 for the whole period => 6,665/11 = €605/month
+	-> ceiling: €61,357/year  
+	-> minimum: maternity grant - €6,665 for the whole period (11 months)
 */
 
-replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1
-replace pl_ben1 = 5113			if country == "NO" & year == 2018 & pl_eli == 1 ///
-								& pl_ben1 >= 5113
-replace pl_ben1 = 605			if country == "NO" & year == 2018 & pl_eli == 1 ///
-								& pl_ben1 < 605
+	* women
+replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1 & gender ==1
+replace pl_ben1 = 61357/12		if country == "NO" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 >= 61357/12 & gender == 1
+replace pl_ben1 = 6665/11		if country == "NO" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 < 6665/11 & gender == 1
+
+	* single men
+replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_ben1 = 61357/12		if country == "NO" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 >= 61357/12 & gender == 2 & parstat == 1
+replace pl_ben1 = 6665/11		if country == "NO" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 < 6665/11 & gender == 2 & parstat == 1
 
 
 replace pl_ben2 = pl_ben1		if country == "NO" & year == 2018 & pl_eli == 1
+
 
 
 
