@@ -42,13 +42,13 @@ replace ml_dur2 = 3*4.3 		if country == "IS" & year == 2019 & ml_eli == 1
 /*	-> employed, self-employed: active for 6 months prior to birth
 			- employed for at least 25% of full time (10 hours/week for 40 hours/week full-time employment) 
 			- 80% earning
-			- ceiling: €4,234/month 
-			- minimum: €906/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
-					   €1,255/month if worked between 50% and 100% FT (i.e. more than 20 hours/week)
+			- ceiling: €4,229.19/month 
+			- minimum: €904,74/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
+					   €1,253.90/month if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
 	-> those not fulfilling the conditions: 
-		- students: €1,255/month
-		- working less than 25% FT: €548/month
+		- students: €1,253.90/month
+		- working less than 25% FT: €547.14/month
 */
 
 * employed, self-employed working 10-20 hours/week			
