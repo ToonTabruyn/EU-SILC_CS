@@ -1,9 +1,10 @@
 /* ML_2018_GB_eusilc_cs */
 
+
 * UK - 2018
 
 * ELIGIBILITY
-/*	-> employed, self-employed: 
+/*	-> employed (statutory maternity pay), self-employed (maternity allowance): 
 		- for 26 weeks before childbirth 
 		- earning at least €34/week
 	-> further restrictions for entitlement to cash benefits
@@ -31,7 +32,7 @@ replace ml_eli = 1 			if country == "GB" & year == 2018 & gender == 2 ///
 replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2018 & gender == 1
 
 * DURATION (weeks)
-/*	-> employed if:
+/*	-> employed if (for paid leave):
 		- employed by the same employer (not coded)
 		- for 26 weeks 
 		- average weekly earnings at least €131
@@ -68,45 +69,50 @@ replace ml_dur2 = 39		if country == "GB" & year == 2018 & ml_eli == 1 ///
 				- ceiling: €164/week 
 			- 13 weeks: unpaid
 			
-	-> employed and self-employed:
+	-> employed and self-employed (maternity allowance):
 			-39 weeks: 90% earning (not taxed)
 				- ceiling: €164/week 
 */
 
-gen ceiling = 0.9*earning
 
-replace ml_ben1 = (((0.9 * earning) * (6/52)) + ((0.9 * earning) * (33/52))) / 12		/// 
-							if country == "GB" & year == 2018 & ml_eli == 1 ///
-							& econ_status == 1 & duremp >= 26/4.3 ///
-							& (earning/4.3) >= 131 
-							
-replace ml_ben1 = (((0.9*earning) * (6/52)) + ((164 * 4.3) * 33/52)) / 12		/// 
-							if country == "GB" & year == 2018 & ml_eli == 1 ///
-							& econ_status == 1 & duremp >= 26/4.3 ///
-							& (earning/4.3) >= 131 & ml_ben1 >= (164*4.3)
-							
-replace ml_ben1 = 0.9 * earning 		if country == "GB" & year == 2018 & ml_eli == 1 ///
-										& inlist(econ_status,1,2) & ml_ben1 == . ///
-										& (earning/4.3) >= 34
+* statutory maternity pay
+gen ml_bena = 0.9 * earning			if country == "GB" & year == 2018 & ml_eli == 1
+gen ml_benb = 0.9 * (164 * 4.3)		if country == "GB" & year == 2018 & ml_eli == 1 ///
+									& earning/4.3 >= 164
 
-replace ml_ben1 = 164*4.3 				if country == "GB" & year == 2018 & ml_eli == 1 ///
-										& inlist(econ_status,1,2)  ///
-										& (earning/4.3) >= 34 & ml_ben1 >= (164*4.3)
+									
+	* under ceiling
+replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2018 & ml_eli == 1 ///
+											& earning/4.3 < 164 & ml_dur2 == 52
+
+	* above ceiling
+replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
+											if country == "GB" & year == 2018 & ml_eli == 1 ///
+											& earning/4.3 >= 164 & ml_dur2 == 52
 
 
+
+* maternity allowance	
+	* under ceiling
+replace ml_ben1 = ml_bena		if country == "GB" & year == 2018 & ml_eli == 1 ///
+								& earning/4.3 < 164 & ml_dur2 == 39	
+	
+	
+	* above ceiling
+replace ml_ben1 = ml_benb		if country == "GB" & year == 2018 & ml_eli == 1 ///
+								& earning/4.3 >= 164 & ml_dur2 == 39
+	
+	
+	
+
+* statutory maternity pay - 1st month										
+replace ml_ben2 = ml_bena 				if country == "GB" & year == 2018 & ml_eli == 1 ///
+										&  ml_dur2 == 52
+										
+replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2018 & ml_eli == 1 ///
+										& ml_dur2 == 39							
 										
 										
-replace ml_ben2 = 0.9 * earning 		if country == "GB" & year == 2018 & ml_eli == 1 ///
-										& econ_status == 1 & duremp >= 26/4.3 ///
-										& (earning/4.3) >= 131
-
-replace ml_ben2 = 0.9 * earning 		if country == "GB" & year == 2018 & ml_eli == 1 ///
-										& inlist(econ_status,1,2) & ml_ben1 == . ///
-										& (earning/4.3) >= 34
-
-replace ml_ben2 = 164*4.3 				if country == "GB" & year == 2018 & ml_eli == 1 ///
-										& inlist(econ_status,1,2)  ///
-										& (earning/4.3) >= 34 & ml_ben1 >= (164*4.3)
 
 										
 										
@@ -116,4 +122,4 @@ foreach x in 1 2 {
 	
 }
 
-drop ceiling
+drop ml_bena ml_benb
