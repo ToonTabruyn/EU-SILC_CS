@@ -27,14 +27,16 @@ replace pt_dur = 2 	if country == "GB" & year == 2019 & pt_eli == 1
 	-> ceiling: €166/week			*/
 
 	
-replace pt_ben1 = ((earning * 0.9) * (2/4.3)) + (earning * ((4.3-2)/4.3)) ///
+replace pt_ben1 = ((0.9 * earning) * (2/4.3)) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2019 & pt_eli == 1
 								
-replace pt_ben1 = (166 * 2) + (earning * ((4.3-2)/4.3)) ///
+* above ceiling
+replace pt_ben1 = (166*2) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2019 & pt_eli == 1 ///
-								& ((earning * 0.9)/4.3) > 166
+								& ((0.9*earning)/4.3) > 166
+
 	
-	
+
 replace pt_ben2 = pt_ben1 	if country == "GB" & year == 2019 & pt_eli == 1
 
 
