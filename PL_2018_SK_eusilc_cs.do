@@ -1,8 +1,5 @@
-/* PL_2018_SK_eusilc_cs
+/* PL_2018_SK_eusilc_cs */
 
-date created: 31/03/2021
-
-*/
 
 * SLOVAKIA - 2018
 
@@ -34,17 +31,14 @@ replace pl_dur = (3*52) - ml_dur2		if country == "SK" & year == 2018 & pl_eli ==
 
 * single men not eligible for ML
 replace pl_dur = (3*52)					if country == "SK" & year == 2018 & pl_eli == 1 ///
-										& gender == 2 & parstat == 1 & ml_eli == 0
+										& gender == 2 & parstat == 1 & pl_dur == . 
 
 
 * BENEFIT (monthly)
 /*	-> €214.70/month  (per family) */
 
-replace pl_ben1 = 214.70 		if country == "SK" & year == 2018 & pl_eli == 1 
+replace pl_ben1 = 214.70 		if country == "SK" & year == 2018 & pl_eli == 1 & pl_dur != . 
 
-* cohabiting men (entitlement assigned to woman)
-replace pl_ben1 = 0 			if country == "SK" & year == 2018 & pl_eli == 1 ///
-								& gender == 2 & parstat == 2
 								
 replace pl_ben2 = pl_ben1		if country == "SK" & year == 2018 & pl_eli == 1
 
