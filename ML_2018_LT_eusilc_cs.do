@@ -1,8 +1,5 @@
-/* ML_2018_LT_eusilc_cs
+/* ML_2018_LT_eusilc_cs */
 
-date created: 29/03/2021
-
-*/
 
 * LITHUANIA - 2018
 
@@ -13,9 +10,9 @@ date created: 29/03/2021
 */
 
 replace ml_eli = 1 			if country == "LT" & year == 2018 & gender == 1 ///
-							& econ_status == 1 & duremp >= 12
-replace ml_eli = 1 			if country == "LT" & year == 2018 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 12							
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
+
+						
 replace ml_eli = 0 			if ml_eli == . & country == "LT" & year == 2018 & gender == 1
 
 
@@ -36,7 +33,7 @@ replace ml_dur2 = 56/5 		if country == "LT" & year == 2018 & ml_eli == 1
 
 replace ml_ben1 = earning 		if country == "LT" & year == 2018 & ml_eli == 1
 
-replace ml_ben1 = 6*38			if country == "LT" & year == 2019 & ml_eli == 1 ///
+replace ml_ben1 = 6*38			if country == "LT" & year == 2018 & ml_eli == 1 ///
 								& ml_ben1 < 6*38
 										
 replace ml_ben2 = ml_ben1 		if country == "LT" & year == 2018 & ml_eli == 1

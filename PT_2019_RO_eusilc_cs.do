@@ -1,8 +1,5 @@
-/* PT_2019_RO_eusilc_cs
+/* PT_2019_RO_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * ROMANIA - 2019
 

@@ -1,8 +1,5 @@
-/* ML_2018_FR_eusilc_cs
+/* ML_2018_FR_eusilc_cs */
 
-date created: 
-
-*/
 
 * FRANCE - 2018
 

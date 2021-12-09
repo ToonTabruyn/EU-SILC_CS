@@ -1,32 +1,27 @@
-/* PT_2019_PT_eusilc_cs
+/* PT_2019_PT_eusilc_cs */
 
-date created: 12/08/2021
-
-
-*/
 
 * PORTUGAL - 2019
+
 
 * ELIGIBILITY
 /*	-> pooled rights (i.e. individual and family rights to leave)
 		- total leave: 120 or 150 (parents' choice)
 		- Paternity leave refers to the leave reserved for father
+		
 	-> compulsorily social insurance for employed and self-employed 
 		- 6 months of work before childbirth	*/
 		
 replace pt_eli = 1 		if country == "PT" & year == 2019 & gender == 2 ///
-						& econ_status == 1 & duremp >= 6
-replace pt_eli = 1 		if country == "PT" & year == 2019 & gender == 2 ///
-						& econ_status == 2 & dursemp >= 6			
-replace pt_eli = 1 		if country == "PT" & year == 2019 & gender == 2 ///
-						& inlist(econ_status,1,2) & duremp + dursemp >= 6
+						& inlist(econ_status,1,2) & (duremp + dursemp) >= 6
 						
 replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2019 & gender == 2
+
 
 * DURATION (weeks)
 /*	-> 25 working days (LP&R 2019), 15 days are obligatory 
 	-> LP&R 2019: single parents cannot use the other parent's entitlement => 
-		mother's share is not assigned to single men 	*/
+		father's share is not assigned to single mother 	*/
 
 replace pt_dur = 25/5 	if country == "PT" & year == 2019 & pt_eli == 1
 

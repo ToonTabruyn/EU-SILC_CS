@@ -1,8 +1,5 @@
-/* ML_2019_HU_eusilc_cs
+/* ML_2019_HU_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * HUNGARY - 2019
 
@@ -17,10 +14,8 @@ date created: 11/08/2021
 */
 	
 replace ml_eli = 1 			if country == "HU" & year == 2019 & gender == 1 ///
-							& econ_status == 1 & duremp >= 12
+							& inlist(econ_status,1,2) & (duremp + dursemp) >= 12
 							
-replace ml_eli = 1 			if country == "HU" & year == 2019 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 12
 
 replace ml_eli = 0 			if ml_eli == . & country == "HU" & year == 2019 & gender == 1
 

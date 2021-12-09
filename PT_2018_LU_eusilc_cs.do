@@ -1,8 +1,5 @@
-/* PT_2018_LU_eusilc_cs
+/* PT_2018_LU_eusilc_cs */
 
-date created: 30/03/2021
-
-*/
 
 * LUXEMBOURG - 2018
 
@@ -25,7 +22,7 @@ replace pt_dur = 10/5 	if country == "LU" & year == 2018 & pt_eli == 1
 replace pt_ben1 = earning 	if country == "LU" & year == 2018 & pt_eli == 1
 
 * ceiling
-replace pt_ben1 = [(9992.05/4.3)* pt_dur] + [(earning/4.3)*(4.3-pt_dur)] ///
+replace pt_ben1 = (9992.05 * (pt_dur/4.3)) + (earning * ((4.3-pt_dur)/4.3)) ///
 							if country == "LU" & year == 2018 & pt_eli == 1 ///
 							& earning >= 9992.95
 

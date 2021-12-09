@@ -1,8 +1,5 @@
-/* ML_2019_LT_eusilc_cs
+/* ML_2019_LT_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * LITHUANIA - 2019
 
@@ -14,10 +11,8 @@ date created: 12/08/2021
 */
 
 replace ml_eli = 1 			if country == "LT" & year == 2019 & gender == 1 ///
-							& econ_status == 1 & duremp >= 12
+							& inlist(econ_status,1,2) & (duremp + dursemp) >= 12
 							
-replace ml_eli = 1 			if country == "LT" & year == 2019 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 12	
 							
 replace ml_eli = 0 			if ml_eli == . & country == "LT" & year == 2019 & gender == 1
 

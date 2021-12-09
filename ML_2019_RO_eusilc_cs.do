@@ -1,8 +1,5 @@
-/* ML_2019_RO_eusilc_cs
+/* ML_2019_RO_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * ROMANIA - 2019
 
@@ -33,8 +30,9 @@ replace ml_dur1 = 0 			if country == "RO" & year == 2019 & ml_eli == 1
 replace ml_dur2 = (63+63)/5 	if country == "RO" & year == 2019 & ml_eli == 1 ///
 								& gender == 1
 
-replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2019 & ml_eli == 1 ///
-									& gender == 2
+* single men								
+replace ml_dur2 = ((63+63)-(6*5))/5	if country == "RO" & year == 2019 & ml_eli == 1 ///
+									& gender == 2 & parstat == 1
 
 
 

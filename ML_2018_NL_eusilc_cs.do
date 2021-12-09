@@ -1,8 +1,4 @@
-/* ML_2018_NL_eusilc_cs
-
-date created: 19/02/2021
-
-*/
+/* ML_2018_NL_eusilc_cs */
 
 * NETHERLANDS - 2018
 

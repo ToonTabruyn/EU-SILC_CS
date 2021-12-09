@@ -1,8 +1,5 @@
-/* ML_2018_HR_eusilc_cs
+/* ML_2018_HR_eusilc_cs */
 
-date created: 12/03/2021
-
-*/
 
 * CROATIA - 2018
 
@@ -42,14 +39,16 @@ replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2018 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> employed, self-employed & insured for  12 consecutive months or for 18 non-consecutive
-		months over the course of 2 years before birth = 100%
+/*	-> employed, self-employed & insured for  12 consecutive months (coded) or for 18 non-consecutive
+		months over the course of 2 years before birth (not coded) = 100%
 	-> those who do not fulfill this requirement = €315/month	*/
 	
 replace ml_ben1 = earning 		if country == "HR" & year == 2018 & gender == 1 ///
-								& ml_eli == 1 & duremp >= 12
+								& ml_eli == 1 & (duremp+dursemp) >= 12 & earning != 0
 replace ml_ben1 = 315 			if country == "HR" & year == 2018 & gender == 1 ///
 								& ml_eli == 1 & ml_ben1 == .
+								
+
 
 replace ml_ben2 = ml_ben1 		if country == "HR" & year == 2018 & gender == 1 & ml_eli == 1
 

@@ -6,9 +6,8 @@
 
 */
 
-cd "$DATA" 
 
-use OFPP_eusilc_cs.dta, clear 
+use eusilc_cs.dta, clear 
 
 *** MALE PARTNERS ***
 
@@ -45,12 +44,13 @@ gen p_earning_yg = py010g + py050g
 keep year country hh_id person_id partner_id p_gender p_earning p_age ///
  p_econ_status p_estatus* p_duremp p_dursemp p_earning_yg 
 
-save OFPP_eusilc_fempartner.dta, replace
+save eusilc_fempartner.dta, replace
+
 
 
 *** FEMALE PARTNERS ***
 
-use OFPP_eusilc_cs.dta, clear
+use eusilc_cs.dta, clear
 
 * delete single and missing values
 keep if parstat == 2
@@ -85,20 +85,21 @@ gen p_earning_yg = py010g + py050g
 keep year country hh_id person_id partner_id p_gender p_earning p_age ///
 p_econ_status p_estatus* p_duremp p_dursemp p_earning_yg 
 
-save OFPP_eusilc_malepartner.dta, replace
+save eusilc_malepartner.dta, replace
 
 
 
 
 *** Merge with the main dataset ***
 
-use OFPP_eusilc_cs.dta, clear
-mer 1:1 person_id using OFPP_eusilc_fempartner.dta 
+use eusilc_cs.dta, clear
 drop _merge
-mer 1:1 person_id using OFPP_eusilc_malepartner.dta, update keep(1 3 4)
+mer 1:1 person_id using eusilc_fempartner.dta 
+drop _merge
+mer 1:1 person_id using eusilc_malepartner.dta, update keep(1 3 4)
 drop _merge
 
-save OFPP_eusilc_cs.dta, replace 
+save eusilc_cs.dta, replace 
 
-erase "$DATA\OFPP_eusilc_fempartner.dta"
-erase "$DATA\OFPP_eusilc_malepartner.dta"
+erase "$DATA/eusilc_fempartner.dta"
+erase "$DATA/eusilc_malepartner.dta"

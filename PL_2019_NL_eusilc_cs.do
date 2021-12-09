@@ -1,8 +1,5 @@
-/* PL_2019_NL_eusilc_cs
+/* PL_2019_NL_eusilc_cs */
 
-date created: 23/08/2021
-
-*/
 
 * NETHERLANDS - 2019
 

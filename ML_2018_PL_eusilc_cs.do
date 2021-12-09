@@ -1,8 +1,4 @@
-/* ML_2018_PL_eusilc_cs
-
-date created: 30/03/2021
-
-*/
+/* ML_2018_PL_eusilc_cs */
 
 * POLAND - 2018
 

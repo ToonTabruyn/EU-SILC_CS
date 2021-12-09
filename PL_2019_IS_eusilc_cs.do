@@ -1,8 +1,4 @@
-/* PL_2019_IS_eusilc_cs
-
-date created: 23/08/2021
-
-*/
+/* PL_2019_IS_eusilc_cs */
 
 /*	Iceland doesn't recognise ML and PT but only PL with individual non-transferable and 
 	family rights. The family right for leave is coded in here. In case of couples, the 
@@ -23,9 +19,12 @@ replace pl_eli =  0			if pl_eli == . & country == "IS" & year == 2019
 /*	-> 3 months of leave - family entitlement
 	-> family entitlement => in couples all assigned to women 
 */
+
+	* women
 replace pl_dur = 3*4.3 		if country == "IS" & year == 2019 & pl_eli == 1 ///
 							& gender == 1 
-							
+
+	* single men
 replace pl_dur = 3*4.3		if country == "IS" & year == 2019 & pl_eli == 1 ///
 							& gender == 2 & parstat == 1
 

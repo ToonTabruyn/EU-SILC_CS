@@ -1,8 +1,5 @@
-/* PL_2019_PT_eusilc_cs
+/* PL_2019_PT_eusilc_cs */
 
-date created: 21/08/2021
-
-*/
 
 * PORTUGAL - 2019
 
@@ -16,12 +13,8 @@ date created: 21/08/2021
 		extended parental period that is a family right
 	-> family right => in couples leave assigned to woman */
 		
-replace pl_eli = 1 			if country == "PT" & year == 2019 & econ_status == 1 ///
-							& duremp >= 6
-replace pl_eli = 1 			if country == "PT" & year == 2019 & econ_status == 2 ///
-							& dursemp >= 6
 replace pl_eli = 1 			if country == "PT" & year == 2019 & inlist(econ_status,1,2) ///
-							& duremp + dursemp >= 6
+							& (duremp+dursemp) >= 6
 							
 replace pl_eli =  0			if pl_eli == . & country == "PT" & year == 2019
 
@@ -32,8 +25,8 @@ replace pl_eli =  0			if pl_eli == . & country == "PT" & year == 2019
 	-> 3 months of extended parental benefit 
 	-> single parents are not entitled to the share of the other parent		*/
 
-gen pl_init = (150 - (6*5) - 15)/5 		if country == "PT"
-gen pl_exte = 3*4.3						if country == "PT"
+gen pl_init = (150 - (6*5) - 15)/5 		if country == "PT" & year == 2019
+gen pl_exte = 3*4.3						if country == "PT" & year == 2019
 	
 * cohabiting women
 replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2019 ///
@@ -56,11 +49,22 @@ replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2019 ///
 	-> most generous option coded (100%)	
 	-> extended PL: 25% earning	 	*/
 	
+	* women
 replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))	///
-												if country == "PT" & year == 2019 & pl_eli == 1
+												if country == "PT" & year == 2019 & pl_eli == 1 ///
+												& gender == 1
 												
 replace pl_ben1 =  435.76		if country == "PT" & year == 2019 & pl_eli == 1	///
-								& pl_ben1 < 435.76
+								& pl_ben1 < 435.76 & gender == 1
+								
+	* single men
+replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))	///
+												if country == "PT" & year == 2019 & pl_eli == 1 ///
+												& gender == 2 & parstat == 1
+												
+replace pl_ben1 =  435.76		if country == "PT" & year == 2019 & pl_eli == 1	///
+								& pl_ben1 < 435.76 & gender == 2 & parstat == 1
+								
 												
 replace pl_ben2 = earning 		if country == "PT" & year == 2019 & pl_eli == 1
 

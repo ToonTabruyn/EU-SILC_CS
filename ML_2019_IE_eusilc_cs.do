@@ -1,8 +1,4 @@
-/* ML_2019_IE_eusilc_cs
-
-date created: 11/08/2019
-
-*/
+/* ML_2019_IE_eusilc_cs */
 
 * IRELAND - 2019
 
@@ -37,7 +33,7 @@ replace ml_dur2 = 26+16-2 		if country == "IE" & year == 2019 & ml_eli == 1
 /*	-> 26 weeks: €245/week
 	-> 16 weeks: unpaid 	*/
 	
-replace ml_ben1 = ((245*4.3)/(26/(26+12)))  	if country == "IE" & year == 2019 & ml_eli == 1
+replace ml_ben1 = ((245*4.3) * (26/(26+16)))  	if country == "IE" & year == 2019 & ml_eli == 1
 
 
 replace ml_ben2 = 245*4.3 		if country == "IE" & year == 2019 & ml_eli == 1

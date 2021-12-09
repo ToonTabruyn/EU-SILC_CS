@@ -1,8 +1,5 @@
-/* ML_2018_EE_eusilc_cs
+/* ML_2018_EE_eusilc_cs */
 
-date created: 24/03/2021
-
-*/
 
 * ESTONIA - 2018
 

@@ -1,15 +1,12 @@
-/* ML_2019_GB_eusilc_cs
+/* ML_2019_GB_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * UK - 2019
 
 * ELIGIBILITY
 /*	-> employed, self-employed: 
 		- for 26 weeks before childbirth 
-		- earning at least E 34/week
+		- earning at least €34/week
 	-> further restrictions for entitlement to cash benefits
 	
 	-> part of ML can be shared with the father (shared parental leave) if:
@@ -17,13 +14,14 @@ date created: 11/08/2021
 			- employed by the same employer for at least 26 weeks 
 		- father/partner:
 			- employed or self-employed for at least 26 weeks
-			- earned at least E 441 in total during 13 weeks within 66 weeks before the birth
+			- earned at least €441 in total during 13 weeks within 66 weeks before the birth
 	-> single fathers are not entitled to shared parental leave because it is 
 	   dependent on the mother's economic status
 */
 
 replace ml_eli = 1 			if country == "GB" & year == 2019 & gender == 1 ///
-							& inlist(econ_status,1,2) & (earning/4.3) >= 34
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 26/4.3 /// 
+							& (earning/4.3) >= 34
 
 * father's eligibility for shared parental leave 
 replace ml_eli = 1 			if country == "GB" & year == 2019 & gender == 2 ///
@@ -76,41 +74,42 @@ replace ml_dur2 = 39		if country == "GB" & year == 2019 & ml_eli == 1 ///
 				- ceiling: €166/week 
 */
 
-gen ceiling = 0.9*earning
+* statutory maternity pay
+gen ml_bena = 0.9 * earning			if country == "GB" & year == 2019 & ml_eli == 1
+gen ml_benb = (166 * 4.3)			if country == "GB" & year == 2019 & ml_eli == 1 
 
-replace ml_ben1 = (((0.9 * earning) * (6/52)) + ((0.9 * earning) * (33/52))) / 12		/// 
-							if country == "GB" & year == 2019 & ml_eli == 1 ///
-							& econ_status == 1 & duremp >= 26/4.3 ///
-							& (earning/4.3) >= 132 
-							
-replace ml_ben1 = (((0.9*earning) * (6/52)) + ((166 * 4.3) * 33/52)) / 12		/// 
-							if country == "GB" & year == 2019 & ml_eli == 1 ///
-							& econ_status == 1 & duremp >= 26/4.3 ///
-							& (earning/4.3) >= 132 & ml_ben1 >= (166*4.3)
-							
-replace ml_ben1 = 0.9 * earning 		if country == "GB" & year == 2019 & ml_eli == 1 ///
-										& inlist(econ_status,1,2) & ml_ben1 == . ///
-										& (earning/4.3) >= 34
+									
+	* under ceiling
+replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2019 & ml_eli == 1 ///
+											& (earning*0.9)/4.3 < 166 & ml_dur2 == 52
 
-replace ml_ben1 = 166*4.3 				if country == "GB" & year == 2019 & ml_eli == 1 ///
-										& inlist(econ_status,1,2)  ///
-										& (earning/4.3) >= 34 & ml_ben1 >= (166*4.3)
+	* above ceiling
+replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
+											if country == "GB" & year == 2019 & ml_eli == 1 ///
+											& (earning*0.9)/4.3 >= 166 & ml_dur2 == 52
 
 
+
+* maternity allowance	
+	* under ceiling
+replace ml_ben1 = ml_bena		if country == "GB" & year == 2019 & ml_eli == 1 ///
+								& (earning*0.9)/4.3 < 166 & ml_dur2 == 39	
+	
+	
+	* above ceiling
+replace ml_ben1 = ml_benb		if country == "GB" & year == 2019 & ml_eli == 1 ///
+								& (earning*0.9)/4.3 >= 166 & ml_dur2 == 39
+	
+	
+
+* statutory maternity pay - 1st month										
+replace ml_ben2 = ml_bena 				if country == "GB" & year == 2019 & ml_eli == 1 ///
+										&  ml_dur2 == 52
+										
+replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2019 & ml_eli == 1 ///
+										& ml_dur2 == 39							
 										
 										
-replace ml_ben2 = 0.9 * earning 		if country == "GB" & year == 2019 & ml_eli == 1 ///
-										& econ_status == 1 & duremp >= 26/4.3 ///
-										& (earning/4.3) >= 132
-
-replace ml_ben2 = 0.9 * earning 		if country == "GB" & year == 2019 & ml_eli == 1 ///
-										& inlist(econ_status,1,2) & ml_ben1 == . ///
-										& (earning/4.3) >= 34
-
-replace ml_ben2 = 166*4.3 				if country == "GB" & year == 2019 & ml_eli == 1 ///
-										& inlist(econ_status,1,2)  ///
-										& (earning/4.3) >= 34 & ml_ben1 >= (166*4.3)
-
 										
 										
 foreach x in 1 2 {
@@ -119,4 +118,4 @@ foreach x in 1 2 {
 	
 }
 
-drop ceiling
+drop ml_bena ml_benb

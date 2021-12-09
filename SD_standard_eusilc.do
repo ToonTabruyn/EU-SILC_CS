@@ -37,8 +37,6 @@ foreach x in a b c d e f g h i j k l {
 * duration of employment (months) 
 egen duremp = anycount(estatus*), values(1) 
 
-
-
 * duration of education
 egen duredu = anycount(pl211*), values(6)  
 
@@ -48,13 +46,17 @@ egen unemp_dur = anycount(estatus*), values(3)
 * duration of self-employment 
 egen dursemp = anycount(estatus*), values(2)	
 	
+replace duremp = . if econ_status == .
+replace duredu = . if pl211a == .
+replace unemp_dur = . if econ_status == .
+replace dursemp = . if econ_status == .
 
 	
 * monthly gross earning (labour income) 
 
-gen earning_yg = py010g + py050g 	// collapses earning from employment and self-employment
+gen earning_yg = py010g + py050g  if econ_status != . 	// collapses earning from employment and self-employment
 
-gen dureact = duremp + dursemp 	// adds of employment and self-employment
+gen dureact = duremp + dursemp 	if econ_status != . // adds of employment and self-employment
 gen earning = earning_yg/dureact 
 
 

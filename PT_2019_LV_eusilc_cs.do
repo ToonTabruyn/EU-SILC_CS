@@ -1,8 +1,5 @@
-/* PT_2019_LV_eusilc_cs
+/* PT_2019_LV_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * LATVIA - 2019
 
@@ -10,7 +7,7 @@ date created: 12/08/2021
 /*	-> employed
 	-> self-employed 	*/
 	
-replace pt_eli = 1 		if country == "LV" & year == 2019 & gender == 2 
+replace pt_eli = 1 		if country == "LV" & year == 2019 & gender == 2 & inlist(econ_status,1,2)
 
 replace pt_eli = 0 		if pt_eli == . & country == "LV" & year == 2019 & gender == 2
 
@@ -24,8 +21,8 @@ replace pt_dur = 10/7 	if country == "LV" & year == 2019 & pt_eli == 1
 * BENEFIT (monthly)
 /*	-> 80% earnings, no ceiling */
 
-replace pt_ben1 = (((0.8 * earning)/4.3)* pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
-										if country == "LV" & year == 2019 & pt_eli == 1
+replace pt_ben1 = ((earning * 0.8) * (10/21.7)) + (earning * ((21.7-10)/21.7)) ///
+							if country == "LV" & year == 2019 & pt_eli == 1
 						
 replace pt_ben2 = pt_ben1 	if country == "LV" & year == 2019 & pt_eli == 1
 

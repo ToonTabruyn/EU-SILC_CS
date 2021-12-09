@@ -1,8 +1,5 @@
-/* PT_2018_CZ_eusilc_cs
+/* PT_2018_CZ_eusilc_cs */
 
-date created: 01/03/2021
-
-*/
 
 * Czechia - 2018
 
@@ -23,17 +20,19 @@ replace pt_dur = 7/5  	if country == "CZ" & year == 2018 & gender == 2 & pt_eli 
 		-> Benefits are not calculated from earnings but from a "daily assessment base" (MISSOC 01/07/2018) 
 		-> up to €38/day = 100% daily earning
 		-> €38 - €58/day = 60% daily earning
-		-> E 58/day = 30% daily earning  
-		-> earning overe €115/day are not taken into account
+		-> €58/day = 30% daily earning  
+		-> earning over €115/day are not taken into account
 	
-	-> 70% of daily assessment base, ceiling: €47/day 
+	-> 70% of daily assessment base
+	-> ceiling: €47/day 
 */
 
 ** DAILY ASSESSMENT BASE
+
 * daily earning < €38
 gen dab = earning/21.7 				if country == "CZ" & year == 2018 & pt_eli == 1 ///
 									& earning/21.7 < 38
-
+									
 * daily earning between €38 and €58
 gen dab1 = 38 						if country == "CZ" & year == 2018 & pt_eli == 1 ///
 									& inrange(earning/21.7,38,57)
@@ -66,14 +65,17 @@ gen dab3 = (115 - 58)*0.3 			if country == "CZ" & year == 2018 & pt_eli == 1 ///
 
 replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2018 & pt_eli == 1 ///
 									& earning/21.7 > 115 & dab == . 		
-			
-* Benefits
-replace pt_ben1 = (((dab*0.7)*5)*pt_dur) + ((earning/4.3)*(4.3-pt_dur))	///
-							if country == "CZ" & year == 2018 & pt_eli == 1
 
-replace pt_ben1 = ((47*5)*pt_dur) + ((earning/4.3)*(4.3-pt_dur))	///
+									
+* Benefits
+
+replace pt_ben1 = ((dab * 0.7) * pt_dur) + (earning * ((21.7 - 7)/21.7))	///
+							if country == "CZ" & year == 2018 & pt_eli == 1
+							
+							
+replace pt_ben1 = (47 * pt_dur) + (earning * ((21.7 - 7)/21.7))	///
 							if country == "CZ" & year == 2018 & pt_eli == 1 ///
-							& dab*0.7 > 47 & pt_eli == 1
+							& dab*0.7 >= 47 & pt_eli == 1
 
 
 replace pt_ben2 = pt_ben1 	if country == "CZ" & year == 2018 & pt_eli == 1

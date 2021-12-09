@@ -1,28 +1,21 @@
-/* ML_2018_SK_eusilc_cs
-
-date created: 31/03/2021
-
-*/
+/* ML_2018_SK_eusilc_cs */
 
 * SLOVAKIA - 2018
 
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed
-	-> 270 calendar days (coded; calendar day exception: 7 days => 270/7=8.97 => 9) 
-		of work during the past 2 years	(not coded) 	
+	-> 270 calendar days (coded) of work during the past 2 years	(not coded) 	
 	-> single fathers can also claim "ML" 	*/
 	
 replace ml_eli = 1 			if country == "SK" & year == 2018 & gender == 1 /// 
-							& econ_status == 1 & duremp >= (270/7)/4.3
-replace ml_eli = 1 			if country == "SK" & year == 2018 & gender == 1 /// 
-							& econ_status == 2 & dursemp >= (270/7)/4.3
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= (270/7)/4.3
+
 
 * single men
 replace ml_eli = 1 			if country == "SK" & year == 2018 & gender == 2 /// 
-							& econ_status == 1 & duremp >= (270/7)/4.3 & parstat == 1
-replace ml_eli = 1 			if country == "SK" & year == 2018 & gender == 2 /// 
-							& econ_status == 2 & dursemp >= (270/7)/4.3 & parstat == 1
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= (270/7)/4.3 & parstat == 1
+
 							
 replace ml_eli = 0 			if ml_eli == . & country == "SK" & year == 2018 & gender == 1
 

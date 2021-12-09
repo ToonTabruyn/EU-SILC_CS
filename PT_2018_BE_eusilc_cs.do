@@ -1,8 +1,5 @@
-/* PT_2018_BE_eusilc_cs
+/* PT_2018_BE_eusilc_cs */
 
-date created: 26/02/2021
-
-*/
 
 * Belgium - 2018
 
@@ -21,18 +18,21 @@ replace pt_dur = 10/5 	if country == "BE" & year == 2018 & gender == 2 ///
 
 
 * BENEFIT (monthly)
-/*	-> 82% of earnings, ceiling = €114.59/day 		*/
+/*	-> 82% of earnings
+	-> ceiling = €114.59/day 		*/
+	
 
-replace pt_ben1 = (((0.82 * earning)/4.3) * pt_dur)	+ (earning * (4.3-pt_dur)) ///
+
+replace pt_ben1 = ((earning*0.82) * (10/21.7))	+ (earning * ((21.7-10)/21.7)) ///
 									if country == "BE" & year == 2018 ///
 									& gender == 2  & pt_eli == 1					
 
 * above ceiling
-replace pt_ben1 = (114.59*10) + (earning * (4.3-pt_dur)) ///
+replace pt_ben1 = (114.59*10) + (earning * ((21.7-10)/21.7)) ///
 									if country == "BE" & year == 2018 ///
 									& gender == 2  & pt_eli == 1 ///
-									& (((0.82 * earning)/4.3) * pt_dur) > (114.59 * 10)
-	
+									& ((0.82*earning)/21.7) > 114.59
+									
 
 replace pt_ben2 = pt_ben1 			if country == "BE" & year == 2018 & gender == 2
 

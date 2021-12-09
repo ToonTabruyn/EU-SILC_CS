@@ -1,8 +1,5 @@
-/* PL_2019_IE_eusilc_cs
+/* PL_2019_IE_eusilc_cs */
 
-date created: 25/08/2021
-
-*/
 
 * IRELAND - 2019
 
@@ -17,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "IE" & year == 2019
 
 * DURATION (weeks)
 /*	-> 18 weeks
-	-> before child's 8th birthday
+	-> before child's 8th birthday (not coded)
 */
 replace pl_dur = 18 		if country == "IE" & year == 2019 & pl_eli == 1
 

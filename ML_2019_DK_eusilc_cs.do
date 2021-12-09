@@ -1,8 +1,5 @@
-/* ML_2019_DK_eusilc_cs
+/* ML_2019_DK_eusilc_cs */
 
-date created: 10/08/2021
-
-*/
 
 * DENMARK - 2019
 
@@ -44,8 +41,8 @@ replace ml_ben1 = earning 		if country == "DK" & year == 2019 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & earning < 583*4.3
 
 replace ml_ben1 = 583*4.3		if country == "DK" & year == 2019 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & ml_ben1 >= 583*4.3 ///
-								& ml_ben1 == .
+								& inlist(econ_status,1,2) & ml_ben1 >= 583*4.3 
+								
 
 replace ml_ben2 = ml_ben1 if country == "DK" & year == 2019 & ml_eli == 1
 

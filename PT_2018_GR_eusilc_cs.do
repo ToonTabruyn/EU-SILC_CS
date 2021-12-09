@@ -1,8 +1,5 @@
-/* PT_2018_GR_eusilc_cs
+/* PT_2018_GR_eusilc_cs */
 
-date created: 26/03/2021
-
-*/
 
 * GREECE - 2018
 
@@ -19,7 +16,7 @@ replace pt_dur = 2/5 	if country == "GR" & year == 2018 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> paid by the employer => coded as "earning" to indicate no change in earnings 	*/
+	-> paid by the employer  	*/
 	
 replace pt_ben1 = earning 	if country == "GR" & year == 2018 & pt_eli == 1
 replace pt_ben2 = pt_ben1 	if country == "GR" & year == 2018 & pt_eli == 1

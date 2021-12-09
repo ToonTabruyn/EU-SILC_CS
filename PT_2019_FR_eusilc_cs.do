@@ -1,8 +1,5 @@
-/* PT_2019_FR_eusilc_cs
+/* PT_2019_FR_eusilc_cs */
 
-date created: 10/08/2021
-
-*/
 
 * FRANCE - 2019
 
@@ -36,15 +33,15 @@ replace pt_ben1 = earning 		if country == "FR" & year == 2019 & pt_eli == 1 ///
 								& pt_ben1 == .
 	
 * ceiling
-replace pt_ben1 = ((87.71*5)* pt_dur) + (earning*(4.3-pt_dur)) ///
+replace pt_ben1 = ((87.71 * 11) * (11/21.7)) + (earning * ((21.7-11)/21.7)) ///
 											if country == "FR" & year == 2019  ///
-											& pt_eli == 1 & pt_ben1/4.3 >= (87.71*5)
+											& pt_eli == 1 & pt_ben1/21.7 >= 87.71
 	
 
 * minimum
-replace pt_ben1 = ((9.53*5)* pt_dur) + (earning*(4.3-pt_dur)) ///
+replace pt_ben1 = ((9.53 * 11) * (11/21.7)) + (earning * ((21.7-11)/21.7)) ///
 											if country == "FR" & year == 2019  ///
-											& pt_eli == 1 & pt_ben1/4.3 < (9.53*5)
+											& pt_eli == 1 & pt_ben1/21.7 < 9.53
 
 											
 

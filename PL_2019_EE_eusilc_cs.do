@@ -1,8 +1,5 @@
-/* PL_2019_EE_eusilc_cs
+/* PL_2019_EE_eusilc_cs */
 
-date created: 24/08/2021
-
-*/
 
 * ESTONIA - 2019
 
@@ -25,15 +22,14 @@ replace pl_eli = 0 			if pl_eli == . & country == "EE" & year == 2019
 replace pl_dur = (3*52) - ml_dur2 		if country == "EE" & year == 2019 ///
 										& pl_eli == 1 & ml_eli == 1 & gender == 1
 										
-replace pl_dur = 18/4.3 		if country == "EE" & year == 2019 & pl_dur == . ///
-								& pl_eli == 1 & gender == 1 & inlist(econ_status,3,4)
+replace pl_dur = 18 * 4.3 				if country == "EE" & year == 2019 & pl_dur == . ///
+										& pl_eli == 1 & gender == 1 & inlist(econ_status,3,4)
 
 								
 * single men										
 replace pl_dur = 3*52 			if country == "EE" & year == 2019 ///
-										& pl_eli == 1 & ml_eli == 1 ///
-										& gender == 2 & parstat == 1
-replace pl_dur = 18/4.3 		if country == "EE" & year == 2019 & pl_dur == . ///
+								& pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2019 ///
 								& pl_eli == 1 & gender == 2 & parstat == 1 ///
 								& inlist(econ_status,3,4)
 								
@@ -46,31 +42,26 @@ replace pl_dur = 18/4.3 		if country == "EE" & year == 2019 & pl_dur == . ///
 	-> unemployed and inactive parent: €500
 */
 
-replace pl_ben1 = earning 	if country == "EE" & year == 2019 & pl_eli == 1 
+replace pl_ben1 = earning 	if country == "EE" & year == 2019 & pl_eli == 1 ///
+							& gender == 1 
 
-* family entitlement -> cohabiting men = 0
-replace pl_ben1 = 0 		if country == "EE" & year == 2019 & gender == 2 ///
-							& parstat == 2
-							
-	
+replace pl_ben1 = earning 	if country == "EE" & year == 2019 & pl_eli == 1 ///
+							& gender == 2 & parstat == 1
+								
 replace pl_ben1 = 540		if country == "EE" & year == 2019 & pl_eli == 1 ///
-							& pl_ben1 < 540 & pl_ben1 != 0
-
+							& pl_ben1 < 540 & pl_ben1 != . & pl_ben1 != .
 							
 replace pl_ben1 = 3319.8	if country == "EE" & year == 2019 & pl_eli == 1 ///
-							& pl_ben1 >= 3319.8
+							& pl_ben1 >= 3319.8 & pl_ben1 != . 
 							
 							
-							
-replace pl_ben2 = pl_ben1 		if country == "EE" & year == 2019 & pl_eli == 1 
-
-							
-replace pl_ben1 = 500 		if country == "EE" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 500 		if country == "EE" & year == 2019 & pl_eli == 1 ///
 							& inlist(econ_status,3,4) & gender == 1
 
-replace pl_ben1 = 500 		if country == "EE" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 500 		if country == "EE" & year == 2019 & pl_eli == 1 ///
 							& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
 
+replace pl_ben2 = pl_ben1 		if country == "EE" & year == 2019 & pl_eli == 1 
 
 							
 foreach x in 1 2 {

@@ -1,8 +1,4 @@
-/* PT_2018_GB_eusilc_cs
-
-date created: 02/04/2021
-
-*/
+/* PT_2018_GB_eusilc_cs */
 
 * UK - 2018
 
@@ -10,7 +6,7 @@ date created: 02/04/2021
 /*	-> employed if:
 		- employed by the same employer (not coded)
 		- for 26 weeks 
-		- average weekly earning at least E 131
+		- average weekly earning at least €131
 */	
 
 replace pt_eli = 1 		if country == "GB" & year == 2018 & gender == 2 ///
@@ -29,14 +25,13 @@ replace pt_dur = 2 	if country == "GB" & year == 2018 & pt_eli == 1
 /*	-> 90% earning 
 	-> ceiling: €164/week			*/
 
-gen ceiling = 0.9*earning
 
 
-replace pt_ben1 = (((0.9*earning)/4.3) * pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = ((0.9 * earning) * (2/4.3)) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2018 & pt_eli == 1
 								
 * above ceiling
-replace pt_ben1 = (164 * pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = (164*2) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2018 & pt_eli == 1 ///
 								& ((0.9*earning)/4.3) > 164
 
@@ -52,10 +47,6 @@ foreach x in 1 2 {
 
 replace pt_dur = 0 		if country == "GB" & year == 2018 & pt_eli == 0 
 
-foreach x in 1 2 {
-	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "GB" & year == 2018
-}
 
-replace pt_dur = 0 if pt_eli == 0 & country == "GB" & year == 2018
 
-drop ceiling
+

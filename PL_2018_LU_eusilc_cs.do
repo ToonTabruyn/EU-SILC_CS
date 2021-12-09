@@ -1,29 +1,32 @@
-/* PL_2018_LU_eusilc_cs
-
-date created: 30/03/2021
-
-*/
+/* PL_2018_LU_eusilc_cs */
 
 * LUXEMBOURG - 2018
 
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed 	
-	-> worked for at least 12 months (coded) before childbirth with the same employer (not coded) 	*/
+	-> worked for at least 12 months (coded) before childbirth with the same employer (not coded) 	
+	-> not transferable
+	-> can be taken simultaneously
 	
-replace pl_eli = 1 			if country == "LU" & year == 2018 & econ_status == 1 ///
-							& duremp >= 12
-replace pl_eli = 1 			if country == "LU" & year == 2018 & econ_status == 2 ///
-							& dursemp >= 12							
+	-> Source: https://cae.public.lu/en/conge-parental.html , accessed 6.12.2021 	*/
+	
 replace pl_eli = 1 			if country == "LU" & year == 2018 & inlist(econ_status,1,2) ///
-							& (duremp + dursemp) >= 12							
+							& (duremp+dursemp) >= 12
+							
 
 replace pl_eli =  0			if pl_eli == . & country == "LU" & year == 2018
 
 
 * DURATION (weeks)
 /*	-> parents can choose between 4 and 6 months of FT leave
-		- the duration does not affect the monthly benefits => 6 months coded */
+		- the duration does not affect the monthly benefits => 6 months coded 
+		- the duration does not affect the monthly benefits => 6 months coded 
+	
+	-> first parental leave must be taken immediately after maternity leave (not coded)
+	-> second parental leave can be taken anytime until child is 6 years old (not coded)
+	
+*/
 replace pl_dur = 6*4.3 		if country == "LU" & year == 2018 & pl_eli == 1
 
 

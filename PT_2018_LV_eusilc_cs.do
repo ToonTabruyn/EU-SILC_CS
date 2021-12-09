@@ -1,8 +1,4 @@
-/* PT_2018_LV_eusilc_cs
-
-date created: 29/03/2021
-
-*/
+/* PT_2018_LV_eusilc_cs */
 
 * LATVIA - 2018
 
@@ -10,7 +6,7 @@ date created: 29/03/2021
 /*	-> employed
 	-> self-employed 	*/
 	
-replace pt_eli = 1 		if country == "LV" & year == 2018 & gender == 2 
+replace pt_eli = 1 		if country == "LV" & year == 2018 & gender == 2 & inlist(econ_status,1,2)
 replace pt_eli = 0 		if pt_eli == . & country == "LV" & year == 2018 & gender == 2
 
 * DURATION (weeks)
@@ -22,7 +18,7 @@ replace pt_dur = 10/7 	if country == "LV" & year == 2018 & pt_eli == 1
 * BENEFIT (monthly)
 /*	-> 80% earnings, no ceiling */
 
-replace pt_ben1 = (((0.8 * earning)/4.3)* pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = ((earning * 0.8) * (10/21.7)) + (earning * ((21.7-10)/21.7)) ///
 										if country == "LV" & year == 2018 & pt_eli == 1
 						
 replace pt_ben2 = pt_ben1 	if country == "LV" & year == 2018 & pt_eli == 1

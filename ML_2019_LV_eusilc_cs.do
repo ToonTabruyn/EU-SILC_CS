@@ -1,8 +1,5 @@
-/* ML_2019_LV_eusilc_cs
+/* ML_2019_LV_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * LATVIA - 2019
 

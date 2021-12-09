@@ -1,8 +1,4 @@
-/* ML_2018_IS_eusilc_cs
-
-date created: 02/04/2021
-
-*/
+/* ML_2018_IS_eusilc_cs */
 
 /*	Iceland doesn't recognise ML and PT but only PL with individual non-transferable and 
 	family rights. The individual non-transferable right for mother is coded in here. 
@@ -45,12 +41,13 @@ replace ml_dur2 = 3*4.3 		if country == "IS" & year == 2018 & ml_eli == 1
 			- 80% earning
 			- ceiling: €4,138/month 
 			- minimum: €986/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
-					   €1,367/month if worked between 50% and 100% FT (i.e. more than 20 hours/week)
+					   €1,367/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
 	-> those not fulfilling the conditions: 
-		- students: E 1,367/month
-		- working less than 25% FT: E 596/month
+		- students: €1,367/month
+		- working less than 25% FT: €596/month
 */
+
 
 * employed, self-employed working 10-20 hours/week			
 replace ml_ben1 = 0.8*earning	 		if country == "IS" & year == 2018 & ml_eli == 1 ///

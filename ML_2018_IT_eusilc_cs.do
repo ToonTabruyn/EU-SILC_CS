@@ -1,8 +1,5 @@
-/* ML_2018_IT_eusilc_cs
+/* ML_2018_IT_eusilc_cs */
 
-date created: 29/03/2021
-
-*/
 
 * ITALY - 2018
 
@@ -20,7 +17,8 @@ date created: 29/03/2021
 		
 replace ml_eli = 1 			if country == "IT" & year == 2018 & gender == 1 ///
 							& inrange(econ_status,1,2)
-							
+
+	* single men						
 replace ml_eli = 1 			if country == "IT" & year == 2018 & gender == 2 ///
 							& inrange(econ_status,1,2) & parstat == 1
 							

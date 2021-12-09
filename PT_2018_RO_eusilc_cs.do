@@ -1,9 +1,4 @@
-/* PT_2018_RO_eusilc_cs
-
-date created: 31/03/2021
-latest update:
-
-*/
+/* PT_2018_RO_eusilc_cs */
 
 * ROMANIA - 2018
 

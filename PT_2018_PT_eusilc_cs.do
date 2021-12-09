@@ -1,9 +1,5 @@
-/* PT_2018_PT_eusilc_cs
+/* PT_2018_PT_eusilc_cs */
 
-date created: 30/03/2021
-latest update:
-
-*/
 
 * PORTUGAL - 2018
 
@@ -15,18 +11,16 @@ latest update:
 		- 6 months of work before childbirth	*/
 		
 replace pt_eli = 1 		if country == "PT" & year == 2018 & gender == 2 ///
-						& econ_status == 1 & duremp >= 6
-replace pt_eli = 1 		if country == "PT" & year == 2018 & gender == 2 ///
-						& econ_status == 2 & dursemp >= 6			
-replace pt_eli = 1 		if country == "PT" & year == 2018 & gender == 2 ///
-						& inlist(econ_status,1,2) & duremp + dursemp >= 6
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 6
+
+					
 						
 replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2018 & gender == 2
 
 * DURATION (weeks)
 /*	-> 25 working days (LP&R 2018), 15 days are obligatory 
 	-> LP&R 2018: single parents cannot use the other parent's entitlement => 
-		mother's share is not assigned to single men 	*/
+		father's share is not assigned to single woman 	*/
 
 replace pt_dur = 25/5 	if country == "PT" & year == 2018 & pt_eli == 1
 

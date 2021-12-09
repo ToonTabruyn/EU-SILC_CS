@@ -2,24 +2,27 @@ clear
 set more off
 
 * original data
-global sourcepath "/Users/temery/Documents/EuroSym/to merge 2018/Cross/Cross"
+global sourcepath "[enter RAW DATA directory]"
 * temporary data folder
-global datapath "/Users/temery/Documents/EuroSym/EUSILC"
-* merged EU-SILC data folder
-global outpath "/Users/temery/Documents/EuroSym"
-cd "${datapath}" // Selecteer een working directory waar de files opgeslagen worden
+global datapath "[enter temporary directory]"
 
-**IS UK to be added with 2019 data
+* merged EU-SILC data folder
+global outpath "[enter directory for the final merged data]"
+
+cd "$datapath" // Select a working directory where the files will be stored
+
+
+** IS UK to be added with 2019 data
 local countries "AT BE BG CH CY CZ DE DK EE EL ES FI FR HR HU IE IS IT LT LU LV MT NL NO PL PT RO SE SI SK UK"
 local countries_x "BE BG CH CY CZ DE DK EE EL ES FI FR HR HU IE IS IT LT LU LV MT NL NO PL PT RO SE SI SK UK"
-local time "18 19"
+local time "18 19" 
 
 
 foreach x in D H P R {
 	foreach t of local time {
-		foreach c of local countries {
-			insheet using "$sourcepath/`c'/20`t'/UDB_c`c'`t'`x'.csv", names clear
-			save "$datapath/UDB_`c'`x'`t'.dta", replace
+		foreach k of local countries {
+			insheet using "$sourcepath\\`k'\20`t'\UDB_c`k'`t'`x'.csv", names clear 
+			save "$datapath\UDB_`k'`x'`t'.dta", replace
 		}	
 	}
 }
@@ -27,20 +30,19 @@ foreach x in D H P R {
 
 foreach x in D H P R {
 	foreach t of local time {
-		use "$datapath/UDB_AT`x'`t'.dta", clear
+		use "$datapath\UDB_AT`x'`t'.dta", clear
 		foreach c of local countries_x {
-			append using "$datapath/UDB_`c'`x'`t'.dta", force
+			append using "$datapath\UDB_`c'`x'`t'.dta", force
 		}
-		save "$datapath/UDB_C`t'`x'.dta", replace
+		save "$datapath\UDB_C`t'`x'.dta", replace
 	}
 }
 
 
 local time "18 19"
 
-quietly foreach t of local time {
-noisily: display "Preparing EU-SILC 20`t'" 
 
+foreach t of local time {
 	
 	local prefix "UDB_C`t'"
 	local suffix ""
@@ -49,7 +51,7 @@ noisily: display "Preparing EU-SILC 20`t'"
 
 	*link R and P files
 			
-	use "${datapath}/`prefix'R`suffix'", clear 
+	use "${datapath}\\`prefix'R`suffix'", clear 
 				
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -65,7 +67,7 @@ noisily: display "Preparing EU-SILC 20`t'"
 	compress
 	save "r-file`year'.dta", replace
 
-	use "${datapath}/`prefix'P`suffix'", clear
+	use "${datapath}\\`prefix'P`suffix'", clear
 
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -88,7 +90,7 @@ noisily: display "Preparing EU-SILC 20`t'"
 
 	*link H file and D file
 
-	use "${datapath}/`prefix'H`suffix'" , clear 
+	use "${datapath}\\`prefix'H`suffix'" , clear 
 
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -103,7 +105,7 @@ noisily: display "Preparing EU-SILC 20`t'"
 	compress
 	save "h-file`year'.dta", replace
 
-	use "${datapath}/`prefix'D`suffix'", clear
+	use "${datapath}\\`prefix'D`suffix'", clear
 	compress
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -129,7 +131,7 @@ noisily: display "Preparing EU-SILC 20`t'"
 
 	cap drop __*
 	compress
-	save "${outpath}/SILC`year'.dta", replace
+	save "${outpath}\SILC`year'.dta", replace
 
 	erase "r-file`year'.dta"
 	erase "p-file`year'.dta"

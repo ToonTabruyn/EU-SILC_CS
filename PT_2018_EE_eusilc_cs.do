@@ -1,8 +1,4 @@
-/* PT_2018_EE_eusilc_cs
-
-date created: 24/03/2021
-
-*/
+/* PT_2018_EE_eusilc_cs */
 
 * ESTONIA - 2018
 
@@ -31,9 +27,9 @@ replace pt_dur = 10/5 	if country == "EE" & year == 2018 & pt_eli == 1
 replace pt_ben1 = earning 	if country == "EE" & year == 2018 & pt_eli == 1
 							
 							
-replace pt_ben1 = (((3*1310)/4.3)* pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = ((3*1310) * (pt_dur/4.3)) + (earning * ((4.3-pt_dur)/4.3)) ///
 							if country == "EE" & year == 2018 & pt_eli == 1 ///
-							& pt_ben1 >= 1310*3
+							& pt_ben1 >= 3*1310
 
 replace pt_ben2 = pt_ben1 	if country == "EE" & year == 2018 & pt_eli == 1
 

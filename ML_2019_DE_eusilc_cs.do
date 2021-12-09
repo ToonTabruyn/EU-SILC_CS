@@ -1,8 +1,5 @@
-/* ML_2019_DE_eusilc_cs
+/* ML_2019_DE_eusilc_cs */
 
-date created: 10/08/2021
-
-*/
 
 * GERMANY - 2019
 

@@ -1,8 +1,5 @@
-/* MS_PL_2019_FI_eusilc_cs
+/* MS_PL_2019_FI_eusilc_cs */
 
-date created: 24/08/2021
-
-*/
 
 * FINLAND - 2019
 
@@ -37,50 +34,107 @@ replace pl_dur = 158/21.7 		if country == "FI" & year == 2019 & pl_eli == 1 ///
 	-> 25% of earnings above €58,252 (IG d)
 */
 
-
+* WOMEN 
 * IGa
-gen pl_ben = 27.86 * 21.7 			if country == "FI" & year == 2018 ///
-									& pl_eli == 1 & (earning*12) < 11942
+replace pl_ben1 = 27.86 * 21.7 			if country == "FI" & year == 2019 & gender == 1 ///
+										& pl_eli == 1 
+									
 
 * IGb
-replace pl_ben = earning * 0.7 		if country == "FI" & year == 2018 ///
-									& pl_eli == 1 & pl_ben == . ///
-									& inrange((earning*12),11942,37861)
+replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2019 & gender == 1 ///
+										& pl_eli == 1 & inrange((earning*12),11942,37861)
 
+									
 * IGc 
-gen pl_bena = (37861/12) * 0.7 		if country == "FI" & year == 2018 ///
-									& pl_eli == 1 & inrange((earning*12),37861,58252)
+gen pl_bena = (37861/12) * 0.7 		if country == "FI" & year == 2019 & gender == 1 ///
+									& pl_eli == 1 & earning*12 >= 37861
 			
-gen pl_benb = (((earning*12) - 37861) / 12) * 0.4 		///
-									if country == "FI" & year == 2018	///
-									& pl_eli == 1 & inrange((earning*12),37861,58252)
+gen pl_benb = (earning - (37862/12)) * 0.4 		///
+									if country == "FI" & year == 2019	///
+									& gender == 1 & pl_eli == 1 ///
+									& inrange((earning*12),37861,58252)
 
-replace pl_ben = pl_bena + pl_benb 		if country == "FI" ///
-												& year == 2018 & pl_eli == 1 & pl_ben == . ///
-												& inrange((earning*12),37861,58252)			
-			
+replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
+												& year == 2019	& gender == 1 ///
+												& pl_eli == 1 & inrange((earning*12),37861,58252)			
+
+																								
+												
+												
 * IGd	
-gen pl_benc = (57183/12) * 0.4 * 0.4			if country == "FI" ///
-													& year == 2018 & pl_eli == 1 ///
-													& (earning*12) > 58252
+
+
+gen pl_benc = (58252/12) * 0.4			if country == "FI" & year == 2019	& gender == 1 ///
+										& pl_eli == 1 & (earning*12) > 58252
 	
-gen pl_bend = (((earning*12) - 57183) / 12) * 0.25 		///
-									if country == "FI" & year == 2018	///
-									& pl_eli == 1 & (earning*12) > 58252
+gen pl_bend = (earning - (58252/12)) * 0.25  		///
+									if country == "FI" & year == 2019	///
+									& gender == 1 & pl_eli == 1 ///
+									& (earning*12) >= 58252
 			
 
-replace pl_ben = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
-							& year == 2018	& pl_eli == 1 & pl_ben == . ///
-							& (earning*12) > 58252
+replace pl_ben1 = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
+							& year == 2019	& gender == 1 & pl_eli == 1 ///
+							& (earning*12) >= 58252
 
 
+							
+* SINGLE MEN
+* IGa
+replace pl_ben1 = 27.86 * 21.7 			if country == "FI" & year == 2019 & gender == 2 ///
+										& pl_eli == 1 & parstat == 1
+									
+
+* IGb
+replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
+										& pl_eli == 1 & inrange((earning*12),11942,37861) ///
+										 & parstat == 1
+
+									
+* IGc 
+replace pl_bena = (37861/12) * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
+									& pl_eli == 1 & earning*12 >= 37861 & parstat == 1
 			
+replace pl_benb = (earning - (37862/12)) * 0.4 		///
+									if country == "FI" & year == 2019	///
+									& gender == 2 & pl_eli == 1 ///
+									& inrange((earning*12),37861,58252) & parstat == 1
+
+replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
+												& year == 2019	& gender == 2 ///
+												& pl_eli == 1 & inrange((earning*12),37861,58252) ///
+												& parstat == 1
+
+																								
+												
+												
+* IGd	
+
+
+replace pl_benc = (58252/12) * 0.4		if country == "FI" & year == 2019	& gender == 2 ///
+										& pl_eli == 1 & (earning*12) > 58252 & parstat == 1
+	
+replace pl_bend = (earning - (58252/12)) * 0.25  		///
+									if country == "FI" & year == 2019	///
+									& gender == 2 & pl_eli == 1 ///
+									& (earning*12) >= 58252 & parstat == 1
 			
-replace pl_ben1 = pl_ben 		if country == "FI" & year == 2019 & pl_eli == 1
-replace pl_ben2 = pl_ben1 		if country == "FI" & year == 2019 & pl_eli == 1
+
+replace pl_ben1 = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
+							& year == 2019	& gender == 2 & pl_eli == 1 ///
+							& (earning*12) >= 58252 & parstat == 1
+
+							
+							
+							
+replace pl_ben2 = pl_ben1 	if country == "FI" & year == 2019 & gender == 2 & pl_eli == 1
+						
+
 
 foreach x in 1 2 {
 	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "FI" & year == 2019
 }
 
 replace pl_dur = 0 	if pl_eli == 0 & country == "FI" & year == 2019
+
+drop pt_bena pt_benb pt_benc pt_bend

@@ -1,8 +1,5 @@
-/* PL_2018_FR_eusilc_cs
+/* PL_2018_FR_eusilc_cs */
 
-date created: 25/03/2021
-
-*/
 
 * FRANCE - 2018
 

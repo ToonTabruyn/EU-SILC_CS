@@ -1,8 +1,4 @@
-/* PT_2019_SK_eusilc_cs
-
-date created: 12/08/2021
-
-*/
+/* PT_2019_SK_eusilc_cs */
 
 /*
 *** NOTE: No statutory right to paternity leave. The individual entitlement 
@@ -26,10 +22,8 @@ date created: 12/08/2021
 	-> single fathers can also claim "ML" - already coded in ml_eli!	*/
 	
 replace pt_eli = 1 		if country == "SK" & year == 2019 & gender == 2 ///
-						& econ_status ==  1 & duremp >= (270/7)/4.3 & parstat == 2
-replace pt_eli = 1 		if country == "SK" & year == 2019 & gender == 2 ///
-						& econ_status ==  2 & dursemp >= (270/7)/4.3 & parstat == 2		
-						
+						& inlist(econ_status,1,2) & (duremp + dursemp) >= 270/30 & parstat == 2
+
 replace pt_eli = 0 		if pt_eli == . & country == "SK" & year == 2019 & gender == 2
 
 
@@ -49,8 +43,8 @@ replace pt_dur = 28 	if country == "SK" & year == 2019 & pt_eli == 1
 			wae of employee in economy of the SR in the 4th quarter of 2019", accessed 12.8.2021	*/
 	
 replace pt_ben1 = 0.75*earning 		if country == "SK" & year == 2019 & pt_eli == 1
-replace pt_ben1 = 1177*2		 		if country == "SK" & year == 2019 & pt_eli == 1 ///
-										& pt_ben1 >= 1177*2
+replace pt_ben1 = 1177*2		 	if country == "SK" & year == 2019 & pt_eli == 1 ///
+									& pt_ben1 >= 1177*2
 
 
 replace pt_ben2 = pt_ben1 	if country == "SK" & year == 2019 & pt_eli == 1

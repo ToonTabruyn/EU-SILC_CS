@@ -1,8 +1,5 @@
-/* ML_2018_LU_eusilc_cs
+/* ML_2018_LU_eusilc_cs */
 
-date created: 30/03/2021
-
-*/
 
 * LUXEMBOURG - 2018
 
@@ -13,13 +10,8 @@ date created: 30/03/2021
 */
 
 replace ml_eli = 1 			if country == "LU" & year == 2018 & gender == 1 ///
-							& econ_status == 1 & duremp >= 6
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 6
 							
-replace ml_eli = 1 			if country == "LU" & year == 2018 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 6
-							
-replace ml_eli = 1 			if country == "LU" & year == 2018 & gender == 1 ///
-							& inlist(econ_status,1,2) & (duremp + dursemp) >= 6	
 							
 replace ml_eli = 0 			if ml_eli == . & country == "LU" & year == 2018 & gender == 1
 

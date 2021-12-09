@@ -1,8 +1,5 @@
-/* PT_2019_SI_eusilc_cs
+/* PT_2019_SI_eusilc_cs */
 
-date created: 12/08/2021
-
-*/
 
 * SLOVENIA - 2019
 
@@ -17,7 +14,7 @@ date created: 12/08/2021
 replace pt_eli = 1 			if country == "SI" & year == 2019 & gender == 2 ///
 							& inlist(econ_status,1,2) 
 replace pt_eli = 1 			if country == "SI" & year == 2019 & gender == 2 ///
-							& inlist(econ_status,3,4) & duremp + dursemp >= 12	
+							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12	
 	
 
 * DURATION (weeks)
@@ -34,11 +31,11 @@ replace pt_dur = 30/7 	if country == "SI" & year == 2019 & pt_eli == 1
 		-> €323.55/month (LP&R 2019)		
 */
 
-replace pt_ben1 = 0.9*earning 	 	if country == "SI" & year == 2019 & pt_eli == 1 
+replace pt_ben1 = earning 	 		if country == "SI" & year == 2019 & pt_eli == 1 
 replace pt_ben1 = 323.55	 	 	if country == "SI" & year == 2019 & pt_eli == 1 ///
-									& pt_ben1 < 323.55
+									& inlist(econ_status,1,2) & pt_ben1 < 323.55
 replace pt_ben1 = 2900		 	 	if country == "SI" & year == 2019 & pt_eli == 1 ///
-									& pt_ben1 >= 2900
+									& inlist(econ_status,1,2) & pt_ben1 >= 2900
 
 
 replace pt_ben2 = pt_ben1 	if country == "SI" & year == 2019 & pt_eli == 1

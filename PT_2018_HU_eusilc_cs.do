@@ -1,17 +1,13 @@
-/* PT_2018_HU_eusilc_cs
+/* PT_2018_HU_eusilc_cs */
 
-date created: 26/03/2021
-
-*/
 
 * HUNGARY - 2018
 
 * ELIGIBILITY
-/*	-> employed
-	Source: LP&R 2018 */
+/*	-> employed  */
 	
 replace pt_eli = 1 		if country == "HU" & year == 2018 & gender == 2 ///
-						& econ_status == 1 & duremp >= 12
+						& econ_status == 1
 						
 						
 replace pt_eli = 0 		if pt_eli == . & country == "HU" & year == 2018 & gender == 2
@@ -24,7 +20,7 @@ replace pt_dur = 5/5 	if country == "HU" & year == 2018 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 100% earning
+/*	-> 100% earning (LP&R 2018)
 	-> no ceiling 		*/ 
 replace pt_ben1 = earning 	if country == "HU" & year == 2018 & pt_eli == 1
 replace pt_ben2 = earning 	if country == "HU" & year == 2018 & pt_eli == 1

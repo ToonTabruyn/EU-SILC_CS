@@ -1,25 +1,20 @@
-/* ML_2018_HU_eusilc_cs
+/* ML_2018_HU_eusilc_cs */
 
-date created: 26/03/2021
-
-*/
 
 * HUNGARY - 2018
 
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed
-	-> compulsorily insured for at least 365 days over the past 2 years 
+	-> compulsorily insured for at least 365 days (coded) over the past 2 years (not coded)
 	-> father is eligible in case of mother's death or when she is not present 
 		in the household due to health reason => assumed this doesn't apply to 
 		fathers when the mother abandoned the child
 */
 	
 replace ml_eli = 1 			if country == "HU" & year == 2018 & gender == 1 ///
-							& econ_status == 1 & duremp >= 12
-							
-replace ml_eli = 1 			if country == "HU" & year == 2018 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 12
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
+						
 
 replace ml_eli = 0 			if ml_eli == . & country == "HU" & year == 2018 & gender == 1
 

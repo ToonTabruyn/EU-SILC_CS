@@ -1,8 +1,5 @@
-/* PL_2019_LT_eusilc_cs
+/* PL_2019_LT_eusilc_cs */
 
-date created: 23/08/2021
-
-*/
 
 * LITHUANIA - 2019
 
@@ -11,12 +8,8 @@ date created: 23/08/2021
 	-> family entitlement => in couples assigned to women
 */
 
-replace pl_eli = 1 			if country == "LT" & year == 2019 & econ_status == 1 ///
-							& duremp >= 12
-replace pl_eli = 1 			if country == "LT" & year == 2019 & econ_status == 2 ///
-							& dursemp >= 12
 replace pl_eli = 1 			if country == "LT" & year == 2019 & inlist(econ_status,1,2) ///
-							& duremp + dursemp >= 12
+							& (duremp+dursemp) >= 12
 
 							
 replace pl_eli =  0			if pl_eli == . & country == "LT" & year == 2019
@@ -40,8 +33,9 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2019 & pl_eli == 1 //
 
 
 * BENEFIT (monthly)
-/* 	-> choice of leave until child is 1: 77.58% (MISSOC 2019), ceiling: €1,617.40/month (coded; LP&R 2019)
-	-> choice of leave until child is 2: not coded
+/* 	-> choice of leave until child is 1: 77.58% (MISSOC 2019)
+		-> ceiling: €1,617.40/month (coded; LP&R 2019)
+	-> choice of leave until child is 2 (not coded) 
 		- 54.31% earnings until child is 1, ceiling: €1,132.18/month 
 		- 31.03% of earnings for the rest of the leave, ceiling: €646.98/month 
 	
@@ -50,10 +44,19 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2019 & pl_eli == 1 //
 				the ceilings reported in 2018. 
 */
 		
-replace pl_ben1 = earning 		if country == "LT" & year == 2019 & pl_eli == 1
+	* women
+replace pl_ben1 = earning 		if country == "LT" & year == 2019 & pl_eli == 1 ///
+								& gender == 1 
 								
 replace pl_ben1 = 1617.40 		if country == "LT" & year == 2019 & pl_eli == 1 ///
-								& pl_ben1 >= 1617.40
+								& pl_ben1 >= 1617.40 & gender == 1
+								
+	* single men
+replace pl_ben1 = earning 		if country == "LT" & year == 2019 & pl_eli == 1 ///
+								& gender == 2 & parstat == 1 
+								
+replace pl_ben1 = 1617.40 		if country == "LT" & year == 2019 & pl_eli == 1 ///
+								& pl_ben1 >= 1617.40 & gender == 2 & parstat == 1
 
 
 replace pl_ben2 = pl_ben1		if country == "LT" & year == 2019 & pl_eli == 1

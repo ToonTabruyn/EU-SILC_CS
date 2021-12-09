@@ -1,8 +1,4 @@
-/* ML_2018_SI_eusilc_cs
-
-date created: 31/03/2021
-
-*/
+/* ML_2018_SI_eusilc_cs */
 
 * SLOVENIA - 2018
 
@@ -18,13 +14,13 @@ date created: 31/03/2021
 replace ml_eli = 1 			if country == "SI" & year == 2018 & gender == 1 ///
 							& inlist(econ_status,1,2) 
 replace ml_eli = 1 			if country == "SI" & year == 2018 & gender == 1 ///
-							& inlist(econ_status,3,4) & duremp + dursemp >= 12
+							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12
 
 * single men
 replace ml_eli = 1 			if country == "SI" & year == 2018 & gender == 2 ///
 							& inlist(econ_status,1,2) & parstat == 1
 replace ml_eli = 1 			if country == "SI" & year == 2018 & gender == 2 ///
-							& inlist(econ_status,3,4) & duremp >= 12 & parstat == 1
+							& inlist(econ_status,3,4) & (duremp+dursemp) >= 12 & parstat == 1
 							
 replace ml_eli = 0 			if ml_eli == . & country == "SI" & year == 2018 & gender == 1
 

@@ -1,8 +1,4 @@
-/* PT_2018_DE_eusilc_cs
-
-date created: 25/03/2021
-
-*/
+/* PT_2018_DE_eusilc_cs */
 
 * GERMANY - 2018
 

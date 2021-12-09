@@ -1,8 +1,5 @@
-/* ML_2018_BE_eusilc_cs
+/* ML_2018_BE_eusilc_cs */
 
-date created: 18/02/2021
-
-*/
 
 * BELGIUM - 2018
 
@@ -51,7 +48,7 @@ replace ml_dur2 = 12-1 	if country == "BE" & year == 2018 & gender == 1 ///
 		-> first 30 days = 82% earnings, no ceiling 
 		-> rest of leave = 75% earnings, ceiling €104.8/day.			
 	-> unemployed (M2018): 
-		-> first month = unemployment benefit + 19% of previous earnings with a ceiling E 111.09/day
+		-> first month = unemployment benefit + 19% of previous earnings with a ceiling €111.09/day
 		-> rest = unemployment benefit + 15% with a ceiling €104.8/day
 		-> not coded (EU-SILC unemployment benefit - household level data)
 	-> self-employed (LP&R 2018):
@@ -69,14 +66,14 @@ replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((0.75*earning)/4.3) * 
 
 						
 * above ceiling						
-replace ml_ben1 = ((((0.82*earning) / 4.3) * (30/5)) + (((104.8 * 5) * (15 - (30/5)))) / 15) * 4.3 ///
+replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((104.8 * 5) * (15 - (30/5))))) / 15) * 4.3 ///
 						if country == "BE" & year == 2018 & gender == 1 ///
 						& econ_status == 1 & ml_ben1 == . & ml_eli == 1 ///
 						& ceiling > 104.8*21.7
 				
 
 	
-* unemployed
+* self-employed
 replace ml_ben1 = 458 * 4.3 		if country == "BE" & year == 2018 ///
 									& gender == 1 & econ_status == 2 ///
 									& ml_ben1 == . & ml_eli == 1

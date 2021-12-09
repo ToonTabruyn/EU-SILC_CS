@@ -1,21 +1,18 @@
-/* PL_2019_DK_eusilc_cs
+/* PL_2019_DK_eusilc_cs */
 
-date created: 23/08/2021
-
-*/
 
 * DENMARK - 2019
 
 
 * ELIGIBILITY
-/* -> employed
+/* 	-> employed
 	-> self-employed
 	-> unemployed (from unemployment insurance)	
 	-> students (extra student grant; pl031 == 6)
 */
 
-replace pl_eli = 1	 		if country == "DK" & year == 2019 & inlist(econ_status,1,2,3) ///
-							& pl031 == 6
+replace pl_eli = 1	 		if country == "DK" & year == 2019 & inlist(econ_status,1,2,3) 
+				
 							
 replace pl_eli = 1	 		if country == "DK" & year == 2019 & pl031 == 6
 							
@@ -48,21 +45,20 @@ replace pl_dur = 32 		if country == "DK" & year == 2019 & pl_eli == 1 & gender =
 */
 	
 replace pl_ben1 = earning 		if country == "DK" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & earning/4.3 < 583 ///
-								& gender == 1
+								& inlist(econ_status,1,2) & gender == 1
 
 replace pl_ben1 = 583*4.3		if country == "DK" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & pl_ben1/4.3 >= 583 ///
-								& pl_ben1 == . & gender == 1
+								& inlist(econ_status,1,2) & earning/4.3 >= 583 ///
+								& gender == 1
 
 * single men
 replace pl_ben1 = earning 		if country == "DK" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & earning/4.3 < 583 ///
+								& inlist(econ_status,1,2) ///
 								& gender == 2 & parstat == 1
 
 replace pl_ben1 = 583*4.3		if country == "DK" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & pl_ben1/4.3 >= 583 ///
-								& pl_ben1 == . & gender == 2 & parstat == 1
+								& inlist(econ_status,1,2) & earning/4.3 >= 583 ///
+								& gender == 2 & parstat == 1
 
 
 replace pl_ben2 = pl_ben1 		if country == "DK" & year == 2019 & pl_eli == 1 ///

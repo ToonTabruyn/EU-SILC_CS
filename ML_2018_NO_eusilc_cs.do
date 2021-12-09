@@ -1,8 +1,4 @@
-/* ML_2018_NO_eusilc_cs
-
-date created: 01/04/2021
-
-*/
+/* ML_2018_NO_eusilc_cs */
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -15,8 +11,8 @@ date created: 01/04/2021
 
 * ELIGIBILITY
 /*	-> any economic activity if they were employed or self-employed for at least 6 months
-		during 10 months before birth (compulsory social insurance for employed & self-employed) 
-		- receipt of sickness, unemployment or parental leave benefit counts towards the 6 months
+		during 10 months (not coded) before birth (compulsory social insurance for employed & self-employed) 
+		- receipt of sickness, unemployment or parental leave benefit counts towards the 6 months (coded)
 			but EU-SILC collects this information on a HH level => not coded 
 		- applies to: mothers, fathers whose female partner doesn't fulfill the conditions, single father
 */
@@ -55,7 +51,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2018 & gender =
 replace ml_dur1 = 3 		if country == "NO" & year == 2018 & ml_eli == 1 & gender == 1
 
 * both partners are eligible
-replace ml_dur2 = 12 		if country == "NO" & year == 2018 & ml_eli == 1 & gender == 1 ///
+replace ml_dur2 = 15-3 		if country == "NO" & year == 2018 & ml_eli == 1 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
 
 * only man is eligible

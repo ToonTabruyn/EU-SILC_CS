@@ -1,8 +1,5 @@
-/* PT_2019_GB_eusilc_cs
+/* PT_2019_GB_eusilc_cs */
 
-date created: 11/08/2021
-
-*/
 
 * UK - 2019
 
@@ -29,14 +26,12 @@ replace pt_dur = 2 	if country == "GB" & year == 2019 & pt_eli == 1
 /*	-> 90% earning 
 	-> ceiling: €166/week			*/
 
-gen ceiling = 0.9*earning
-
-
-replace pt_ben1 = (((0.9*earning)/4.3) * pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+	
+replace pt_ben1 = ((0.9 * earning) * (2/4.3)) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2019 & pt_eli == 1
 								
 * above ceiling
-replace pt_ben1 = (166 * pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = (166*2) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2019 & pt_eli == 1 ///
 								& ((0.9*earning)/4.3) > 166
 
@@ -58,4 +53,4 @@ foreach x in 1 2 {
 
 replace pt_dur = 0 if pt_eli == 0 & country == "GB" & year == 2019
 
-drop ceiling
+
