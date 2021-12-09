@@ -76,31 +76,29 @@ replace ml_dur2 = 39		if country == "GB" & year == 2019 & ml_eli == 1 ///
 
 * statutory maternity pay
 gen ml_bena = 0.9 * earning			if country == "GB" & year == 2019 & ml_eli == 1
-gen ml_benb = 0.9 * (166 * 4.3)		if country == "GB" & year == 2019 & ml_eli == 1 ///
-									& earning/4.3 >= 166
+gen ml_benb = (166 * 4.3)			if country == "GB" & year == 2019 & ml_eli == 1 
 
 									
 	* under ceiling
 replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2019 & ml_eli == 1 ///
-											& earning/4.3 < 166 & ml_dur2 == 52
+											& (earning*0.9)/4.3 < 166 & ml_dur2 == 52
 
 	* above ceiling
 replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
 											if country == "GB" & year == 2019 & ml_eli == 1 ///
-											& earning/4.3 >= 166 & ml_dur2 == 52
+											& (earning*0.9)/4.3 >= 166 & ml_dur2 == 52
 
 
 
 * maternity allowance	
 	* under ceiling
 replace ml_ben1 = ml_bena		if country == "GB" & year == 2019 & ml_eli == 1 ///
-								& earning/4.3 < 166 & ml_dur2 == 39	
+								& (earning*0.9)/4.3 < 166 & ml_dur2 == 39	
 	
 	
 	* above ceiling
 replace ml_ben1 = ml_benb		if country == "GB" & year == 2019 & ml_eli == 1 ///
-								& earning/4.3 >= 166 & ml_dur2 == 39
-	
+								& (earning*0.9)/4.3 >= 166 & ml_dur2 == 39
 	
 	
 
