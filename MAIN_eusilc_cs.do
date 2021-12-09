@@ -12,19 +12,13 @@ clear
 */
 
 *** Data directory
-//global DATA "[enter your DATA directory]" 
-//global DATA "/Users/alzbeta/Documents/Data" // Win
-
-global DATA "/Users/alzbeta/Documents/Data"
-
+global DATA "[enter your DATA directory]" 
 
 cd "$DATA"
 
 
 *** Code directory
-//global CODE "[enter your CODE directory]" 
-//global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC" // Win
-global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC"
+global CODE "[enter your CODE directory]" 
 
 
 use SILC2018.dta, clear 
@@ -80,7 +74,7 @@ run "$CODE/SD_sample_eusilc_cs.do"
 
 
 
-* create a "doorstop" before running the estimation of family policy entitlements 
+* a "doorstop" before running the estimation of family policy entitlements 
 save eusilc_cs, replace
 
 
@@ -96,8 +90,6 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/ML_2018_`x'_eusilc_cs.do"
 	run "$CODE/ML_2019_`x'_eusilc_cs.do"
 }
-
-
 
 
 *** Run policy coding for PATERNITY LEAVE (PT) ***
