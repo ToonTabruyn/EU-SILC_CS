@@ -1,8 +1,4 @@
-/* PL_2018_RO_eusilc_cs
-
-date created: 31/03/2021
-
-*/
+/* PL_2018_RO_eusilc_cs */
 
 * ROMANIA - 2018
 
@@ -27,7 +23,7 @@ replace pl_dur =  (2*52) - ml_dur2		if country == "RO" & year == 2018 & pl_eli =
 
 * single men
 replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2018 & pl_eli == 1 ///
-												& gender == 2
+												& gender == 2 & parstat == 1
 
 
 * BENEFIT (monthly)
@@ -35,16 +31,29 @@ replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2018 & p
 	-> minimum: €268.06/month (LP&R 2018)
 	-> maximum: €1,825/month (M2018)	*/
 	
-replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 
+	* women
+replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+									& gender == 1
 
 replace pl_ben1 = 268.06	 		if country == "RO" & year == 2018 & pl_eli == 1 ///
-									& pl_ben1 < 268.06
+									& pl_ben1 < 268.06 & gender == 1
 replace pl_ben1 = 1825	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
-									& pl_ben1 >= 1825
+									& pl_ben1 >= 1825 & gender == 1
 									
+	* single men
+replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+									& gender == 2 & parstat == 1
+
+replace pl_ben1 = 268.06	 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+									& pl_ben1 < 268.06 & gender == 2 & parstat == 1
+replace pl_ben1 = 1825	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
+									& pl_ben1 >= 1825 & gender == 2 & parstat == 1								
 			
 
 replace pl_ben2 = pl_ben1		if country == "RO" & year == 2018 & pl_eli == 1
+
+
+
 
 
 foreach x in 1 2 {
