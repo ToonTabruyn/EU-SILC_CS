@@ -57,9 +57,9 @@ replace ml_dur2 = 10 		if country == "ES" & year == 2016 &  ml_eli == 1 ///
 							
 							
 * BENEFIT (monthly)
-/*	-> employed, self-employed who didn't fulfill the contribution requirements: €537.84/month (LP&R 2016)
+/*	-> employed, self-employed who didn't fulfill the contribution requirements: €532.51/month (LP&R 2016)
 	-> employed, self-employed: 100%
-	-> ceiling: €3,803.70/month	
+	-> ceiling: €3,642.00/month	
 */
 
 replace ml_ben1 = earning 		if country == "ES" & year == 2016 & ml_eli == 1 ///
@@ -73,10 +73,10 @@ replace ml_ben1 = earning 		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & age > 26 ///
 								& (duremp+dursemp) >= 180/21.7
 								
-replace ml_ben1 = 3803.70 		if country == "ES" & year == 2016 & ml_eli == 1 ///
-								& ml_ben1 >= 3803.7
+replace ml_ben1 = 3642.0 		if country == "ES" & year == 2016 & ml_eli == 1 ///
+								& ml_ben1 >= 3642.0
 
-replace ml_ben1 = 537.84		if country == "ES" & year == 2016 & ml_eli == 1 ///
+replace ml_ben1 = 532.51		if country == "ES" & year == 2016 & ml_eli == 1 ///
 								& ml_ben1 == .
 
 
