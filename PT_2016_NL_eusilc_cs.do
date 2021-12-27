@@ -19,9 +19,12 @@ replace pt_dur = 2/5 if country == "NL" & year == 2016 & pt_eli == 1  // LP&R 20
 
 
 * BENEFIT (monthly)
-/* 100% of earning */
-replace pt_ben1 = earning if country == "NL" & year == 2016 & pt_eli == 1
-replace pt_ben2 = earning if country == "NL" & year == 2016 & pt_eli == 1
+/*	-> 100% of earning
+	-> ceiling: €203.85/day (not coded		
+	(MISSOC 01/07/2016)		*/
+	
+replace pt_ben1 = earning 		if country == "NL" & year == 2016 & pt_eli == 1
+replace pt_ben2 = 203,85 * 21.7		if country == "NL" & year == 2016 & pt_eli == 1 & earning >= 203.85 * 21.7
 
 
 foreach x in 1 2 {
