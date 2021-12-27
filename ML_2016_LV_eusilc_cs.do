@@ -23,9 +23,9 @@ replace ml_eli = 0 			if ml_eli == . & country == "LV" & year == 2016 & gender =
 	-> father who takes ML from mother: 42 calendar days (coded) within 70 calendar days since birth (not 		
 		coded)	*/
 
-replace ml_dur1 = 2 		if country == "LV" & year == 2016 & ml_eli == 1
+replace ml_dur1 = 0		if country == "LV" & year == 2016 & ml_eli == 1
 
-replace ml_dur2 = (112-(2*7))/7 		if country == "LV" & year == 2016 & ml_eli == 1 & gender == 1
+replace ml_dur2 = 112/7 		if country == "LV" & year == 2016 & ml_eli == 1 & gender == 1
 replace ml_dur2 = 42/7					if country == "LV" & year == 2016 & ml_eli == 1 & gender == 2
 
 
