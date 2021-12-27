@@ -3,6 +3,8 @@
 
 * IRELAND - 2016
 
+* No paternity leave at all!
+
 * ELIGIBILITY
 /*	-> employed: at least 39 weeks (9 months) compulsory social insurance contributions in past 12 months
 	-> self-employed: at least 52 weeks compulsory social insurance contribution in past 12 months
