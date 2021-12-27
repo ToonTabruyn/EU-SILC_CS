@@ -27,7 +27,7 @@ replace ml_dur2 = 56/5 		if country == "LT" & year == 2016 & ml_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100% average earninngs, no ceiling  
-	-> minimum: 1/3 of the insured income of the current year. (I didn't update the code like you wrote in your notes)
+	-> minimum: 1/3 of the insured income of the current year (not coded; contains code from 2018)
 */
 
 replace ml_ben1 = earning 		if country == "LT" & year == 2016 & ml_eli == 1
