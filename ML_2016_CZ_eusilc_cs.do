@@ -8,6 +8,7 @@
 	-> self-employed: 180 days of sickness insurance contribution during 1 year before 
 			ML + total 270 days of contribution over 2 years period before ML 	
 		-> voluntary participation in sickness insurance (not coded)
+	-> time spent in education counts towards the qualifying period of 270 days
 		
 
 	-> transfer to father: after 6 weeks, mother's consent => assumed that single father is not
