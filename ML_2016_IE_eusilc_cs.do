@@ -31,13 +31,13 @@ replace ml_dur2 = 26+16-2 		if country == "IE" & year == 2016 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 26 weeks: €240/week
+/*	-> 26 weeks: €230/week
 	-> 16 weeks: unpaid 	*/
 	
-replace ml_ben1 = ((240*4.3) * (26/(26+16)))  	if country == "IE" & year == 2016 & ml_eli == 1
+replace ml_ben1 = ((230*4.3) * (26/(26+16)))  	if country == "IE" & year == 2016 & ml_eli == 1
 
 
-replace ml_ben2 = 240*4.3 		if country == "IE" & year == 2016 & ml_eli == 1
+replace ml_ben2 = 230*4.3 		if country == "IE" & year == 2016 & ml_eli == 1
 
 
 foreach x in 1 2 {
