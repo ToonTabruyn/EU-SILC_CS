@@ -31,19 +31,12 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2016 & gender == 1 & 
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
-	-> minimum: €235.16/month
-	-> ceiling: €1,329.18/month
-The minimum and maximum values of benefit are sourced from LP&R 2016. 
+The amount cannot be lower than minimu wage and cannot exceed avg. net remuneration. 
+LP&R 2016 info does not exist for Bulgaria. Values of benefits are not sourced.
 */ 
 
 replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2016 ///
 										& gender == 1 & ml_eli == 1 
-replace ml_ben1 = 235.16 				if country == "BG" & year == 2016 ///
-										& gender == 1 & ml_eli == 1 ///
-										& ml_ben1 < 235.16
-replace ml_ben1 = 1329.18 				if country == "BG" & year == 2016 /// 
-										& gender == 1 & ml_eli == 1 ///
-										& ml_ben1 >= 1329.18
 				
 				
 replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2016 & gender == 1 & ml_eli == 1
