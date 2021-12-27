@@ -5,7 +5,7 @@
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed 	
-	-> worked for at least 12 months (coded) before childbirth with the same employer (not coded) 	
+	-> worked for at least 12 months (coded) at a minimum of 20h/week before childbirth with the same employer (not coded) 	
 	-> not transferable
 	-> can be taken simultaneously
 	
@@ -31,12 +31,10 @@ replace pl_dur = 6*4.3 		if country == "LU" & year == 2016 & pl_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> calculated using the average income over 12 month before birth and average working hours
-		- this determines the ceiling on the benefits
-		- the exact calculation is unclear => not coded  	*/
+/*	flat-rate: €1,788/month  	*/
 		
-replace pl_ben1 = . 	if country == "LU" & year == 2016 & pl_eli == 1
-replace pl_ben2 = .		if country == "LU" & year == 2016 & pl_eli == 1
+replace pl_ben1 = 1778 		if country == "LU" & year == 2016 & pl_eli == 1
+replace pl_ben2 = pl_ben1		if country == "LU" & year == 2016 & pl_eli == 1
 
 
 foreach x in 1 2 {
