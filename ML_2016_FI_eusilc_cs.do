@@ -29,86 +29,86 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2016 & gender == 1 & m
 
 * BENEFIT (monthly; LP&R 2016)
 /* first 56 days:
-	-> €24.64/day if unemployed or earnings are less than €8,215/year (income group 56a)
-	-> 90% of earnings between €8,215/year and €57,183/year (IG 56b)
-	-> 32.5% of earnings above €57,183/year (IG 56c)
+	-> €23.93/day if unemployed or earnings are less than €7,979/year (income group 56a)
+	-> 90% of earnings between €7,979/year and €56,443/year (IG 56b)
+	-> 32.5% of earnings above €56,443/year (IG 56c)
 
 remaining 49 days:
-	-> €24.64/day if unemployed or earnings are less than €10,562/year (income group 49a)
-	-> 70% on earnings between €10,562/year and €37,167/year (IG 49b)
-	-> 40% on earnings between €37,168/year and €57,183/year (IG 49c)
-	-> 25% on earnings above €57,183/year   (IG 49d) 						*/ 
+	-> €23.93/day if unemployed or earnings are less than €10,258/year (income group 49a)
+	-> 70% on earnings between €10,258/year and €36,686/year (IG 49b)
+	-> 40% on earnings between €36,687/year and €56,443/year (IG 49c)
+	-> 25% on earnings above €56,443/year   (IG 49d) 						*/ 
 
 * Income group (IG) 56a
-gen ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2016 ///
+gen ml_ben56 = 23.93 * 21.7 		if country == "FI" & year == 2016 ///
 									& gender == 1 & ml_eli == 1 ///
 									& econ_status == 3
 
 
-replace ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2016 ///
+replace ml_ben56 = 23.93 * 21.7 		if country == "FI" & year == 2016 ///
 									& gender == 1 & ml_eli == 1 ///
-									& (earning*12) < 8215
+									& (earning*12) < 7979
 
 * IG 56b			
 replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2016 ///
 									& gender == 1 & ml_eli == 1 & ml_ben56 == . ///
-									& inrange((earning*12),8215,57183)
+									& inrange((earning*12),7979,56443)
 
 * IG 56c			
-gen ml_ben56a = (57183/12) * 0.9 	if country == "FI" & year == 2016 ///
-									& gender == 1 & (earning*12) > 57183 ///
+gen ml_ben56a = (56443/12) * 0.9 	if country == "FI" & year == 2016 ///
+									& gender == 1 & (earning*12) > 56443 ///
 									& ml_eli == 1
 									
 gen ml_ben56b = (earning - (57183/12)) * 0.325 		if country == "FI" & year == 2016 ///
 													& gender == 1 ///
-													& (earning*12) > 57183 & ml_eli == 1
+													& (earning*12) > 56443 & ml_eli == 1
 	
 	
 replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2016 ///
 												& gender == 1 & ml_eli == 1 ///
 												& ml_ben56 == . ///
-												& (earning*12) > 57183 & ml_eli == 1
+												& (earning*12) > 56443 & ml_eli == 1
 
 
 * IG 49a
-gen ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2016 & gender == 1 ///
+gen ml_ben49 = 23.93 * 21.7 		if country == "FI" & year == 2016 & gender == 1 ///
 									& ml_eli == 1 & econ_status == 3
 
 
-replace ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2016 & gender == 1 ///
-									& ml_eli == 1 & (earning*12) < 10562
+replace ml_ben49 = 23.93 * 21.7 		if country == "FI" & year == 2016 & gender == 1 ///
+									& ml_eli == 1 & (earning*12) < 10258
 
-* IG 49b - annual earnings under €37,167
+* IG 49b - annual earnings under €36,686
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2016 & gender == 1 ///
 									& ml_eli == 1 & ml_ben49 == . ///
-									& inrange((earning*12),10562,37167)
+									& inrange((earning*12),10258,36686)
 
-* IG 49c - annual earnings between €37,168/year and €57,183/year
-gen ml_ben49a = (37167/12) * 0.7 	if country == "FI" & year == 2016 & gender == 1 ///
-									& ml_eli == 1 & (earning*12) > 37168
+* IG 49c - annual earnings between €36,687/year and €56,443/year
+gen ml_ben49a = (36687/12) * 0.7 	if country == "FI" & year == 2016 & gender == 1 ///
+									& ml_eli == 1 & (earning*12) > 36687
 			
-gen ml_ben49b = (earning - (37167/12)) * 0.4 		if country == "FI" ///
+gen ml_ben49b = (earning - (36687/12)) * 0.4 		if country == "FI" ///
 									& year == 2016	& gender == 1 & ml_eli == 1 ///
-									& inrange((earning*12),37168,57183)
+									& inrange((earning*12),36687,56443)
 
 replace ml_ben49 = ml_ben49a + ml_ben49b 		if country == "FI" ///
 												& year == 2016	& gender == 1 ///
 												& ml_eli == 1 & ml_ben49 == . ///
-												& inrange((earning*12),37167,57183)			
+												& inrange((earning*12),36687,56443)			
 			
-* IG 49d - annual earnings above €57,183 	
-gen ml_ben49c = (57183/12) * 0.4			if country == "FI" ///
+* IG 49d - annual earnings above €56,443	
+gen ml_ben49c = (56443/12) * 0.4			if country == "FI" ///
 													& year == 2016	& gender == 1 ///
-													& ml_eli == 1 & (earning*12) > 57183
+													& ml_eli == 1 & (earning*12) > 56443	
 	
-gen ml_ben49d = (earning - (57183/12)) * 0.25 		if country == "FI" ///
+gen ml_ben49d = (earning - (56443/12)) * 0.25 		if country == "FI" ///
 									& year == 2016	& gender == 1 & ml_eli == 1 ///
-									& (earning*12) > 57183
+									& (earning*12) > 56443	
 			
 
 replace ml_ben49 = ml_ben49a + ml_ben49c + ml_ben49d 		if country == "FI" ///
 							& year == 2016	& gender == 1 & ml_eli == 1 & ml_ben49 == . ///
-							& (earning*12) > 57183
+							& (earning*12) > 56443	
 			
 
 * ML benefit 
