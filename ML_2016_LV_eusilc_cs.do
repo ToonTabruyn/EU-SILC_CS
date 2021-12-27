@@ -3,7 +3,7 @@
 * LATVIA - 2016
 
 * ELIGIBILITY
-/*	-> employed (conditions are listed in LP&R 2016 but not in MISSOC 01/07/2016 => not coded)
+/*	-> employed
 	-> self-employed
 	-> father after mother's death or mother relinquished the care and raising the child 
 		=> coded for single fathers			*/
@@ -20,7 +20,6 @@ replace ml_eli = 0 			if ml_eli == . & country == "LV" & year == 2016 & gender =
 
 * DURATION (weeks)
 /*	-> total: 112 calendar days
-	-> prenatal compulsory: 2 weeks
 	-> father who takes ML from mother: 42 calendar days (coded) within 70 calendar days since birth (not 		
 		coded)	*/
 
@@ -31,7 +30,7 @@ replace ml_dur2 = 42/7					if country == "LV" & year == 2016 & ml_eli == 1 & gen
 
 
 * BENEFIT (monthly)
-/*	-> 80% gross earnings */
+/*	-> 80% gross earnings, no ceiling */
 
 replace ml_ben1 = 0.8*earning 		if country == "LV" & year == 2016 & ml_eli == 1
 replace ml_ben2 = ml_ben1 			if country == "LV" & year == 2016 & ml_eli == 1
