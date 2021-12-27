@@ -59,7 +59,7 @@ replace pt_dur = 15 		if country == "NO" & year == 2016 & pt_eli == 1
 replace pt_ben1 = earning 		if country == "NO" & year == 2016 & pt_eli == 1
 
 * ceiling
-replace pt_ben1 = 59,68512			if country == "NO" & year == 2016 & pt_eli == 1 ///
+replace pt_ben1 = 59685/12			if country == "NO" & year == 2016 & pt_eli == 1 ///
 									& pt_ben1 >= 59685/12
 
 * minimum
