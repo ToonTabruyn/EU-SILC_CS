@@ -15,25 +15,25 @@ replace ml_eli = 0 			if ml_eli == . & country == "FR" & year == 2016 & gender =
 
 
 * DURATION (weeks)
-/*	-> prenatal: 3 weeks 
+/*	-> prenatal: 2 weeks 
 	-> total: 16 weeks
 	-> for 3rd and subsequent child: 26 weeks (coded as <2 and >= 2 due to 
 	the hypothetical child the microsimulation adds to the HH)
 */
 	
-replace ml_dur1 = 3 		if country == "FR" & year == 2016 & gender == 1 & ml_eli == 1
+replace ml_dur1 = 2 		if country == "FR" & year == 2016 & gender == 1 & ml_eli == 1
 
-replace ml_dur2 = 16-3 		if country == "FR" & year == 2016 & gender == 1 ///
+replace ml_dur2 = 16-2 		if country == "FR" & year == 2016 & gender == 1 ///
 							& ml_eli == 1 & childc < 2
 							
-replace ml_dur2 = 26-3 		if country == "FR" & year == 2016 & gender == 1 ///
+replace ml_dur2 = 26-2 		if country == "FR" & year == 2016 & gender == 1 ///
 							& ml_eli == 1 & childc >= 2
 
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> minimum: €9.39/day
-	-> ceiling: €86/ day
+	-> minimum: €9.27/day
+	-> ceiling: €83.58/ day
 	-> no ceiling in public sector (not coded; LP&R 2016)
 	-> source: MISSOC 01/07/2016
 */ 
@@ -42,12 +42,12 @@ replace ml_ben1 = earning 			if country == "FR" & year == 2016 & ml_eli == 1 ///
 									& ml_ben1 == .
 
 * minimum
-replace ml_ben1 = 9.39 * 21.7		if country == "FR" & year == 2016  ///
-									& ml_eli == 1 & ml_ben1 < 9.39*21.7
+replace ml_ben1 = 9.27 * 21.7		if country == "FR" & year == 2016  ///
+									& ml_eli == 1 & ml_ben1 < 9.27*21.7
 		
 * maximum
-replace ml_ben1 = 86 * 21.7			if country == "FR" & year == 2016  ///
-									& ml_eli == 1 & ml_ben1 >= 86*21.7
+replace ml_ben1 = 83.58 * 21.7			if country == "FR" & year == 2016  ///
+									& ml_eli == 1 & ml_ben1 >= 83.58*21.7
 		
 
 
