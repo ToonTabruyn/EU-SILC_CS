@@ -27,23 +27,23 @@ replace ml_dur2 = 16-4 	if country == "NL" & year == 2016 & gender == 1 & ml_eli
 
 * BENEFIT (monthly)
 /*	-> employed: 100% of daily wage
-	-> ceiling: €211.42/day 		
+	-> ceiling: €203.85/day 		
 	(MISSOC 01/07/2016)		*/
 
 replace ml_ben1 = earning 		if country == "NL" & year == 2016 & gender == 1 /// 
 								& ml_eli == 1 & econ_status == 1 
-replace ml_ben1 = 211.42 * 21.7 	if country == "NL" & year == 2016 & gender == 1 ///
-									& ml_eli == 1 & econ_status == 1 & ml_ben1 > 211.42 * 21.7
+replace ml_ben1 = 203.85 * 21.7 	if country == "NL" & year == 2016 & gender == 1 ///
+									& ml_eli == 1 & econ_status == 1 & ml_ben1 > 203.85 * 21.7
 
 /*	->self-employed: 100% of the net trading income
-	-> ceiling: €1594.20/month 		
+	-> ceiling: minimum wage (has to be looked up)		
 	(MISSOC 01/07/2016) */
 	
 replace ml_ben1 = earning 		if country == "NL" & year == 2016 & gender == 1 /// 
 								& ml_eli == 1 & econ_status == 2
 							
-replace ml_ben1 = 1594.20 		if country == "NL" & year == 2016 & gender == 1 /// 
-								& ml_eli == 1 & econ_status == 2 & earning >= 1594.2
+replace ml_ben1 = XXXX			if country == "NL" & year == 2016 & gender == 1 /// 
+								& ml_eli == 1 & econ_status == 2 & earning >= XXXX
 
 
 		
