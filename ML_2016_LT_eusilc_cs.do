@@ -27,8 +27,7 @@ replace ml_dur2 = 56/5 		if country == "LT" & year == 2016 & ml_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100% average earninngs, no ceiling  
-	-> minimum: 6* Basic Social Benefit 
-		-> Basic Social Benefit = €38 (M2019 mentions 2*BSB = €76)
+	-> minimum: 1/3 of the insured income of the current year. (I didn't update the code like you wrote in your notes)
 */
 
 replace ml_ben1 = earning 		if country == "LT" & year == 2016 & ml_eli == 1
