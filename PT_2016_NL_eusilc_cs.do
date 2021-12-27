@@ -19,9 +19,10 @@ replace pt_dur = 2/5 if country == "NL" & year == 2016 & pt_eli == 1  // LP&R 20
 
 
 * BENEFIT (monthly)
-/* 100% of earning */
-replace pt_ben1 = earning if country == "NL" & year == 2016 & pt_eli == 1
-replace pt_ben2 = earning if country == "NL" & year == 2016 & pt_eli == 1
+/*	-> 100% of earning		
+	(MISSOC 01/07/2016)		*/
+	
+replace pt_ben1 = earning 		if country == "NL" & year == 2016 & pt_eli == 1
 
 
 foreach x in 1 2 {
