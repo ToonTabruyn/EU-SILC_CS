@@ -3,10 +3,8 @@
 * AUSTRIA - 2016
 
 /*	No statutory entitlement to paternity leave.
-	There is a 'Family-time bonus' for fathers but it doesn't provide 
-	job-protection during the period of leave => not coded.
 	
-	Source: LP&R 2019 
+	Source: LP&R 2016
 */
 
 * ELIGIBILITY
