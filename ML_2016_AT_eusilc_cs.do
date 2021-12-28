@@ -3,7 +3,7 @@
 * AUSTRIA - 2016
 
 * ELIGIBILITY
-/* -> Employed: earnings at least €438.05/month  
+/* -> Employed: earnings at least €415.72/month  
    -> Self-employed: if voluntarily insured => not coded.
    -> Unemployed: if receive unemployment benefits/completed 3 months of 
 	continuous  employment		
@@ -12,7 +12,7 @@
 */
    
 replace ml_eli = 1 		if country == "AT" & year == 2016 & gender == 1 ///
-						& econ_status == 1 & earning >= 438.05
+						& econ_status == 1 & earning >= 415.72
 replace ml_eli = 1 		if country == "AT" & year == 2016 & gender == 1 ///
 						& econ_status == 3 & duremp >= 3
 				
