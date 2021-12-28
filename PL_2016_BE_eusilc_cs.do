@@ -22,16 +22,10 @@ replace pl_dur = 4 * 4.3 	if country == "BE" & year == 2016 & pl_eli == 1
 
 * BENEFIT (monthly)
 /*	-> full-time workers: €771.33/month 
-	-> single parent: €1,129.61/month
 */
 
-* single parent
-replace pl_ben1 = 1129.61 		if country == "BE" & year == 2016 & pl_eli == 1 ///
-								& parstat == 1
-								
-* cohabiting, married
 replace pl_ben1 = 771.33 		if country == "BE" & year == 2016 & pl_eli == 1 ///
-								& parstat == 2 & pl_ben1 == . 
+								& pl_ben1 == . 
 			
 
 replace pl_ben2 = pl_ben1 		if country == "BE" & year == 2016 & pl_eli == 1
