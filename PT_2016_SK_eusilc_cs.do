@@ -37,10 +37,10 @@ replace pt_dur = 28 	if country == "SK" & year == 2016 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 75% average earnings
+/*	-> 70% average earnings
 	-> ceiling: €954/month (LP&R 2016)	*/
 	
-replace pt_ben1 = 0.75*earning 		if country == "SK" & year == 2016 & pt_eli == 1
+replace pt_ben1 = 0.70*earning 		if country == "SK" & year == 2016 & pt_eli == 1
 replace pt_ben1 = 954		 		if country == "SK" & year == 2016 & pt_eli == 1 ///
 									& pt_ben1 >= 954
 
