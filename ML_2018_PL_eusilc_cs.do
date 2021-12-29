@@ -26,12 +26,11 @@ replace ml_dur2 = 20 		if country == "PL" & year == 2018 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 100% earning
+/*	-> 100% earning, no ceiling
 		- women may choose between 100% and 80% (LP&R 2018)
 		- the choice will determine the duration of parental leave (100% more generous 
 		in a short run, 80% more generous in a long run => 80% coded), less generous 
 		cash benefits imply longer parental leave
-	-> minimum: €229/month*/	*/
 	
 replace ml_ben1 = earning*0.8 		if country == "PL" & year == 2018 & ml_eli == 1
 replace ml_ben1 = 229 				if country == "PL" & year == 2018 & ml_eli == 1 ///
