@@ -21,13 +21,11 @@ replace ml_eli = 0 			if ml_eli == . & country == "SK" & year == 2016 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 34 weeks
+/*	-> total: 34 weeks obligatory (LP&R p. 304 first dot under 'flexibility in use')
 	-> prenatal: 6 weeks 	
 	-> single mother: 37 weeks
 	-> single father: 31 weeks 
-	-> source: z.c. 461/2003 z.z., zakon o socialnom poisteni 
-	(https://www.zakonypreludi.sk/zz/2003-461/znenie-20210101#cast1-hlava2-diel5)
-	accessed: 30/03/2021			*/
+*/
 	
 replace ml_dur1 = 6 		if country == "SK" & year == 2016 & ml_eli == 1 & gender == 1
 
@@ -44,10 +42,10 @@ replace ml_dur2 = 31		if country == "SK" & year == 2016 & ml_eli == 1 ///
 
 
 * BENEFIT (monthly)
-/*	-> 75% average earnings
-	-> ceiling: €954/month (LP&R 2016)	*/
+/*	-> 70% average earnings
+	-> ceiling: monthly ceiling 1.5-times of national average monthly wage (has to be looked up).	*/
 	
-replace ml_ben1 = 0.75*earning 		if country == "SK" & year == 2016 & ml_eli == 1
+replace ml_ben1 = 0.70*earning 		if country == "SK" & year == 2016 & ml_eli == 1
 replace ml_ben1 = 954				if country == "SK" & year == 2016 & ml_eli == 1 ///
 									& ml_ben1 >= 954
 
