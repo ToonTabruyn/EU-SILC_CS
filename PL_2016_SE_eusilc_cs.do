@@ -35,10 +35,10 @@ replace pl_dur = (150+150)/7	if country == "SE" & year == 2016 & parstat == 1
 
 		- for 195 calendar days (includes 90 non-transferable leave = > 150 days transferable): 
 			- 77.6% earning => for 105 calendar days
-			- minimum: €26/day
-			- ceiling: €46,803 for the duration of benefits
+			- minimum: €27/day
+			- ceiling: €46,972 for the duration of benefits
 		- for 45 days: €19/day
-	-> all others: €26/day
+	-> all others: €27/day
  */
  
 
@@ -49,17 +49,17 @@ replace pl_ben1 = (((0.776*earning) * (105/30)) + ((19*30) *  (45/30))) / (150/3
 									& earning/30 >= 26 & pl_dur != . 
 
 * minimum
-replace pl_ben1 = (((26*30) * (105/30)) + ((19*30) *  (45/30))) / (150/30) ///
+replace pl_ben1 = (((27*30) * (105/30)) + ((19*30) *  (45/30))) / (150/30) ///
 									if country == "SE" & year == 2016 & pl_eli == 1 ///
-									& earning/30 < 26 & earning != 0 & pl_dur != . 
+									& earning/30 < 27 & earning != 0 & pl_dur != . 
 
 * ceiling
-replace pl_ben1 = (((46803/12) * (105/30)) + (((19*30) *  (45/30)))) / (150/30)	///
+replace pl_ben1 = (((46972/12) * (105/30)) + (((19*30) *  (45/30)))) / (150/30)	///
 									if country == "SE" & year == 2016 & pl_eli == 1 ///
-									& earning*12 >= 46803 & pl_dur != . 
+									& earning*12 >= 46972 & pl_dur != . 
 
 * all others									
-replace pl_ben1 = 26*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = 27*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
 									
 
@@ -67,10 +67,10 @@ replace pl_ben1 = 26*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
 replace pl_ben2 = 0.776*earning		if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning/30 >= 26 & pl_dur != .
 									
-replace pl_ben2 = 46803/12			if country == "SE" & year == 2016 & pl_eli == 1 ///
-									& earning*12 >= 46803 & pl_dur != .
+replace pl_ben2 = 46972/12			if country == "SE" & year == 2016 & pl_eli == 1 ///
+									& earning*12 >= 46972 & pl_dur != .
 									
-replace pl_ben2 = 26*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
+replace pl_ben2 = 27*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
 									
 
