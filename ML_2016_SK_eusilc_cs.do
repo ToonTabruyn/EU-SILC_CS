@@ -21,13 +21,15 @@ replace ml_eli = 0 			if ml_eli == . & country == "SK" & year == 2016 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 34 weeks
+/*	-> total: 34 weeks obligatory 
 	-> prenatal: 6 weeks 	
 	-> single mother: 37 weeks
 	-> single father: 31 weeks 
+	
 	-> source: z.c. 461/2003 z.z., zakon o socialnom poisteni 
 	(https://www.zakonypreludi.sk/zz/2003-461/znenie-20210101#cast1-hlava2-diel5)
-	accessed: 30/03/2021			*/
+	accessed: 30/03/2021	
+*/
 	
 replace ml_dur1 = 6 		if country == "SK" & year == 2016 & ml_eli == 1 & gender == 1
 
@@ -44,12 +46,15 @@ replace ml_dur2 = 31		if country == "SK" & year == 2016 & ml_eli == 1 ///
 
 
 * BENEFIT (monthly)
-/*	-> 75% average earnings
-	-> ceiling: €954/month (LP&R 2016)	*/
+/*	-> 70% average earnings
+	-> ceiling: monthly ceiling 1.5-times of national average monthly wage (€889).
 	
-replace ml_ben1 = 0.75*earning 		if country == "SK" & year == 2016 & ml_eli == 1
-replace ml_ben1 = 954				if country == "SK" & year == 2016 & ml_eli == 1 ///
-									& ml_ben1 >= 954
+	source: Statistical Office of the Slovak Republic, Average monthly wage of employee 
+		in economy of the SR in the 3rd quarter of 2016, shorturl.at/stvAT , accessed 30.12.2021 */
+	
+replace ml_ben1 = 0.70*earning 		if country == "SK" & year == 2016 & ml_eli == 1
+replace ml_ben1 = 1.5*889		if country == "SK" & year == 2016 & ml_eli == 1 ///
+									& ml_ben1 >= (1.5*889)
 
 replace ml_ben2 = ml_ben1 		if country == "SK" & year == 2016 & ml_eli == 1
 
