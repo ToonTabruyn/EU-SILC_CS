@@ -47,11 +47,11 @@ replace pl_dur = 2*52	 				if country == "FR" & year == 2016 ///
 								
 
 * BENEFIT (monthly)
-/*	-> €396.01/month for full-time leave
-	-> lower income parents: €576/month (lower income not specified => not coded) 
+/*	-> €391/month for full-time leave
+	
 */
 
-replace pl_ben1 = 396.01 		if country == "FR" & year == 2016 & pl_eli == 1
+replace pl_ben1 = 391 		if country == "FR" & year == 2016 & pl_eli == 1
 replace pl_ben2 = pl_ben1 		if country == "FR" & year == 2016 & pl_eli == 1
 
 
