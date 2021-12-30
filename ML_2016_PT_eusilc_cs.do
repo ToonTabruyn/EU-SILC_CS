@@ -35,12 +35,12 @@ replace ml_dur2 = 6 		if country == "PT" & year == 2016 & ml_eli == 1
 	-> 150 days, not shared: 80% earning
 	-> 150 days, shared: 100% earning
 	-> 180 days, shared: 83% earning 
-	-> minimum: €428.90/month 
+	-> minimum: €419.22/month 
 	-> most generous option coded (100%)*/
 
 replace ml_ben1 = earning 		if country == "PT" & year == 2016 & ml_eli == 1
-replace ml_ben1 = 428.90		if country == "PT" & year == 2016 & ml_eli == 1 ///
-								& ml_ben1 < 428.9
+replace ml_ben1 = 419.22		if country == "PT" & year == 2016 & ml_eli == 1 ///
+								& ml_ben1 < 419.22
 								
 replace ml_ben2 = ml_ben1 		if country == "PT" & year == 2016 & ml_eli == 1
 
