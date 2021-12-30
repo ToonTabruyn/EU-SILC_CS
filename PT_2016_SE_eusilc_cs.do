@@ -36,7 +36,7 @@ replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2016 & pt_eli =
 		- minimum: not specified, also not specified whether only for working parents => 
 			assumed identical with the 90 days 
 	-> 90 days: 77.6% earning
-			- minimum: €267day
+			- minimum: €27/day
 			- ceiling: €46,972/year - this is an earning ceiling NOT benefit ceiling (LP&R 2016)
 */
 
