@@ -33,7 +33,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "SI" & year == 2016 & gender =
 	
 replace ml_dur1 = 0 			if country == "SI" & year == 2016 & ml_eli == 1
 
-replace ml_dur2 = (105-15)/7 		if country == "SI" & year == 2016 & ml_eli == 1 ///
+replace ml_dur2 = 105/7 		if country == "SI" & year == 2016 & ml_eli == 1 ///
 								& gender == 1
 replace ml_dur2 = 80/7			if country == "SI" & year == 2016 & ml_eli == 1 ///
 								& gender == 2 & parstat == 1
