@@ -27,8 +27,7 @@ replace pl_dur = (3*52) - pt_dur 		if country == "ES" & year == 2016 & pl_eli ==
 * BENEFIT (monthly)
 /*	-> unpaid
 	-> regional variation (LP&R 2016):
-		- Basque country: €277.08/month if earning < €20,000/year
-						  €232.92/month if earning > €20,000/year
+		- Basque country: €271.25/month if earning 
 						  NUTS2 region code ES21
 		- La Rioja: €250/month if family income < €40,000/year
 					NUTS2 region code ES23 
@@ -39,10 +38,8 @@ replace pl_dur = (3*52) - pt_dur 		if country == "ES" & year == 2016 & pl_eli ==
 replace pl_ben1 = 0 		if country == "ES" & year == 2016 & pl_eli == 1
 
 * Basque country
-replace pl_ben1 = 277.08	if country == "ES" & year == 2016 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg < 20000
-replace pl_ben1 = 232.92	if country == "ES" & year == 2016 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg >= 20000	
+replace pl_ben1 = 271.25	if country == "ES" & year == 2016 & pl_eli == 1 ///
+							& region == "ES21" 	
 
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2016 & pl_eli == 1 ///
