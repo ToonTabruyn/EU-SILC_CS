@@ -27,27 +27,24 @@ replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2016 & p
 
 
 * BENEFIT (monthly)
-/*	-> 85% earning (net, but coded gross)
-	-> minimum: €132/month (LP&R 2016)
-	-> maximum: €265/month (M2016)	*/
+/*	-> 85% earning (net, but coded gross), no ceiling
+	-> minimum: €276/month (LP&R 2016)
+*/
 	
 	* women
 replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2016 & pl_eli == 1 ///
 									& gender == 1
 
-replace pl_ben1 = 132		 		if country == "RO" & year == 2016 & pl_eli == 1 ///
-									& pl_ben1 < 132 & gender == 1
-replace pl_ben1 = 265	 			if country == "RO" & year == 2016 & pl_eli == 1 ///
-									& pl_ben1 >= 265 & gender == 1
+replace pl_ben1 = 276		 		if country == "RO" & year == 2016 & pl_eli == 1 ///
+									& pl_ben1 < 271 & gender == 1
+
 									
 	* single men
 replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2016 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 
-replace pl_ben1 = 132		 		if country == "RO" & year == 2016 & pl_eli == 1 ///
-									& pl_ben1 < 132 & gender == 2 & parstat == 1
-replace pl_ben1 = 265	 			if country == "RO" & year == 2016 & pl_eli == 1 ///
-									& pl_ben1 >= 265 & gender == 2 & parstat == 1								
+replace pl_ben1 = 276		 		if country == "RO" & year == 2016 & pl_eli == 1 ///
+									& pl_ben1 < 276 & gender == 2 & parstat == 1
 			
 
 replace pl_ben2 = pl_ben1		if country == "RO" & year == 2016 & pl_eli == 1
