@@ -17,12 +17,12 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2016
 	-> maximum amount of benefit for the whole period: €8,114
    
 	-> 70% of the daily assessment base
-	-> ceiling: €1,171/month 
+	-> ceiling: €424/month 
     
 	-> The benefit is calculated from the higher daily assessment base (if man's dab is higher, it is calculated
    from his daily assessment base; if woman's dab is higher, it is calculated from hers).
 	-> If neither of the parents have social insurance:
-		- €292/month
+		- €280/month until child is 10 months old, €140 until child is 48 months old => duration 4 years
 		
 	-> the most generous benefit is coded
    
@@ -119,44 +119,44 @@ drop p_dab1 p_dab2 p_dab3
 */	
 									
 * SINGLE (women & men)
-	* not employed
-replace pl_dur = (8114/292) * 4.3		if country == "CZ" & year == 2016 & pl_eli == 1 ///
+	* not employed (4 years)
+replace pl_dur = 4*52		if country == "CZ" & year == 2016 & pl_eli == 1 ///
 										& econ_status != 1 & parstat == 1
 
 	* employed
 replace pl_dur = (8114 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2016 & pl_eli == 1 ///
 														& econ_status == 1 & parstat == 1 & pl_dur == . ///
-														& earning/21.7 < 1171
+														& earning < 424
 	* employed, above ceiling	
-replace pl_dur = (8114 /1171) * 4.3 					if country == "CZ" & year == 2016 & pl_eli == 1 ///
+replace pl_dur = (8114 / 424) * 4.3 					if country == "CZ" & year == 2016 & pl_eli == 1 ///
 														& econ_status == 1 & parstat == 1 & pl_dur == . ///
-														& earning/21.7 >= 1171
+														& earning >= 424
 
 
 * COUPLE (assigned to women)
-	* neither is working														
-replace pl_dur = (8114/292)*4.3 		if country == "CZ" & year == 2016 & pl_eli == 1 ///
+	* neither is working (4 years)														
+replace pl_dur = 4*52 		if country == "CZ" & year == 2016 & pl_eli == 1 ///
 										& econ_status != 1 & !inlist(p_econ_status,.,1) & parstat == 2
 										
 	* woman not employed, man employed, below ceiling
 replace pl_dur = (8114/((0.7 * p_dab)*21.7)) * 4.3 	if country == "CZ" & year == 2016 & pl_eli == 1 /// 
 													& p_econ_status == 1 & !inlist(econ_status,.,1) ///
-													& parstat == 2 & ((0.7*p_dab)*21.7) < 1171
+													& parstat == 2 & ((0.7*p_dab)*21.7) < 424
 																										
 	* woman not employed, man employed, above ceiling
-replace pl_dur = (8114/1171) * 4.3					if country == "CZ" & year == 2016 & pl_eli == 1 /// 
+replace pl_dur = (8114/424) * 4.3					if country == "CZ" & year == 2016 & pl_eli == 1 /// 
 													& p_econ_status == 1 & econ_status != 1 ///
-													& parstat == 2 & ((0.7*p_dab)*21.7) >= 1171
+													& parstat == 2 & ((0.7*p_dab)*21.7) >= 424
 															
 	* woman employed, below ceiling
 replace pl_dur = (8114/((0.7 * dab)*21.7)) * 4.3 	if country == "CZ" & year == 2016 & pl_eli == 1 /// 
 													& econ_status == 1 & parstat == 2 ///
-													& ((0.7*dab)*21.7) < 1171
+													& ((0.7*dab)*21.7) < 424
 
 	* woman employed, above ceiling
-replace pl_dur = (8114/1171) * 4.3				 	if country == "CZ" & year == 2016 & pl_eli == 1 /// 
+replace pl_dur = (8114/424) * 4.3				 	if country == "CZ" & year == 2016 & pl_eli == 1 /// 
 													& econ_status == 1 & parstat == 2 ///
-													& ((0.7*dab)*21.7) >= 1171
+													& ((0.7*dab)*21.7) >= 424
 	
 	
 	
@@ -170,43 +170,43 @@ replace pl_dur = (8114/1171) * 4.3				 	if country == "CZ" & year == 2016 & pl_e
 
 * SINGLE
 	* not employed
-replace pl_ben1 = 292 					if country == "CZ" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = (292 * (10/58)) + (140 * (48/58)) 					if country == "CZ" & year == 2016 & pl_eli == 1 ///
 										& econ_status != 1 & parstat == 1
 										
 	* employed, below ceiling
 replace pl_ben1 = 0.7 * (21.7*dab)		if country == "CZ" & year == 2016 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 1 & earning/21.7 < 1171
+										& econ_status == 1 & parstat == 1 
 										
 	* employed, above ceiling
-replace pl_ben1 = 1171					if country == "CZ" & year == 2016 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 1 & earning/21.7 >= 1171
+replace pl_ben1 = 424					if country == "CZ" & year == 2016 & pl_eli == 1 ///
+										& econ_status == 1 & parstat == 1 & pl_ben1 >= 424
 
 	
 		
 * COUPLE (assigned to women)
 	* neither employed
-replace pl_ben1 = 292 					if country == "CZ" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = (292 * (10/58)) + (140 * (48/58)) 					if country == "CZ" & year == 2016 & pl_eli == 1 ///
 										& econ_status != 1 & !inlist(p_econ_status,.,1) & parstat == 2
 										
-	* woman not employed, man employed, below ceiling
+	* woman not employed, man employed
 replace pl_ben1 =  0.7 * (21.7*p_dab)	if country == "CZ" & year == 2016 & pl_eli == 1 ///
-										& econ_status != 1 & p_econ_status == 1 & parstat == 2 ///
-										& p_earning/21.7 < 1171
+										& econ_status != 1 & p_econ_status == 1 & parstat == 2
+										
 	
 	* woman not employed, man employed, above ceiling
-replace pl_ben1 =  1171					if country == "CZ" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 =  424					if country == "CZ" & year == 2016 & pl_eli == 1 ///
 										& econ_status != 1 & p_econ_status == 1 & parstat == 2 ///
-										& p_earning/21.7 >= 1171	
+										& pl_ben1 >= 424	
 										
 	* woman employed, below ceiling
 replace pl_ben1 =  0.7 * (21.7*dab)	if country == "CZ" & year == 2016 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 2 ///
-										& earning/21.7 < 1171
+										& econ_status == 1 & parstat == 2 
+										
 	
 	* above ceiling
-replace pl_ben1 =  1171					if country == "CZ" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 =  424					if country == "CZ" & year == 2016 & pl_eli == 1 ///
 										& econ_status == 1 & parstat == 2 ///
-										& earning/21.7 >= 1171
+										& pl_ben1 >= 424
 	
 
 replace pl_ben2 = pl_ben1 				if country == "CZ" & year == 2016 & pl_eli == 1 
