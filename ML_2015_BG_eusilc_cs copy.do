@@ -1,7 +1,7 @@
 /* ML_2016_BG_eusilc_cs */
 
 
-* BULGARIA - 2016
+* BULGARIA - 2015
 
 * ELIGIBILITY
 /*	-> employed (compulsorily insured): 12 months of insurance
@@ -13,37 +13,37 @@
 		- single father is not automatically entitled since the mother's consent is required => not coded
 */
 
-replace ml_eli = 1 		if country == "BG" & year == 2016 & gender == 1 ///
+replace ml_eli = 1 		if country == "BG" & year == 2015 & gender == 1 ///
 						& econ_status == 1 & duremp >= 12
 					
 						
-replace ml_eli = 0 		if ml_eli == . & country == "BG" & year == 2016 & gender == 1
+replace ml_eli = 0 		if ml_eli == . & country == "BG" & year == 2015 & gender == 1
 
 
 * DURATION (weeks)
 /* 	-> total leave = 410 days
 	-> prenatal leave = 45 days				*/
 	
-replace ml_dur1 = 45/5 			if country == "BG" & year == 2016 & gender == 1 & ml_eli == 1
+replace ml_dur1 = 45/5 			if country == "BG" & year == 2015 & gender == 1 & ml_eli == 1
 
-replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2016 & gender == 1 & ml_eli == 1
+replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2015 & gender == 1 & ml_eli == 1
 
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
 The amount cannot be lower than minimu wage and cannot exceed avg. net remuneration. 
-LP&R 2016 info does not exist for Bulgaria. Values of benefits are not sourced.
+LP&R 2015 info does not exist for Bulgaria. Values of benefits are not sourced.
 */ 
 
-replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2016 ///
+replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2015 ///
 										& gender == 1 & ml_eli == 1 
 				
 				
-replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2016 & gender == 1 & ml_eli == 1
+replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2015 & gender == 1 & ml_eli == 1
 
 
 foreach x in 1 2 {
-    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "BG" & year == 2016
-	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "BG" & year == 2016
+    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "BG" & year == 2015
+	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "BG" & year == 2015
 }
 
