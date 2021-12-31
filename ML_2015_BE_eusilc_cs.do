@@ -1,14 +1,14 @@
 /* ML_2016_BE_eusilc_cs */
 
 
-* BELGIUM - 2016
+* BELGIUM - 2015
 
 
 * ELIGIBILITY
 /*	-> employed
 	-> self-emloyed (separate system)
 	-> unemployed with unemployment benefit
-	-> source: LP&R 2016
+	-> source: LP&R 2015
 	
 	-> ML is not transferable but can be turned into parental leave if mother dies 
 		or during woman's hospitalization => it is assumed that this does not apply 
