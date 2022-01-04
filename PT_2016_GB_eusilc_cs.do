@@ -10,7 +10,7 @@
 */	
 
 replace pt_eli = 1 		if country == "GB" & year == 2016 & gender == 2 ///
-						& econ_status == 1 & duremp >= 26/4.3 & earning/4.3 
+						& econ_status == 1 & duremp >= 26/4.3 
 						
 replace pt_eli = 0 		if pt_eli == . & country == "GB" & year == 2016 & gender == 2
 
