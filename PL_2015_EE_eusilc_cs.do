@@ -40,6 +40,7 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2015 ///
 	-> minimum: €390/month
 	-> maximum: €2,549/month 	
 	-> unemployed and inactive parent: €355
+	-> source: LP&R 2015
 */
 
 replace pl_ben1 = earning 	if country == "EE" & year == 2015 & pl_eli == 1 ///
