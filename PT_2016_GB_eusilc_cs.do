@@ -5,12 +5,13 @@
 * ELIGIBILITY
 /*	-> employed if:
 		- employed by the same employer (not coded)
-		- for 26 weeks 
+		- for 26 weeks
+		- average weekly earning at least €136
 		
 */	
 
 replace pt_eli = 1 		if country == "GB" & year == 2016 & gender == 2 ///
-						& econ_status == 1 & duremp >= 26/4.3 
+						& econ_status == 1 & duremp >= 26/4.3 & earning/4.3 >= 136
 						
 replace pt_eli = 0 		if pt_eli == . & country == "GB" & year == 2016 & gender == 2
 
