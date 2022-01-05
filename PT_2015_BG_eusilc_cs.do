@@ -22,6 +22,10 @@ replace pt_dur = 15/5 if country == "BG" & year == 2015 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
+	-> minimum: statutory minimum wage (€184.07/month)
+		-> source: Eurostat (2021) Minimum Wages, EARN_MW_CUR, accessed 5/1/2022
+	-> ceiling: average net wage (annual net earnings €2,016.86)
+		-> source: Eurostat (2021) Annual net earnings, EARN_NT_NET, accessed 5/1/2022
 
 */
 
@@ -31,7 +35,18 @@ replace pt_ben1 = ((earning * 0.9) * (15/21.7)) + (earning * ((21.7-15)/21.7)) /
 										& pt_eli == 1 & pt_ben1 == .
 	
 
-								
+* minimum
+replace pt_ben1 = 184.07 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
+								& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 235.16
+
+* maximum 
+replace pt_ben1 = (2016.86/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
+								& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= (2016.18/12)
+
+
+
+
+replace pt_ben2 = pt_ben1 if country == "BG" & year == 2016 & pt_eli == 1								
 
 
 
