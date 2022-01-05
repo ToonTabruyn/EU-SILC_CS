@@ -1,7 +1,7 @@
-/* PL_2016_PT_eusilc_cs */
+/* PL_2015_PT_eusilc_cs */
 
 
-* PORTUGAL - 2016
+* PORTUGAL - 2015
 
 * ELIGIBILITY
 /*	-> pooled rights (i.e. individual and family rights to leave)
@@ -13,11 +13,11 @@
 		extended parental period that is a family right
 	-> family right => in couples leave assigned to woman */
 		
-replace pl_eli = 1 			if country == "PT" & year == 2016 & inlist(econ_status,1,2) ///
+replace pl_eli = 1 			if country == "PT" & year == 2015 & inlist(econ_status,1,2) ///
 							& (duremp+dursemp) >= 6
 
 							
-replace pl_eli =  0			if pl_eli == . & country == "PT" & year == 2016
+replace pl_eli =  0			if pl_eli == . & country == "PT" & year == 2015
 
 
 * DURATION (weeks)
@@ -26,15 +26,15 @@ replace pl_eli =  0			if pl_eli == . & country == "PT" & year == 2016
 	-> 3 months of extended parental benefit 
 	-> single parents are not entitled to the share of the other parent*/
 
-gen pl_init = (150 - (6*5) - 15)/5 		if country == "PT" & year == 2016
-gen pl_exte = 3*4.3						if country == "PT" & year == 2016
+gen pl_init = (150 - (6*5) - 15)/5 		if country == "PT" & year == 2015
+gen pl_exte = 3*4.3						if country == "PT" & year == 2015
 	
 * cohabiting women
-replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2016 ///
+replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2015 ///
 										& pl_eli == 1 & gender == 1
 
 * single men											
-replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2016 ///
+replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2015 ///
 										& pl_eli == 1 & gender == 2 & parstat == 1
 
 
@@ -52,30 +52,30 @@ replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2016 ///
 	
 	* women
 replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))	///
-												if country == "PT" & year == 2016 & pl_eli == 1 ///
+												if country == "PT" & year == 2015 & pl_eli == 1 ///
 												& gender == 1
 												
-replace pl_ben1 =  419.22		if country == "PT" & year == 2016 & pl_eli == 1	///
+replace pl_ben1 =  419.22		if country == "PT" & year == 2015 & pl_eli == 1	///
 								& pl_ben1 < 419.22 & gender == 1
 								
 	* single men
 replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))	///
-												if country == "PT" & year == 2016 & pl_eli == 1 ///
+												if country == "PT" & year == 2015 & pl_eli == 1 ///
 												& gender == 2 & parstat == 1
 												
-replace pl_ben1 =  419.22		if country == "PT" & year == 2016 & pl_eli == 1	///
+replace pl_ben1 =  419.22		if country == "PT" & year == 2015 & pl_eli == 1	///
 								& pl_ben1 < 419.22 & gender == 2 & parstat == 1
 								
 												
-replace pl_ben2 = earning 		if country == "PT" & year == 2016 & pl_eli == 1
+replace pl_ben2 = earning 		if country == "PT" & year == 2015 & pl_eli == 1
 
 
 
 
 foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "PT" & year == 2016
+	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "PT" & year == 2015
 }
 
-replace pl_dur = 0 	if pl_eli == 0 & country == "PT" & year == 2016
+replace pl_dur = 0 	if pl_eli == 0 & country == "PT" & year == 2015
 
 drop pl_init pl_exte

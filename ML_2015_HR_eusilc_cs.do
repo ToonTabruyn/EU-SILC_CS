@@ -1,7 +1,7 @@
-/* ML_2016_HR_eusilc_cs */
+/* ML_2015_HR_eusilc_cs */
 
 
-* CROATIA - 2016
+* CROATIA - 2015
 
 * ELIGIBILITY
 /*	-> employed  (maternity leave)
@@ -13,10 +13,10 @@
 		mother needs to agree => it is assumed that single father is not automatically
 		entitled to the leave (not coded)
 */
-replace ml_eli = 1 		if country == "HR" & year == 2016 & gender == 1 ///
+replace ml_eli = 1 		if country == "HR" & year == 2015 & gender == 1 ///
 						& inrange(econ_status,1,4) 
 						
-replace ml_eli = 0 		if ml_eli == . & country == "HR" & year == 2016 ///
+replace ml_eli = 0 		if ml_eli == . & country == "HR" & year == 2015 ///
 						& gender == 1
 
 
@@ -29,13 +29,13 @@ replace ml_eli = 0 		if ml_eli == . & country == "HR" & year == 2016 ///
 		-> postnatal: until child is 6 months old
 */
 	
-replace ml_dur1 = 28/5 		if country == "HR" & year == 2016 & ml_eli == 1 ///
+replace ml_dur1 = 28/5 		if country == "HR" & year == 2015 & ml_eli == 1 ///
 							& inlist(econ_status,1,2)
-replace ml_dur1 = 0 		if country == "HR" & year == 2016 & ml_eli == 1 ///
+replace ml_dur1 = 0 		if country == "HR" & year == 2015 & ml_eli == 1 ///
 							& inlist(econ_status,3,4)
 							
 
-replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2016 & ml_eli == 1
+replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2015 & ml_eli == 1
 
 
 * BENEFIT (monthly)
@@ -43,17 +43,17 @@ replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2016 & ml_eli == 1
 		months over the course of 2 years before birth (not coded) = 100%
 	-> those who do not fulfill this requirement = €221/month	*/
 	
-replace ml_ben1 = earning 		if country == "HR" & year == 2016 & gender == 1 ///
+replace ml_ben1 = earning 		if country == "HR" & year == 2015 & gender == 1 ///
 								& ml_eli == 1 & (duremp+dursemp) >= 12 & earning != 0
-replace ml_ben1 = 221			if country == "HR" & year == 2016 & gender == 1 ///
+replace ml_ben1 = 221			if country == "HR" & year == 2015 & gender == 1 ///
 								& ml_eli == 1 & ml_ben1 == .
 								
 
 
-replace ml_ben2 = ml_ben1 		if country == "HR" & year == 2016 & gender == 1 & ml_eli == 1
+replace ml_ben2 = ml_ben1 		if country == "HR" & year == 2015 & gender == 1 & ml_eli == 1
 
 foreach x in 1 2 {
-    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "HR" & year == 2016
-	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "HR" & year == 2016
+    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "HR" & year == 2015
+	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "HR" & year == 2015
 }
 

@@ -1,4 +1,4 @@
-/* PL_2016_BG_eusilc_cs */
+/* PL_2015_BG_eusilc_cs */
 
 
 * BULGARIA - 2015
@@ -10,7 +10,7 @@
 	-> single father is not automatically entitled - mother's consent is required => not coded
    Source: MISSOC 01/07/2015										*/
 
-replace pl_eli = 1 	if country == "BG" & year == 2016 & gender == 1
+replace pl_eli = 1 	if country == "BG" & year == 2015 & gender == 1
 replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2015 
 
 

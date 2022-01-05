@@ -1,7 +1,7 @@
-/* PT_2016_PT_eusilc_cs */
+/* PT_2015_PT_eusilc_cs */
 
 
-* PORTUGAL - 2016
+* PORTUGAL - 2015
 
 * ELIGIBILITY
 /*	-> pooled rights (i.e. individual and family rights to leave)
@@ -10,19 +10,19 @@
 	-> compulsorily social insurance for employed and self-employed 
 		- 6 months of work before childbirth	*/
 		
-replace pt_eli = 1 		if country == "PT" & year == 2016 & gender == 2 ///
+replace pt_eli = 1 		if country == "PT" & year == 2015 & gender == 2 ///
 						& inlist(econ_status,1,2) & (duremp+dursemp) >= 6
 
 					
 						
-replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2016 & gender == 2
+replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2015 & gender == 2
 
 * DURATION (weeks)
-/*	-> 25 working days (LP&R 2016), 15 days are obligatory 
-	-> LP&R 2016: single parents cannot use the other parent's entitlement => 
+/*	-> 25 working days (LP&R 2015), 15 days are obligatory 
+	-> LP&R 2015: single parents cannot use the other parent's entitlement => 
 		father's share is not assigned to single woman 	*/
 
-replace pt_dur = 25/5 	if country == "PT" & year == 2016 & pt_eli == 1
+replace pt_dur = 25/5 	if country == "PT" & year == 2015 & pt_eli == 1
 
 
 * BENEFIT (monthly)
@@ -35,16 +35,16 @@ replace pt_dur = 25/5 	if country == "PT" & year == 2016 & pt_eli == 1
 	-> minimum: €419.22/month 
 */
 	
-replace pt_ben1 = earning  	if country == "PT" & year == 2016 & pt_eli == 1
+replace pt_ben1 = earning  	if country == "PT" & year == 2015 & pt_eli == 1
 
-replace pt_ben1 = 419.22  	if country == "PT" & year == 2016 & pt_eli == 1 ///
+replace pt_ben1 = 419.22  	if country == "PT" & year == 2015 & pt_eli == 1 ///
 							& pt_ben1 < 419.22
 
-replace pt_ben2 = pt_ben1 	if country == "PT" & year == 2016 & pt_eli == 1
+replace pt_ben2 = pt_ben1 	if country == "PT" & year == 2015 & pt_eli == 1
 
 
 foreach x in 1 2 {
-	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "PT" & year == 2016
+	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "PT" & year == 2015
 }
 
-replace pt_dur = 0 if pt_eli == 0 & country == "PT" & year == 2016
+replace pt_dur = 0 if pt_eli == 0 & country == "PT" & year == 2015

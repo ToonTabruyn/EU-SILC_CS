@@ -1,4 +1,4 @@
- /* PT_2016_BG_eusilc_cs */
+ /* PT_2015_BG_eusilc_cs */
 
  
 * BULGARIA - 2015
@@ -36,17 +36,17 @@ replace pt_ben1 = ((earning * 0.9) * (15/21.7)) + (earning * ((21.7-15)/21.7)) /
 	
 
 * minimum
-replace pt_ben1 = 184.07 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
+replace pt_ben1 = 184.07 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2015 ///
 								& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 235.16
 
 * maximum 
-replace pt_ben1 = (2016.86/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
-								& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= (2016.18/12)
+replace pt_ben1 = (2015.86/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2015 ///
+								& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= (2015.18/12)
 
 
 
 
-replace pt_ben2 = pt_ben1 if country == "BG" & year == 2016 & pt_eli == 1								
+replace pt_ben2 = pt_ben1 if country == "BG" & year == 2015 & pt_eli == 1								
 
 
 

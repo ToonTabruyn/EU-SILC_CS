@@ -1,4 +1,4 @@
-/* ML_2016_NO_eusilc_cs */
+/* ML_2015_NO_eusilc_cs */
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -7,7 +7,7 @@
 	Accessed: 01/04/2021
 */
 
-* NORWAY - 2016
+* NORWAY - 2015
 
 * ELIGIBILITY
 /*	-> any economic activity if they were employed or self-employed for at least 6 months
@@ -18,23 +18,23 @@
 */
 
 * only woman is eligibile
-replace ml_eli = 1 			if country == "NO" & year == 2016 & gender == 1 ///
+replace ml_eli = 1 			if country == "NO" & year == 2015 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * both partners are eligible
-replace ml_eli = 1 			if country == "NO" & year == 2016 & gender == 1 ///
+replace ml_eli = 1 			if country == "NO" & year == 2015 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
 
 * only man is eligible							
-replace ml_eli = 1 			if country == "NO" & year == 2016 & gender == 2 ///
+replace ml_eli = 1 			if country == "NO" & year == 2015 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single man							
-replace ml_eli = 1			if country == "NO" & year == 2016 & gender == 2 ///
+replace ml_eli = 1			if country == "NO" & year == 2015 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & parstat == 1
 
 
-replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2016 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2015 & gender == 1
 
 
 * DURATION (weeks)
@@ -48,18 +48,18 @@ replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2016 & gender =
 		- 59 weeks on 80% earning
 */
 
-replace ml_dur1 = 3 		if country == "NO" & year == 2016 & ml_eli == 1 & gender == 1
+replace ml_dur1 = 3 		if country == "NO" & year == 2015 & ml_eli == 1 & gender == 1
 
 * both partners are eligible
-replace ml_dur2 = 15-3 		if country == "NO" & year == 2016 & ml_eli == 1 & gender == 1 ///
+replace ml_dur2 = 15-3 		if country == "NO" & year == 2015 & ml_eli == 1 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
 
 * only man is eligible
-replace ml_dur2 = 6 		if country == "NO" & year == 2016 & gender == 2 ///
+replace ml_dur2 = 6 		if country == "NO" & year == 2015 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single man
-replace ml_dur2 = 12		if country == "NO" & year == 2016 & gender == 2 ///
+replace ml_dur2 = 12		if country == "NO" & year == 2015 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & parstat == 1
 
 							
@@ -71,18 +71,18 @@ replace ml_dur2 = 12		if country == "NO" & year == 2016 & gender == 2 ///
 	-> minimum: maternity grant - €4,943 for the whole period (11 months)
 */
 	
-replace ml_ben1 = earning 		if country == "NO" & year == 2016 & ml_eli == 1
-replace ml_ben1 = 59685/12			if country == "NO" & year == 2016 & ml_eli == 1 ///
+replace ml_ben1 = earning 		if country == "NO" & year == 2015 & ml_eli == 1
+replace ml_ben1 = 59685/12			if country == "NO" & year == 2015 & ml_eli == 1 ///
 								& ml_ben1 >= 59685/12
-replace ml_ben1 = 4943/11			if country == "NO" & year == 2016 & ml_eli == 1 ///
+replace ml_ben1 = 4943/11			if country == "NO" & year == 2015 & ml_eli == 1 ///
 								& ml_ben1 < 4943/11
 
 
-replace ml_ben2 = ml_ben1 		if country == "NO" & year == 2016 & ml_eli == 1
+replace ml_ben2 = ml_ben1 		if country == "NO" & year == 2015 & ml_eli == 1
 
 
 foreach x in 1 2 {
-	replace ml_dur`x' = 0 	if country == "NO" & year == 2016 & ml_eli == 0
-	replace ml_ben`x' = 0 	if country == "NO" & year == 2016 & ml_eli == 0
+	replace ml_dur`x' = 0 	if country == "NO" & year == 2015 & ml_eli == 0
+	replace ml_ben`x' = 0 	if country == "NO" & year == 2015 & ml_eli == 0
 	
 }

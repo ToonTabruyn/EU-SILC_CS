@@ -1,6 +1,6 @@
-/* ML_2016_PT_eusilc_cs */
+/* ML_2015_PT_eusilc_cs */
 
-* PORTUGAL - 2016
+* PORTUGAL - 2015
 
 * ELIGIBILITY
 /*	-> pooled rights (i.e. individual and family rights to leave)
@@ -12,19 +12,19 @@
 		we assume that this does not extend to abandonment of child by the mother 
 */
 	
-replace ml_eli = 1 			if country == "PT" & year == 2016 & gender == 1 ///
+replace ml_eli = 1 			if country == "PT" & year == 2015 & gender == 1 ///
 							& inlist(econ_status,1,2) & duremp >= 6
 
 							
-replace ml_eli = 0 			if ml_eli == . & country == "PT" & year == 2016 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "PT" & year == 2015 & gender == 1
 
 
 * DURATION (weeks)
 /*	-> postnatal leave: 6 weeks
 	-> prenatal leave: no compulsory leave, option of 30 days from the leave (not coded) */
-replace ml_dur1 = 0 		if country == "PT" & year == 2016 & ml_eli == 1
+replace ml_dur1 = 0 		if country == "PT" & year == 2015 & ml_eli == 1
 
-replace ml_dur2 = 6 		if country == "PT" & year == 2016 & ml_eli == 1
+replace ml_dur2 = 6 		if country == "PT" & year == 2015 & ml_eli == 1
 
 
 
@@ -38,14 +38,14 @@ replace ml_dur2 = 6 		if country == "PT" & year == 2016 & ml_eli == 1
 	-> minimum: €419.22/month 
 	-> most generous option coded (100%)*/
 
-replace ml_ben1 = earning 		if country == "PT" & year == 2016 & ml_eli == 1
-replace ml_ben1 = 419.22		if country == "PT" & year == 2016 & ml_eli == 1 ///
+replace ml_ben1 = earning 		if country == "PT" & year == 2015 & ml_eli == 1
+replace ml_ben1 = 419.22		if country == "PT" & year == 2015 & ml_eli == 1 ///
 								& ml_ben1 < 419.22
 								
-replace ml_ben2 = ml_ben1 		if country == "PT" & year == 2016 & ml_eli == 1
+replace ml_ben2 = ml_ben1 		if country == "PT" & year == 2015 & ml_eli == 1
 
 foreach x in 1 2 {
-    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "PT" & year == 2016
-	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "PT" & year == 2016
+    replace ml_dur`x' = 0 	if ml_eli == 0 & country == "PT" & year == 2015
+	replace ml_ben`x' = 0 	if ml_eli == 0 & country == "PT" & year == 2015
 }
 

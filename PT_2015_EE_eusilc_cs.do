@@ -19,7 +19,7 @@ replace pt_dur = 10/5 	if country == "EE" & year == 2015 & pt_eli == 1
 * BENEFIT (monthly)
 /*	-> 100% of earning
 	-> ceiling: 3x the average gross monthly salary (MISSOC 2015)
-	-> average gross monthly salary, 2016: €1,310 (Source: Statistics Estonia, 
+	-> average gross monthly salary, 2015: €1,310 (Source: Statistics Estonia, 
 
 	https://www.stat.ee/en/find-statistics/statistics-theme/work-life/wages-and-salaries-and-labour-costs/average-monthly-gross-wages-and-salaries
 	accessed 24/03/2021		*/

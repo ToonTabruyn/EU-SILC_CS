@@ -1,13 +1,13 @@
-/* PT_2016_IE_eusilc_cs */
+/* PT_2015_IE_eusilc_cs */
 
 
-* IRELAND - 2016
+* IRELAND - 2015
 
 * No paternity leave at all!
 
 * ELIGIBILITY
 /*	no statutory right to paternity leave  	*/
 
-replace pt_eli = 0 		if country == "IE" & year == 2016 & gender == 2
+replace pt_eli = 0 		if country == "IE" & year == 2015 & gender == 2
 
 
