@@ -43,18 +43,18 @@ replace pl_dur = 6 		if country == "HR" & year == 2016 & pl_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> Employed & self-employd: 100%
-		-> ceiling = €541/month
-	-> All others: €315/month
+		-> ceiling = €565/month
+	-> All others: €225.22/month
 */
 
 replace pl_ben1 = earning 		if country == "HR" & year == 2016 & pl_eli == 1 ///
 								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
 
-replace pl_ben1 = 541 	if country == "HR" & year == 2016 & pl_eli == 1 ///
-						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning > 541
+replace pl_ben1 = 565 	if country == "HR" & year == 2016 & pl_eli == 1 ///
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning > 565
 
 
-replace pl_ben1 = 315 	if country == "HR" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = 225.22 	if country == "HR" & year == 2016 & pl_eli == 1 ///
 						& pl_ben1 == . 
  
 
