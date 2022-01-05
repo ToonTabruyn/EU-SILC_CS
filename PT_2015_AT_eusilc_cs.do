@@ -1,10 +1,10 @@
 /* PT_2016_AT_eusilc_cs */
 
-* AUSTRIA - 2016
+* AUSTRIA - 2015
 
 /*	No statutory entitlement to paternity leave.
 	
-	Source: LP&R 2016
+	Source: LP&R 2015
 */
 
 * ELIGIBILITY
