@@ -23,8 +23,8 @@ replace pt_dur = 11/5 	if country == "FR" & year == 2015 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> minimum: €9.39/day
-	-> ceiling: €86/ day
+	-> minimum: €9.26/day
+	-> ceiling: €82.33/ day
 	-> no ceiling in public sector (not coded; LP&R 2015)
 	-> source: MISSOC 01/07/2015	*/ 
 
@@ -32,15 +32,15 @@ replace pt_ben1 = earning 		if country == "FR" & year == 2015 & pt_eli == 1 ///
 								& pt_ben1 == .
 	
 * ceiling
-replace pt_ben1 = ((86*11) * (11/21.7)) + (earning * ((21.7-11)/21.7)) ///
+replace pt_ben1 = ((82.33*11) * (11/21.7)) + (earning * ((21.7-11)/21.7)) ///
 											if country == "FR" & year == 2015  ///
-											& pt_eli == 1 & pt_ben1/21.7 >= 86
+											& pt_eli == 1 & pt_ben1/21.7 >= 82.33
 	
 
 * minimum
-replace pt_ben1 = ((9.39*11) * (11/21.7)) + (earning * ((21.7-11)/21.7)) ///
+replace pt_ben1 = ((9.26*11) * (11/21.7)) + (earning * ((21.7-11)/21.7)) ///
 											if country == "FR" & year == 2015  ///
-											& pt_eli == 1 & pt_ben1/11 < (9.39*5)
+											& pt_eli == 1 & pt_ben1/11 < (9.26*5)
 
 											
 
