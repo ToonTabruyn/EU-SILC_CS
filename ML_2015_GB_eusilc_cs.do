@@ -6,7 +6,7 @@
 * ELIGIBILITY
 /*	-> employed (statutory maternity pay), self-employed (maternity allowance): 
 		- for 26 weeks before childbirth 
-		- earning at least €36/week
+		- earning at least €42/week
 	-> further restrictions for entitlement to cash benefits
 	
 	-> part of ML can be shared with the father (shared parental leave) if:
@@ -14,19 +14,19 @@
 			- employed by the same employer for at least 26 weeks 
 		- father/partner:
 			- employed or self-employed for at least 26 weeks
-			- earned at least €441 (coded) in total during 13 weeks (not coded) within 66 weeks (not coded) before the birth
+			- earned at least €42 (coded) a week for 13 weeks (not coded) within 66 weeks (not coded) before the birth
 	-> single fathers are not entitled to shared parental leave because it is 
 	   dependent on the mother's economic status
 */
 
 replace ml_eli = 1 			if country == "GB" & year == 2015 & gender == 1 ///
-							& inlist(econ_status,1,2) & (earning/4.3) >= 36 ///
+							& inlist(econ_status,1,2) & (earning/4.3) >= 42 ///
 							& (duremp+dursemp) >= 26/4.3
 
 * father's eligibility for shared parental leave 
 replace ml_eli = 1 			if country == "GB" & year == 2015 & gender == 2 ///
 							& inlist(econ_status,1,2) & (duremp+dursemp) >= 26/4.3 ///
-							& (earning/4.3) >= 441 & p_econ_status == 1 ///
+							& (earning/4.3) >= 42 & p_econ_status == 1 ///
 							& (p_duremp+p_dursemp) >= 26/4.3
 							
 replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2015 & gender == 1
@@ -35,12 +35,12 @@ replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2015 & gender =
 /*	-> employed if (for paid leave):
 		- employed by the same employer (not coded)
 		- for 26 weeks 
-		- average weekly earnings at least €136
+		- average weekly earnings at least €158
 		- duration: 52 weeks  
 		
 	-> self-employed and employed if
 		- working for at least 26 weeks (coded) in the 66 weeks before birth (not coded)
-		- average weekly earnings at least €39
+		- average weekly earnings at least €42
 		- duration: 39 weeks
 		
 	-> no compulsory prenatal leave (can take up to 11 weeks)
@@ -54,11 +54,11 @@ replace ml_dur1 = 0 		if country == "GB" & year == 2015 & ml_eli == 1 & gender =
 
 replace ml_dur2 = 52 		if country == "GB" & year == 2015 & ml_eli == 1 ///
 							& econ_status == 1 & duremp >= 26/4.3 ///
-							& (earning/4.3) >= 136 & gender == 1
+							& (earning/4.3) >= 158 & gender == 1
 							
 replace ml_dur2 = 39		if country == "GB" & year == 2015 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & ml_dur2 == . ///
-							& (earning/4.3) >= 39 & gender == 1
+							& (earning/4.3) >= 42 & gender == 1
 
 
 
