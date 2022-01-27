@@ -26,13 +26,13 @@ replace pt_dur = 4 				if country == "ES" & year == 2014 & pt_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> ceiling: €3,803.70/month
+	-> ceiling: €3,597/month
 */
 
 replace pt_ben1 = earning 	if country == "ES" & year == 2014 & pt_eli == 1
 
-replace pt_ben1 = 3803 		if country == "ES" & year == 2014 & pt_eli == 1 ///
-							& pt_ben1 > 3803.7
+replace pt_ben1 = 3597 		if country == "ES" & year == 2014 & pt_eli == 1 ///
+							& pt_ben1 > 3597
 
 replace pt_ben2 = pt_ben1 	if country == "ES" & year == 2014 & pt_eli == 1
 
