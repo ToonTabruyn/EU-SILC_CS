@@ -33,7 +33,7 @@ replace pl_dur = 52 		if country == "PL" & year == 2016 & pl_eli == 1 ///
 							
 * BENEFIT (monthly)
 /*	-> proportional benefits: 
-		- woman choose 100% ML benefit: 100% earning for 6 weeks, 60% for 24 weeks (not coded)
+		- woman choose 100% ML benefit: 100% earning for 6 weeks, 60% for 26 weeks (not coded)
 		- woman choose 80% ML benefit: 80% earning for the whole period
 	-> flat-rate benefit: €226/month
  */
