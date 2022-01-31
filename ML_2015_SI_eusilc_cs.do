@@ -41,15 +41,15 @@ replace ml_dur2 = 80/7			if country == "SI" & year == 2015 & ml_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> ceiling: €2,863/month (LP&R 2015)
-	-> minimum: €323.55/month (LP&R 2015)		*/
+	-> ceiling: €3,080/month (LP&R 2015)
+	-> minimum: €434.90/month (LP&R 2015)		*/
 	
 replace ml_ben1 = earning 		if country == "SI" & year == 2015 & ml_eli == 1 ///
 								& inlist(econ_status,1,2)	
-replace ml_ben1 = 323.55 		if country == "SI" & year == 2015 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & ml_ben1 < 323.55
+replace ml_ben1 = 434.90 		if country == "SI" & year == 2015 & ml_eli == 1 ///
+								& inlist(econ_status,1,2) & ml_ben1 < 434.90
 replace ml_ben1 = 2863	 		if country == "SI" & year == 2015 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & ml_ben1 >= 2863 
+								& inlist(econ_status,1,2) & ml_ben1 >= 3080 
 					
 
 replace ml_ben2 = ml_ben1 		if country == "SI" & year == 2015 & ml_eli == 1
