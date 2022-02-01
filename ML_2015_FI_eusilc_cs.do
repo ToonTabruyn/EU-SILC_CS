@@ -6,6 +6,8 @@
 * ELIGIBILITY (MISSOC 01/07/2015)
 /*	-> all residents (women)
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> ML can be transferred to father in case of death or illness => it is assumed that 
+		this does not apply to cases where the mother abandoned her child (not coded)
 
 */
 replace ml_eli = 1 			if country == "FI" & year == 2015 & gender == 1 
