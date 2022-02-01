@@ -31,11 +31,10 @@ replace ml_dur2 = 20 		if country == "PL" & year == 2015 & ml_eli == 1
 		- the choice will determine the duration of parental leave (100% more generous 
 		in a short run, 80% more generous in a long run => 80% coded), less generous 
 		cash benefits imply longer parental leave
-	-> minimum: €226/month		*/
+	*/
 	
 replace ml_ben1 = earning*0.8 		if country == "PL" & year == 2015 & ml_eli == 1
-replace ml_ben1 = 226 				if country == "PL" & year == 2015 & ml_eli == 1 ///
-									& ml_ben1 < 226
+
 
 replace ml_ben2 = ml_ben1 			if country == "PL" & year == 2015 & ml_eli == 1						
 
