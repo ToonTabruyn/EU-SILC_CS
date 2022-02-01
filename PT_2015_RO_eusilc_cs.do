@@ -15,7 +15,8 @@ replace pt_eli = 0 		if pt_eli == . & country == "RO" & year == 2015 & gender ==
 
 * DURATION (weeks)
 /*	-> 5 days
-	-> can be extended of 5 days if father attends a course in childcare (not coded)	*/
+	-> can be extended of 5 days if father attends a course in childcare (not coded)
+*/
 	
 replace pt_dur = 5/5 	if country == "RO" & year == 2015 & pt_eli == 1
 
