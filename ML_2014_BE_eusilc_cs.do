@@ -46,7 +46,10 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2014 & gender == 1 ///
 * BENEFIT (monthly)
 /* 	-> employed (MISSOC 01/07/2014): 
 		-> first 30 days = 82% earnings, no ceiling 
-		-> rest of leave = 75% earnings, ceiling €98.70/day.			
+		-> rest of leave = 75% earnings, ceiling €98.70/day.	
+	-> self-employed:
+		-> entitled to flat-rate benefit (MISSOC 2014)
+		-> the value of the flat-rate benefit is not available => coded as in 2015: €440.5/week
 	-> unemployed (M2014): 
 		-> Special regulations for unemployed workers (not coded)
 
@@ -70,7 +73,10 @@ replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((98.7 * 5) * (15 - (30
 				
 
 	
-
+* self-employed
+replace ml_ben1 = 440.5 * 4.3 		if country == "BE" & year == 2014 ///
+									& gender == 1 & econ_status == 2 ///
+									& ml_ben1 == . & ml_eli == 1
 
 * ML benefit in the first month
 replace ml_ben2 = 0.82 * earning ///
