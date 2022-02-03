@@ -79,7 +79,7 @@ gen pt_ben24b = (earning - (36420/12)) * 0.4 		if country == "FI" ///
 
 replace pt_ben24 = pt_ben24a + pt_ben24b 		if country == "FI" ///
 												& year == 2015	& gender == 2 ///
-												& pt_eli == 1 & ml_ben49 == . ///
+												& pt_eli == 1 & pt_ben24 == . ///
 												& inrange((earning*12),36420,56,032)			
 			
 * IG 24d - annual earnings above €56,032	
