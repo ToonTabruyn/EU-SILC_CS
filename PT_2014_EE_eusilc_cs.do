@@ -22,7 +22,7 @@ replace pt_dur = 10/5 	if country == "EE" & year == 2014 & pt_eli == 1
 	-> average gross monthly salary, 2014: €1,005 (Source: Statistics Estonia, 
 
 	https://www.stat.ee/en/find-statistics/statistics-theme/work-life/wages-and-salaries-and-labour-costs/average-monthly-gross-wages-and-salaries
-	accessed 24/03/2021		*/
+	accessed 3/02/2021		*/
 	
 replace pt_ben1 = earning 	if country == "EE" & year == 2014 & pt_eli == 1
 							
