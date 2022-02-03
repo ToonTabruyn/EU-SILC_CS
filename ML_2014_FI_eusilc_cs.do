@@ -37,7 +37,7 @@ remaining 49 days:
 	-> €23.92/day if unemployed or earnings are less than €10,253/year (income group 49a)
 	-> 70% on earnings between €10,253/year and €36,071/year (IG 49b)
 	-> 40% on earnings between €36,071/year and €56,498/year (IG 49c)
-	-> 25% on earnings above €56,498/year   (IG 49d) 						*/ 
+	-> 25% on earnings above €55,498/year   (IG 49d) 						*/ 
 
 * Income group (IG) 56a
 gen ml_ben56 = 23.92 * 21.7 		if country == "FI" & year == 2014 ///
