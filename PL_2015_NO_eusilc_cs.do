@@ -40,23 +40,23 @@ replace pl_dur = 19 		if country == "NO" & year == 2015 & pl_eli == 1 & gender =
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €59,685/year  
-	-> minimum: maternity grant - €4,943 for the whole period (11 months)
+	-> ceiling: €61,365/year  
+	-> minimum: maternity grant - €5,018 for the whole period (11 months)
 */
 
 	* women
 replace pl_ben1 = earning 		if country == "NO" & year == 2015 & pl_eli == 1 & gender ==1
-replace pl_ben1 = 59685/12		if country == "NO" & year == 2015 & pl_eli == 1 ///
-								& pl_ben1 >= 59685/12 & gender == 1
-replace pl_ben1 = 4943/11		if country == "NO" & year == 2015 & pl_eli == 1 ///
-								& pl_ben1 < 4943/11 & gender == 1
+replace pl_ben1 = 61365/12		if country == "NO" & year == 2015 & pl_eli == 1 ///
+								& pl_ben1 >= 61365/12 & gender == 1
+replace pl_ben1 = 5018/11		if country == "NO" & year == 2015 & pl_eli == 1 ///
+								& pl_ben1 < 5018/11 & gender == 1
 
 	* single men
 replace pl_ben1 = earning 		if country == "NO" & year == 2015 & pl_eli == 1 & gender == 2 & parstat == 1
-replace pl_ben1 = 59685/12		if country == "NO" & year == 2015 & pl_eli == 1 ///
-								& pl_ben1 >= 59685/12 & gender == 2 & parstat == 1
-replace pl_ben1 = 4943/11		if country == "NO" & year == 2015 & pl_eli == 1 ///
-								& pl_ben1 < 4943/11 & gender == 2 & parstat == 1
+replace pl_ben1 = 61365/12		if country == "NO" & year == 2015 & pl_eli == 1 ///
+								& pl_ben1 >= 61365/12 & gender == 2 & parstat == 1
+replace pl_ben1 = 5018/11		if country == "NO" & year == 2015 & pl_eli == 1 ///
+								& pl_ben1 < 5018/11 & gender == 2 & parstat == 1
 
 
 replace pl_ben2 = pl_ben1		if country == "NO" & year == 2015 & pl_eli == 1
