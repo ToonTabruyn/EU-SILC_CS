@@ -66,40 +66,40 @@ replace ml_dur2 = 39		if country == "GB" & year == 2015 & ml_eli == 1 ///
 /*	->  employed women who fulfil the stricter conditions (see "Duration"):
 			- 6 weeks: 90% earnings (taxed)
 			- 33 weeks: 90% earnings (taxed)
-				- ceiling: €181/week 
+				- ceiling: €197/week 
 			- 13 weeks: unpaid
 			
 	-> employed and self-employed (maternity allowance):
 			-39 weeks: 90% earning (not taxed)
-				- ceiling: €181/week 
+				- ceiling: €197/week 
 */
 
 
 * statutory maternity pay
 gen ml_bena = 0.9 * earning			if country == "GB" & year == 2015 & ml_eli == 1
-gen ml_benb = (181 * 4.3)			if country == "GB" & year == 2015 & ml_eli == 1 
+gen ml_benb = (197 * 4.3)			if country == "GB" & year == 2015 & ml_eli == 1 
 
 									
 	* under ceiling
 replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2015 & ml_eli == 1 ///
-											& (earning*0.9)/4.3 < 181 & ml_dur2 == 52
+											& (earning*0.9)/4.3 < 197 & ml_dur2 == 52
 
 	* above ceiling
 replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
 											if country == "GB" & year == 2015 & ml_eli == 1 ///
-											& (earning*0.9)/4.3 >= 181 & ml_dur2 == 52
+											& (earning*0.9)/4.3 >= 197 & ml_dur2 == 52
 
 
 
 * maternity allowance	
 	* under ceiling
 replace ml_ben1 = ml_bena		if country == "GB" & year == 2015 & ml_eli == 1 ///
-								& (earning*0.9)/4.3 < 181 & ml_dur2 == 39	
+								& (earning*0.9)/4.3 < 197 & ml_dur2 == 39	
 	
 	
 	* above ceiling
 replace ml_ben1 = ml_benb		if country == "GB" & year == 2015 & ml_eli == 1 ///
-								& (earning*0.9)/4.3 >= 181 & ml_dur2 == 39
+								& (earning*0.9)/4.3 >= 197 & ml_dur2 == 39
 	
 	
 	
