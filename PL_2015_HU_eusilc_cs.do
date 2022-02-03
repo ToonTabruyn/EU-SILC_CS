@@ -40,12 +40,11 @@ replace pl_dur = (3*52)					if country == "HU" & year == 2015 & pl_eli == 1 ///
 		
 	-> female tertiary education students or women who completed at least 2 semesters
 		of tertiary education in past 2 years:
-		-> undergraduate, for 1 year: €432.64/monthly
-		-> MA, PhD, for 1 year: €302.85/month
-		-> for 2 years: €87/month
+		-> undergraduate, for 1 year: €334/monthly
+		-> MA, PhD, for 1 year: €276/month
 		-> not coded (EU-SILC doesn't recognise)
 	
-	-> all other parents: €87/month 
+	-> all other parents: €91/month 
 	
 	-> family entitlement: all assigned to women
 */
