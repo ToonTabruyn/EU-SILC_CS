@@ -34,53 +34,52 @@ replace ml_dur1 = 6 	if country == "CZ" & year == 2014 & gender == 1 & ml_eli ==
 replace ml_dur2 = 28-6 	if country == "CZ" & year == 2014 & gender == 1 & ml_eli == 1
 
 
-
 * BENEFIT (monthly)
 /* 	-> Benefits are not calculated from earnings but from a "daily assessment base" (MISSOC 01/07/2014) 
 	-> daily assessment base:
-		-> up to €33/day = 100% daily earning
-		-> €33 - €50/day = 60% daily earning
-		-> €50/day = 30% daily earning  
-		-> earnings over €100/day are not taken into account
+		-> up to €32/day = 100% daily earning
+		-> €32 - €47/day = 60% daily earning
+		-> €47/day = 30% daily earning  
+		-> earnings over €95/day are not taken into account
 */
 
 ** DAILY ASSESSMENT BASE:
-* daily earning < €33
+* daily earning < €32
 gen dab = earning/21.7 				if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& earning/21.7 < 33
+									& earning/21.7 < 32
 
-* daily earning between €33 and €50
-gen dab1 = 33					if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& inrange(earning/21.7,33,50)
-gen dab2 = ((earning/21.7) - 33)*0.6 	if country == "CZ" & year == 2014 & ml_eli == 1 ///
-										& inrange(earning/21.7,33,50)
+* daily earning between €32 and €47
+gen dab1 = 32					if country == "CZ" & year == 2014 & ml_eli == 1 ///
+									& inrange(earning/21.7,32,47)
+gen dab2 = ((earning/21.7) - 32)*0.6 	if country == "CZ" & year == 2014 & ml_eli == 1 ///
+										& inrange(earning/21.7,32,47)
 replace dab = dab1 + dab2 				if country == "CZ" & year == 2014 & ml_eli == 1 ///
-										& inrange(earning/21.7,33,50) & dab == .
+										& inrange(earning/21.7,32,47) & dab == .
 drop dab1 dab2
 										
-* daily earning between €50 and €100										
-gen dab1 = 33 						if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& inrange(earning/21.7,50,100)
-gen dab2 = (50 - 33)*0.6 			if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& inrange(earning/21.7,50,100)
-gen dab3 = ((earning/21.7) - 50)*0.3 	if country == "CZ" & year == 2014 & ml_eli == 1 ///
-										& inrange(earning/21.7,50,100)
+* daily earning between €47 and €95										
+gen dab1 = 32 						if country == "CZ" & year == 2014 & ml_eli == 1 ///
+									& inrange(earning/21.7,47,95)
+gen dab2 = (47 - 32)*0.6 			if country == "CZ" & year == 2014 & ml_eli == 1 ///
+									& inrange(earning/21.7,47,95)
+gen dab3 = ((earning/21.7) - 47)*0.3 	if country == "CZ" & year == 2014 & ml_eli == 1 ///
+										& inrange(earning/21.7,47,95)
 
 replace dab = dab1 + dab2 + dab3  	if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& inrange(earning/21.7,50,100) & dab == .									
+									& inrange(earning/21.7,47,95) & dab == .									
 drop dab1 dab2 dab3 
 
-* daily earning over €100
-gen dab1 = 33 						if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& earning/21.7 > 100
-gen dab2 = (50 - 33)*0.6 			if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& earning/21.7 > 100
+* daily earning over €95
+gen dab1 = 32 						if country == "CZ" & year == 2014 & ml_eli == 1 ///
+									& earning/21.7 > 95
+gen dab2 = (47 - 32)*0.6 			if country == "CZ" & year == 2014 & ml_eli == 1 ///
+									& earning/21.7 > 95
 										
-gen dab3 = (100 - 50)*0.3 			if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& earning/21.7 > 100
+gen dab3 = (95 - 47)*0.3 			if country == "CZ" & year == 2014 & ml_eli == 1 ///
+									& earning/21.7 > 95
 
 replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2014 & ml_eli == 1 ///
-									& earning/21.7 > 100 & dab == . 										
+									& earning/21.7 > 95 & dab == . 										
 										
 										
 
