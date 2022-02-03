@@ -22,7 +22,7 @@ replace pt_dur = 15/5 if country == "BG" & year == 2014 & pt_eli == 1
 * BENEFIT (monthly)
 /*	-> 90% earning 
 	-> minimum: statutory minimum wage; €173.84 (source: Eurostat, Minimum wages, code: EARN_MW_CUR) 
-	-> ceiling: average net income; annual net earnings = €2,169.57 (source: Eurostat, Annual net earnings, code: EARN_NT_NET)
+	-> ceiling: average net income; annual net earnings = €2,016.86 (source: Eurostat, Annual net earnings, code: EARN_NT_NET)
 	 
 */
 
@@ -34,11 +34,11 @@ replace pt_ben1 = ((earning * 0.9) * (15/21.7)) + (earning * ((21.7-15)/21.7)) /
 
 * minimum
 replace pt_ben1 = 173.84 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2014 ///
-															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 235.16
+									& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 173.84
 
 * maximum 
-replace pt_ben1 = (2169.57/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2014 ///
-															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= 1329.18
+replace pt_ben1 = (2016.86/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2014 ///
+															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= 2016.86
 
 
 
