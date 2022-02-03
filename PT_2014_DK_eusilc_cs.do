@@ -29,16 +29,16 @@ replace pt_dur = 2 		if country == "DK" & year == 2014 & pt_eli == 1
 
 * BENEFIT (monthly)
 /* 	-> employed, self-employed: 100% earning
-	-> ceiling: €561/week 	
+	-> ceiling: €546/week 	
 	-> unemployed: unemployment benefits (not coded; LP&R 2014)
 	-> students: extra 12 months of study grant (not coded; LP&R 2014) */
 	
 replace pt_ben1 = earning 		if country == "DK" & year == 2014 & pt_eli == 1 ///
 								& inlist(econ_status,1,2) 
 								
-replace pt_ben1 = (561*pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
+replace pt_ben1 = (546*pt_dur) + ((earning/4.3)*(4.3-pt_dur)) ///
 								if country == "DK" & year == 2014 & pt_eli == 1 ///
-								& inlist(econ_status,1,2) & pt_ben1/4.3 >= 561 ///
+								& inlist(econ_status,1,2) & pt_ben1/4.3 >= 546 ///
 								
 
 replace pt_ben2 = pt_ben1 		if country == "DK" & year == 2014 & pt_eli == 1
