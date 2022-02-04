@@ -31,7 +31,8 @@ replace ml_dur2 = 26+16-2 		if country == "IE" & year == 2014 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 26 weeks: €230/week
+/*	-> 26 weeks: "80% of average weekly earnings (subject to a ceiling) in the relevant tax year."
+	-> ceiling: €230/week
 	-> 16 weeks: unpaid 	*/
 	
 replace ml_ben1 = ((230*4.3) * (26/(26+16)))  	if country == "IE" & year == 2014 & ml_eli == 1
