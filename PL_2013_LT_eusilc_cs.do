@@ -17,14 +17,14 @@ replace pl_eli =  0			if pl_eli == . & country == "LT" & year == 2013
 
 * DURATION (weeks)
 /*	-> parents can choose the duration of leave => affects benefits
-	-> more generous option coded (until child is 1)		*/
+	-> more generous option coded (until child is 2)		*/
 
 * women	
-replace pl_dur = 52-ml_dur2 		if country == "LT" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 104-ml_dur2 		if country == "LT" & year == 2013 & pl_eli == 1 ///
 									& gender == 1
 
 * single men
-replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 104-pt_dur 			if country == "LT" & year == 2013 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 									
 
@@ -33,15 +33,14 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2013 & pl_eli == 1 //
 
 * BENEFIT (monthly)
 /* 	-> choice of leave until child is 1: 100%
-		-> ceiling: €1,379/month (coded)
-	-> choice of leave until child is 2: not coded
-		- 70% earnings until child is 1, ceiling: €965,30/month
-		- 40% of earnings for the rest of the leave, ceiling: €551,6/month */
+		-> ceiling: €1,379/month (not coded)
+	-> choice of leave until child is 2: 70%
+		-> ceiling: €965.30/month (coded, more generous)
 		
-replace pl_ben1 = earning 		if country == "LT" & year == 2013 & pl_eli == 1
+replace pl_ben1 = 0.7*earning 		if country == "LT" & year == 2013 & pl_eli == 1
 								
-replace pl_ben1 = 1379	 		if country == "LT" & year == 2013 & pl_eli == 1 ///
-								& pl_ben1 >= 1379
+replace pl_ben1 = 965.30	 		if country == "LT" & year == 2013 & pl_eli == 1 ///
+								& pl_ben1 >= 965.30
 
 
 replace pl_ben2 = pl_ben1		if country == "LT" & year == 2013 & pl_eli == 1
