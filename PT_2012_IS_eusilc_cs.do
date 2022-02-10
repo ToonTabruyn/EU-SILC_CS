@@ -31,48 +31,48 @@ replace pt_dur = 3*4.3 	if country == "IS" & year == 2012 & pt_eli == 1
 * BENEFIT (monthly)
 /*	-> employed, self-employed: active for 6 months prior to birth
 			- employed for at least 25% of full time (10 hours/week for 40 hours/week full-time employment) 
-			- 80% earning
-			- ceiling: €2,677/month 
-			- minimum: €799/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
-					   €1,108/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
+			- 80% earning (coded) until €1270 per month, and 75% earning of remuneration beyond €1270/month (not coded)
+			- ceiling: €1,905/month 
+			- minimum: €584/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
+					   €809/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
 	-> those not fulfilling the conditions: 
 		- students: €1,108/month
-		- working less than 25% FT: €483/month
+		- working less than 25% FT: €353/month
 */
 
 * employed, self-employed working 10-20 hours/week			
 replace pt_ben1 = 0.8*earning	 		if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19)
 
-replace pt_ben1 = 799	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 584	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19) ///
-										& pt_ben1 < 799
+										& pt_ben1 < 584
 										
-replace pt_ben1 = 2677	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 1905	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19) ///
-										& pt_ben1 >= 2677
+										& pt_ben1 >= 1905
 										
 * employed, self-employed working 20+ hours/week			
 replace pt_ben1 = 0.8*earning	 		if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20
 
-replace pt_ben1 = 1108	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 809	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20 ///
-										& pt_ben1 < 1108
+										& pt_ben1 < 809
 										
-replace pt_ben1 = 2677	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 1905	 				if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20 ///
-										& pt_ben1 >= 2677
+										& pt_ben1 >= 1905
 										
 * the rest 
-replace pt_ben1 = 483					if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 353					if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours < 10
-replace pt_ben1 = 483					if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 353					if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& inlist(econ_status,3,4) 
 										
 * students
-replace pt_ben1 = 1108					if country == "IS" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 809					if country == "IS" & year == 2012 & pt_eli == 1 ///
 										& pl031 == 6
 
 
