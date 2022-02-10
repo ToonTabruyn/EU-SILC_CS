@@ -3,10 +3,7 @@
 * LATVIA - 2012
 
 * ELIGIBILITY
-/*	-> employed
-	-> self-employed
-	-> father after mother's death or mother relinquished the care and raising the child 
-		=> coded for single fathers			*/
+/*	-> incapacity for work certified by doctor (not coded, MISSOC 2012)			*/
 	
 replace ml_eli = 1 			if country == "LV" & year == 2012 & gender == 1 ///
 							& inlist(econ_status,1,2) 
