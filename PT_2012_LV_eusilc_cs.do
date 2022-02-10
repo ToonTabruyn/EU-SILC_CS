@@ -3,11 +3,9 @@
 * LATVIA - 2012
 
 * ELIGIBILITY
-/*	-> employed
-	-> self-employed 	*/
+/*	-> no qualifying conditions 	*/
 	
-replace pt_eli = 1 		if country == "LV" & year == 2012 & gender == 2 & inlist(econ_status,1,2)
-replace pt_eli = 0 		if pt_eli == . & country == "LV" & year == 2012 & gender == 2
+replace pt_eli = 1 		if country == "LV" & year == 2012 & gender == 2
 
 * DURATION (weeks)
 /*	-> 10 calendar days to be taken after childbirth */
