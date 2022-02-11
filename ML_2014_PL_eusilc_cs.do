@@ -16,8 +16,8 @@ replace ml_eli = 0 			if ml_eli == . & country == "PL" & year == 2014 & gender =
 
 * DURATION (weeks)
 /*	-> total: 26 weeks (coded as postnatal)
-	-> prenatal: 6 weeks, not compulsory (not coded)
-	-> postnatal: 20 weeks (not coded) 			
+	-> prenatal: 2 weeks, not compulsory (not coded)
+	-> postnatal: 24 weeks 			
 */
 	
 replace ml_dur1 = 0 		if country == "PL" & year == 2014 & ml_eli == 1
