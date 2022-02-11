@@ -36,20 +36,20 @@ replace ml_dur2 = 26+16-2 		if country == "IE" & year == 2013 & ml_eli == 1
 	-> ceiling: €262/week
 	-> 16 weeks: unpaid 	*/
 	
-replace ml_ben1 = ((230*4.3) * (26/(26+16)))  	if country == "IE" & year == 2013 & ml_eli == 1
 
-replace ml_ben2 = 0.8*earning			if country == "IE" & year == 2013 & ml_eli == 1
+replace ml_ben1 = ((earning * 0.8) * (26/(26+16))) 	if country == "IE" & year == 2013 & ml_eli == 1
 
-replace ml_ben2 = 217.80*4.3		  	if country == "IE" & year == 2013 & ml_eli == 1 ///
-								& ml_ben1 < 217.80*4.3
-replace ml_ben2 = 262*4.3			if country == "IE" & year == 2013 & ml_eli == 1 ///
-								& ml_ben1 >= 262*4.3
+* minimum
+replace ml_ben1 = ((217.8 * 4.3) * (26/(26+16)))  	if country == "IE" & year == 2013 & ml_eli == 1 & ((earning * 0.8)/4.3) < 217.8
 
-
-	replace ml_ben1 = ((230*4.3) * (26/(26+16)))  	if country == "IE" & year == 2013 & ml_eli == 1
+* maximum
+replace ml_ben1 = ((262 * 4.3) * (26/(26+16)))  	if country == "IE" & year == 2013 & ml_eli == 1 & ((earning * 0.8)/4.3) >= 262
 
 
-	replace ml_ben2 = 230*4.3 		if country == "IE" & year == 2013 & ml_eli == 1
+replace ml_ben2 = (earning * 0.8) 	if country == "IE" & year == 2013 & ml_eli == 1
+replace ml_ben2 = (217.8 * 4.3)		if country == "IE" & year == 2013 & ml_eli == 1 & ((earning * 0.8)/4.3) < 217.8
+replace ml_ben2 = (262 * 4.3)		if country == "IE" & year == 2013 & ml_eli == 1 & ((earning * 0.8)/4.3) >= 262
+
 
 
 foreach x in 1 2 {
