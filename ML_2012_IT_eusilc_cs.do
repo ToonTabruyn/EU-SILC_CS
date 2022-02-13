@@ -26,7 +26,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "IT" & year == 2012 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 5 months (optional extra 6 months, not coded)
+/*	-> total: 5 months 
 	-> prenatal: 1 month
 	-> father if mother doesn't claim: 3 months 			*/
 	
@@ -41,7 +41,7 @@ replace ml_dur2 = 3*4.3			if country == "IT" & year == 2012 & ml_eli == 1 & gend
 
 
 * BENEFIT (monthly)
-/*	-> 80% earning for compulsory 5 months (coded), 30% for optional 6 months (not coded) no ceiling 
+/*	-> 80% earning for compulsory 5 months 
 	-> public sector employees are entitled to 100% for the first 30 days, no ceiling => not coded */
 
 replace ml_ben1 = 0.8*earning 		if country == "IT" & year == 2012 & ml_eli == 1
