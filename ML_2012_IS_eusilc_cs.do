@@ -66,7 +66,7 @@ replace ml_ben1 = 1905	 				if country == "IS" & year == 2012 & ml_eli == 1 ///
 										
 * employed, self-employed working 20+ hours/week			
 replace ml_ben1 = 0.8*earning	 		if country == "IS" & year == 2012 & ml_eli == 1 ///
-										& inlist(econ_status,1,2) & whours >= 20
+										& inlist(econ_status,1,2) & whours >= 20 & earning < 1270
 										
 replace ml_ben1 = (0.8 * 1270) + (0.75 * (earning-1270)) 	if country == "IS" & year == 2012 & ml_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20) & earning >= 1270
