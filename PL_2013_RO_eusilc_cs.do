@@ -15,14 +15,16 @@ replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2013
 
 * DURATION (weeks)
 /*	-> benefit is a family entitlement => in couples, all is assigned to the woman
-	-> until child is 2 years old 	*/
+	-> parents can choose between 1 and 2 years of parental leave
+		-> 1 year coded (more generous)
+*/
 
 * women	
-replace pl_dur =  (2*52) - ml_dur2		if country == "RO" & year == 2013 & pl_eli == 1 ///
+replace pl_dur =  52 - ml_dur2		if country == "RO" & year == 2013 & pl_eli == 1 ///
 										& gender == 1 
 
 * single men
-replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 52 - pt_dur - ml_dur2 		if country == "RO" & year == 2013 & pl_eli == 1 ///
 												& gender == 2 & parstat == 1
 
 
@@ -38,9 +40,8 @@ replace pl_ben1 = 0.85*earning 			if country == "RO" & year == 2013 & pl_eli == 
 replace pl_ben1 = 134.4		 		if country == "RO" & year == 2013 & pl_eli == 1 ///
 									& pl_ben1 < 134.4 & gender == 1
 replace pl_ben1 = 761.6				if country == "RO" & year == 2013 & pl_eli == 1 ///
-									& pl_ben1 >= 761.6 & gender == 1 & [CHILD IS UNDER 1]
-replace pl_ben1 = 268.8				if country == "RO" & year == 2013 & pl_eli == 1 ///
-									& pl_ben1 >= 268.8 & gender == 1 & [CHILD IS BETWEEN 1 AND 2]
+									& pl_ben1 >= 761.6 & gender == 1 
+
 
 									
 	* single men
@@ -49,9 +50,8 @@ replace pl_ben1 = 0.85*earning 			if country == "RO" & year == 2013 & pl_eli == 
 replace pl_ben1 = 134.4		 		if country == "RO" & year == 2013 & pl_eli == 1 ///
 									& pl_ben1 < 134.4 & gender == 2 & parstat == 1
 replace pl_ben1 = 761.6		 		if country == "RO" & year == 2013 & pl_eli == 1 ///
-									& pl_ben1 >= 761.6 & gender == 2 & parstat == 1 & [CHILD IS UNDER 1]		
-replace pl_ben1 = 268.8		 		if country == "RO" & year == 2013 & pl_eli == 1 ///
-									& pl_ben1 >= 268.8 & gender == 2 & parstat == 1 & [CHILD IS BETWEEN 1 AND 2]
+									& pl_ben1 >= 761.6 & gender == 2 & parstat == 1 	
+
 
 
 replace pl_ben2 = pl_ben1			if country == "RO" & year == 2013 & pl_eli == 1
