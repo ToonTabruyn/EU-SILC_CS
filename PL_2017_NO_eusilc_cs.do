@@ -40,21 +40,21 @@ replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1 & gender =
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €61,357/year  
+	-> ceiling: €9,735/month 
 	-> minimum: maternity grant - €6,665 for the whole period (11 months)
 */
 
 	* women
 replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1 & gender ==1
-replace pl_ben1 = 61357/12		if country == "NO" & year == 2018 & pl_eli == 1 ///
-								& pl_ben1 >= 61357/12 & gender == 1
+replace pl_ben1 = 9735		if country == "NO" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 >= 9735 & gender == 1
 replace pl_ben1 = 6665/11		if country == "NO" & year == 2018 & pl_eli == 1 ///
 								& pl_ben1 < 6665/11 & gender == 1
 
 	* single men
 replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 2 & parstat == 1
-replace pl_ben1 = 61357/12		if country == "NO" & year == 2018 & pl_eli == 1 ///
-								& pl_ben1 >= 61357/12 & gender == 2 & parstat == 1
+replace pl_ben1 = 9735		if country == "NO" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 >= 9,735 & gender == 2 & parstat == 1
 replace pl_ben1 = 6665/11		if country == "NO" & year == 2018 & pl_eli == 1 ///
 								& pl_ben1 < 6665/11 & gender == 2 & parstat == 1
 
