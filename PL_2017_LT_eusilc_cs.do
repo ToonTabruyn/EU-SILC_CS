@@ -37,6 +37,7 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2018 & pl_eli == 1 //
 		- 70% earnings until child is 1
 		- 40% of earnings for the rest of the leave
 	-> ceiling: €1,379/month 
+	-> source: LP&R 2017
 	
 replace pl_ben1 = earning 		if country == "LT" & year == 2018 & pl_eli == 1
 								
