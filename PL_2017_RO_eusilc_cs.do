@@ -15,39 +15,35 @@ replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2018
 
 * DURATION (weeks)
 /*	-> benefit is a family entitlement => in couples, all is assigned to the woman
-	-> until child is 2 years old 	*/
+	-> 24 months 	*/
 
 * women	
-replace pl_dur =  (2*52) - ml_dur2		if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_dur =  24*4.3		if country == "RO" & year == 2018 & pl_eli == 1 ///
 										& gender == 1 
 
 * single men
-replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 24*4.3	 		if country == "RO" & year == 2018 & pl_eli == 1 ///
 												& gender == 2 & parstat == 1
 
 
 * BENEFIT (monthly)
 /*	-> 85% earning (net, but coded gross)
-	-> minimum: €268.06/month (LP&R 2018)
-	-> maximum: €1,825/month (M2018)	*/
+	-> minimum: €231/month (LP&R 2018)
+	-> no ceiling	*/
 	
 	* women
 replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 ///
 									& gender == 1
-
-replace pl_ben1 = 268.06	 		if country == "RO" & year == 2018 & pl_eli == 1 ///
-									& pl_ben1 < 268.06 & gender == 1
-replace pl_ben1 = 1825	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
-									& pl_ben1 >= 1825 & gender == 1
+	
+replace pl_ben1 = 231	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
+									& pl_ben1 < 231 & gender == 1
 									
 	* single men
 replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 
-replace pl_ben1 = 268.06	 		if country == "RO" & year == 2018 & pl_eli == 1 ///
-									& pl_ben1 < 268.06 & gender == 2 & parstat == 1
-replace pl_ben1 = 1825	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
-									& pl_ben1 >= 1825 & gender == 2 & parstat == 1								
+replace pl_ben1 = 231	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
+									& pl_ben1 < 231 & gender == 2 & parstat == 1							
 			
 
 replace pl_ben2 = pl_ben1		if country == "RO" & year == 2018 & pl_eli == 1
