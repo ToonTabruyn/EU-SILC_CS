@@ -46,7 +46,7 @@ replace pl_dur = pl_init + pl_exte  	if country == "PT" & year == 2018 ///
 	-> 150 days, not shared: 80% earning
 	-> 150 days, shared: 100% earning
 	-> 180 days, shared: 83% earning 
-	-> minimum: €428.90/month 
+	-> minimum: €421.32/month 
 	-> most generous option coded (100%)	
 	-> extended PL: 25% earning	 	*/
 	
@@ -55,16 +55,16 @@ replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur)
 												if country == "PT" & year == 2018 & pl_eli == 1 ///
 												& gender == 1
 												
-replace pl_ben1 =  428.90		if country == "PT" & year == 2018 & pl_eli == 1	///
-								& pl_ben1 < 428.90 & gender == 1
+replace pl_ben1 =  421.32		if country == "PT" & year == 2018 & pl_eli == 1	///
+								& pl_ben1 < 421.32 & gender == 1
 								
 	* single men
 replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))	///
 												if country == "PT" & year == 2018 & pl_eli == 1 ///
 												& gender == 2 & parstat == 1
 												
-replace pl_ben1 =  428.90		if country == "PT" & year == 2018 & pl_eli == 1	///
-								& pl_ben1 < 428.90 & gender == 2 & parstat == 1
+replace pl_ben1 =  421.32		if country == "PT" & year == 2018 & pl_eli == 1	///
+								& pl_ben1 < 421.32 & gender == 2 & parstat == 1
 								
 												
 replace pl_ben2 = earning 		if country == "PT" & year == 2018 & pl_eli == 1
