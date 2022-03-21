@@ -32,7 +32,7 @@ replace ml_dur2 = 56/5 		if country == "LT" & year == 2010 & ml_eli == 1
 
 replace ml_ben1 = earning 		if country == "LT" & year == 2010 & ml_eli == 1
 
-replace ml_ben1 = 6*38			if country == "LT" & year == 2010 & ml_eli == 1 ///
+replace ml_ben1 = 6*38	(?)		if country == "LT" & year == 2010 & ml_eli == 1 ///
 								& ml_ben1 < 6*38
 										
 replace ml_ben2 = ml_ben1 		if country == "LT" & year == 2010 & ml_eli == 1
