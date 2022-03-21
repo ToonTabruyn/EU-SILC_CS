@@ -20,13 +20,9 @@ replace pt_dur = 4.3 	if country == "LT" & year == 2010 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100% average earnings (MISSOC 07/2010)
-	-> ceiling: €1,380/month (LP&R 2010)
 */
 	
 replace pt_ben1 = earning 	if country == "LT" & year == 2010 & pt_eli == 1 
-							
-replace pt_ben1 = 1380		if country == "LT" & year == 2010 & pt_eli == 1 ///
-							& pt_ben1 >= 1380	
 							
 replace pt_ben2 = pt_ben1  	if country == "LT" & year == 2010 & pt_eli == 1
 
