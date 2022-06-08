@@ -18,8 +18,7 @@ replace pt_dur = 10/7 	if country == "LV" & year == 2010 & pt_eli == 1
 * BENEFIT (monthly)
 /*	-> 100% earnings, no ceiling */
 
-replace pt_ben1 = (earning * (10/21.7)) + (earning * ((21.7-10)/21.7)) ///
-										if country == "LV" & year == 2010 & pt_eli == 1
+replace pt_ben1 = earning 	if country == "LV" & year == 2010 & pt_eli == 1
 						
 replace pt_ben2 = pt_ben1 	if country == "LV" & year == 2010 & pt_eli == 1
 
