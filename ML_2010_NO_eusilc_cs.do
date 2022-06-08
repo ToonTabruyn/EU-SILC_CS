@@ -42,7 +42,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2010 & gender =
 	-> total: 9 weeks
 	-> postnatal: 6 weeks compulsory for mother (non-transferable) 	
 	-> father, when mother is not eligible: 6 weeks
-	-> single father: 10 weeks
+	-> single father: 6 weeks
 	-> parents can choose between 2 options for the whole leave:
 		- 46 weeks on 100% earning
 		- 56 weeks on 80% earning
@@ -59,7 +59,7 @@ replace ml_dur2 = 6 		if country == "NO" & year == 2010 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
 
 * single man
-replace ml_dur2 = 10		if country == "NO" & year == 2010 & gender == 2 ///
+replace ml_dur2 = 6		if country == "NO" & year == 2010 & gender == 2 ///
 							& (duremp + dursemp) >= 6  & parstat == 1
 
 							
