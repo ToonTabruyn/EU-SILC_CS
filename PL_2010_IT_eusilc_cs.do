@@ -68,9 +68,11 @@ replace pl_dur = 10		if country == "IT" & year == 2010 & pl_eli == 1 ///
 						
 * BENEFIT (monthly)
 /*	-> 30% of earnings (coded) if the child is under 3 years old (not coded)
-	-> unpaid if the child is between 3 and 8 years old (not coded) 	*/
+	-> unpaid if the child is between 3 and 8 years old (not coded)
+		-> 30% if annual earnings are under €14,891.50
+*/
 	
-replace pl_ben1 = 0.3*earning 		if country == "IT" & year == 2010 & pl_eli == 1
+replace pl_ben1 = 0.3*earning 			if country == "IT" & year == 2010 & pl_eli == 1
 replace pl_ben2 = pl_ben1			if country == "IT" & year == 2010 & pl_eli == 1
 
 
