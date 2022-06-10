@@ -27,11 +27,11 @@ replace ml_dur2 = 8 		if country == "LU" & year == 2011 & ml_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> maximum:  €100,350  gross/month 		*/
+	-> maximum:  €100,350  gross/year 		*/
 
 replace ml_ben1 = earning 		if country == "LU" & year == 2011 & ml_eli == 1
-replace ml_ben1 = 100350		if country == "LU" & year == 2011 & ml_eli == 1 ///
-								& ml_ben1 >= 100350
+replace ml_ben1 = 100350/12		if country == "LU" & year == 2011 & ml_eli == 1 ///
+								& ml_ben1 >= 100350/12
 
 			 
 								
