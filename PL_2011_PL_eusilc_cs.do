@@ -29,10 +29,10 @@ replace pl_dur = 36*4.3 		if country == "PL" & year == 2011 & pl_eli == 1 ///
 * BENEFIT (monthly)
 /*
 	-> unpaid
-	-> flat-rate benefit: €100 (if monthly household income does not exceed €125, paid for the first 24 months in case of 1 child.)
+	-> flat-rate benefit: €100 (if monthly household income does not exceed €125, paid for the first 24 months in case of 1 child. not coded)
  */
  
-replace pl_ben1 = 100				if country == "PL" & year == 2011 & pl_eli == 1 ///
+replace pl_ben1 = 0				if country == "PL" & year == 2011 & pl_eli == 1 ///
 									& earning < 125
 									
 replace pl_ben2 = pl_ben1			if country == "PL" & year == 2011 & pl_eli == 1
