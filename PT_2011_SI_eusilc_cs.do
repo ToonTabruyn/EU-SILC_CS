@@ -19,7 +19,8 @@ replace pt_eli = 1 			if country == "SI" & year == 2011 & gender == 2 ///
 	
 
 * DURATION (weeks)
-/*	-> 90 calendar days in total (15 days have to be used before child is 6 months old, remaining 75 days have to be used before child is 3 years old)
+/*	-> 90 calendar days in total (coded) 
+		-> 15 days have to be used before child is 6 months old, remaining 75 days have to be used before child is 3 years old (not coded)
 */
 
 replace pt_dur = 90/7 	if country == "SI" & year == 2011 & pt_eli == 1
